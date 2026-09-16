@@ -1,0 +1,42 @@
+# Building the v6 NJ backbone tree
+
+Two steps, run in order, from this directory as the repo root:
+
+1. `1_build_nj_backbone/` — build the per-side (B1/B2) distance matrix and NJ tree
+2. `2_root_tree/` — root each tree and drop the synthetic root tip
+
+## 1. Build the distance matrix + NJ tree
+
+`run_b1.sh` / `run_b2.sh` are the exact commands used for the real build.
+Each points `run_full_distance.R` at that side's `ge7_founderok.tsv.gz` (see
+`processed_data/README.md`), which parses the tapes, builds the distance
+matrix, appends a synthetic founder-genotype root for the next step, and
+hands the matrix straight to DecentTree's RapidNJ in-process -- no PHYLIP
+file, no re-parse.
+
+Needs a big-memory machine: B1 (401,902 tips) ~3.0 TB RAM, B2 (238,112 tips)
+~1.06 TB RAM. Not runnable on a normal workstation.
+
+## 2. Root the tree
+
+`root_tree.R` roots the raw NJ tree on its synthetic-root tip and drops it --
+self-contained, just `ape::root`/`drop.tip`.
+
+## Tests
+
+```
+Rscript 1_build_nj_backbone/tests/test_full_distance_pipeline.R
+```
+
+## External prerequisites
+
+- R + `Rcpp`, `RcppParallel`, `data.table`, `ape`
+- DecentTree source, for the in-process NJ build:
+  `git clone --recursive https://github.com/iqtree/decenttree.git decenttree`
+- `pigz` on PATH
+
+## Not included here
+
+- Blastomere routing and the founder-consistency filter -- upstream steps;
+  this repo trusts their shipped output in `processed_data/` directly.
+- Dating and the B1/B2 merge into one whole-embryo tree -- a later stage.

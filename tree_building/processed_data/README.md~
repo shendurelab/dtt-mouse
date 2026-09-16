@@ -1,0 +1,18 @@
+# tape_pipeline/ — v6 tape-consensus tables
+
+All files under this directory are **outputs of the tape_pipeline code**
+(raw sequencing → tape genotype calling → per-cell consensus), which is run
+separately and is not part of this repo. They are treated here as external
+deliverables — inputs to tree building, not something regenerated in
+`tree_building/`.
+
+## Files and where they're used downstream
+
+| File | Used by | Role |
+|---|---|---|
+| `tables/v6/e3v5v6.B1_tape_consensus.tsv.gz`<br>`tables/v6/e3v5v6.B2_tape_consensus.tsv.gz` | placement (stage 16/17, not included in this cleanup pass); also the input to `00_filter_highqual_consensus.R` | Unfiltered per-side genotype table, all cells (975,196 / 711,668). Placement's query universe — every cell, not just the ones that made it into the NJ backbone. |
+| `tables/v6/e3v5v6.B1_tape_consensus.ge7_founderok.tsv.gz`<br>`tables/v6/e3v5v6.B2_tape_consensus.ge7_founderok.tsv.gz` | `src/1-dist-mat/run_b1.sh` / `run_b2.sh` (`DTT_TSV`) | The `pass_qc & n_loci>=7 & founder-consistent` filtered subset (401,901 / 238,111 cells) that the NJ backbone is actually built from. |
+| `tables/v6/e3v5v6.defining_sites.tsv` | `src/1-dist-mat/make_synthetic_root_outgroup.R` | Per-side founder-defining (integration, site) alleles, used to construct the synthetic founder-genotype root outgroup. |
+| `tables/e3v5v6.supp_table1_founder_genotypes.csv` | `src/1-dist-mat/00_filter_highqual_consensus.R` | Canonical A/B (B1/B2) founder genotype table; source of the founder-consistency filter. |
+
+See `../README.md` for the full NJ-backbone pipeline these files feed into.

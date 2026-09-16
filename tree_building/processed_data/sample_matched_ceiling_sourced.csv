@@ -1,0 +1,11 @@
+day,cells_min,cells_max,basis
+0.5,1,1,Kojima et al. (PMID: 24954643)
+2,4,4,Kojima et al. (PMID: 24954643)
+2.5,8,16,Kojima et al. (PMID: 24954643)
+3.5,32,32,Kojima et al. (PMID: 24954643)
+4,64,64,Kojima et al. (PMID: 24954643)
+5.5,120,120,Kojima et al. (PMID: 24954643)
+6,250,250,Kojima et al. (PMID: 24954643)
+6.5,660,660,Kojima et al. (PMID: 24954643)
+7,4500,4500,Kojima et al. (PMID: 24954643)
+7.5,15000,15000,Kojima et al. (PMID: 24954643)
