@@ -1,0 +1,26 @@
+v4 blastomere routing report
+============================
+input                : /Users/shendure/tape_work/e3v8.cell_consensus.tsv
+cells                : 1,559,419
+integrations         : 11
+discriminating tapes : 11  (['CGGGGAATTGTA', 'TCCGGAAGACCC', 'GTGTAAATCGGC', 'TGACTAAAGCGG', 'TAACGAATGCCG', 'TGGGGAACATAT', 'ATATCAAATTGA', 'CATATAATCGCA', 'AATAGAAAACGA', 'CGGCGAAAAGGT', 'CAGCTAACGCCT'])
+defining alleles     : 20
+orientation          : B1 = larger routed group (provisional L side)
+
+routed B1            : 889,849
+routed B2            : 653,335
+total routed         : 1,543,184 (99.0%)
+masked (1 bleed->NA) : 58,711
+
+set aside total      : 16,235 (1.04%)
+  no founder (w=0)   : 5,308
+  tie                : 8,451
+  multibleed (l>=2)  : 2,476
+
+params: FIX_THRESH=0.85 DISC_MIN=0.3 CONF_MIN_LOCI=8 FOUNDER_SITE=site1
+
+Tweak B pre-ship QC filter (pass_qc; cells retained in matrix):
+  thresholds         : n_loci>=4, n_doublet_loci<=1, mean_dominance>=0.95
+  B1 pass_qc=1       : 759,388 / 889,849 (85.3%)
+  B2 pass_qc=1       : 537,411 / 653,335 (82.3%)
+  total pass_qc=1    : 1,296,799 / 1,543,184 (84.0%)

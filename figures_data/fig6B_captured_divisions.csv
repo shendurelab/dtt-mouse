@@ -1,0 +1,38 @@
+progenitor,postmitotic,prog_germlayer,pm_germlayer,same_germlayer,n_cells,n_expected,fold,q,n_cells_A,fold_A,q_A,n_cells_B,fold_B,q_B
+Olfactory bulb cells,Olfactory sensory neurons,Neuroectoderm,Surface ectoderm,0,63,1.19,29.25,5.515e-66,46,25.94,6.852e-46,17,13.08,3.020e-12
+Olfactory epithelial cells,Olfactory sensory neurons,Surface ectoderm,Surface ectoderm,1,190,5.74,28.33,2.386e-196,126,25.04,1.102e-123,64,24.34,5.197e-62
+Myelinating Schwann cells (Tgfb2+),Parasympathetic neurons,Neural crest,Neural crest,1,37,0.44,26.32,3.810e-37,29,23.51,9.889e-28,8,7.71,3.532e-04
+Myelinating Schwann cells (Tgfb2+),Cranial motor neurons,Neural crest,Neuroectoderm,0,23,0.33,18.07,1.352e-19,12,10.6,1.153e-07,11,10.89,3.950e-07
+Border-associated macrophages,Osteoclasts,Blood,Blood,1,24,0.45,17.19,6.180e-20,16,13.2,1.352e-11,8,7.72,3.532e-04
+Otic epithelial cells,Otic sensory neurons,Surface ectoderm,Surface ectoderm,1,37,1.41,15.79,2.126e-29,33,16.82,4.678e-27,4,3.61,4.145e-01
+Naive retinal progenitor cells,Retinal ganglion cells,Neuroectoderm,Neuroectoderm,1,46,2.42,13.73,6.339e-34,24,13.72,9.431e-18,22,8.84,1.837e-12
+Eye field,Retinal ganglion cells,Neuroectoderm,Neuroectoderm,1,27,1.1,13.35,1.120e-19,15,11.19,6.704e-10,12,7.79,2.994e-06
+Neural crest (PNS glia),Neural crest (PNS neurons),Neural crest,Neural crest,1,116,9.84,10.79,3.004e-74,90,10.89,6.072e-58,26,7.75,2.114e-13
+Kupffer cells,Osteoclasts,Blood,Blood,1,9,0.12,8.94,3.764e-05,5,5.57,4.985e-02,4,4.81,2.032e-01
+Pre-epidermal keratinocytes,Granular keratinocytes,Surface ectoderm,Surface ectoderm,1,278,31.67,8.54,1.288e-128,215,8.89,1.468e-104,63,6.82,3.238e-29
+Dorsal telencephalon,Cajal-Retzius cells,Neuroectoderm,Neuroectoderm,1,177,21.83,7.8,5.522e-91,127,8.17,1.477e-67,50,6.25,1.286e-21
+Hindbrain,Cerebellar Purkinje cells,Neuroectoderm,Neuroectoderm,1,548,72.28,7.49,3.931e-273,367,7.39,5.775e-181,181,7.44,1.071e-89
+Definitive early erythroblasts (CD36-),Granulocytes,Blood,Blood,1,27,2.93,7.12,3.949e-13,16,6.05,7.374e-07,11,5.67,1.713e-04
+Branchial arch epithelium,Granular keratinocytes,Surface ectoderm,Surface ectoderm,1,113,15.49,6.91,1.659e-39,78,6.58,1.043e-27,35,6.57,3.993e-14
+Hematopoietic stem cells (Cd34+),Megakaryocytes,Blood,Blood,1,104,15.33,6.43,2.229e-40,65,6.57,3.672e-26,39,5.49,3.953e-15
+Definitive early erythroblasts (CD36-),Osteoclasts,Blood,Blood,1,45,6.16,6.42,4.549e-20,26,5.22,9.626e-10,19,6.7,8.181e-09
+Spinal cord dorsal progenitors,Cerebellar Purkinje cells,Neuroectoderm,Neuroectoderm,1,161,25.1,6.21,4.470e-60,115,6.1,1.488e-41,46,5.81,1.054e-18
+Intermediate neuronal progenitors,Deep-layer neurons,Neuroectoderm,Neuroectoderm,1,1234,198.85,6.18,0.000e+00,820,6.45,0.000e+00,414,5.64,4.049e-163
+Definitive early erythroblasts (CD36-),Megakaryocytes,Blood,Blood,1,963,156.47,6.12,0.000e+00,558,5.87,2.565e-187,405,6.42,1.342e-178
+Retinal progenitor cells,Retinal ganglion cells,Neuroectoderm,Neuroectoderm,1,7,0.31,6.09,4.743e-03,5,5.37,5.534e-02,,,
+Border-associated macrophages,Megakaryocytes,Blood,Blood,1,77,12.75,5.67,9.616e-31,37,4.67,2.424e-12,40,6.21,2.826e-17
+Myelinating Schwann cells,Parasympathetic neurons,Neural crest,Neural crest,1,19,2.88,5.15,2.761e-06,11,4.25,3.419e-03,8,4.36,1.377e-02
+Astrocytes,Spinal cord motor neurons,Neuroectoderm,Neuroectoderm,1,19,3.0,5.0,7.861e-07,15,5.05,1.739e-05,4,2.73,7.878e-01
+Myelinating Schwann cells (Tgfb2+),Sympathetic neurons,Neural crest,Neural crest,1,11,1.51,4.78,7.854e-04,5,2.92,4.468e-01,6,4.82,3.770e-02
+Telencephalon,Deep-layer neurons,Neuroectoderm,Neuroectoderm,1,6972,1725.32,4.04,0.000e+00,4501,4.25,0.000e+00,2471,3.7,0.000e+00
+Spinal cord/r7/r8,GABAergic neurons,Neuroectoderm,Neuroectoderm,1,1094,274.51,3.97,3.379e-300,827,4.08,4.493e-234,267,3.64,7.400e-66
+Hematopoietic stem cells (Mpo+),Megakaryocytes,Blood,Blood,1,12,2.33,3.9,2.209e-03,7,3.28,1.088e-01,5,3.17,3.534e-01
+Myelinating Schwann cells,Neural crest (PNS neurons),Neural crest,Neural crest,1,73,18.07,3.88,4.030e-18,49,3.48,1.185e-11,24,4.39,1.452e-07
+Definitive early erythroblasts (CD36-),Primitive erythroid cells,Blood,Blood,1,49,11.99,3.85,3.210e-13,30,3.45,3.800e-07,19,3.99,1.920e-05
+Branchial arch epithelium,Olfactory sensory neurons,Surface ectoderm,Surface ectoderm,1,50,13.11,3.61,1.659e-12,40,4.13,1.004e-11,10,2.12,3.265e-01
+Kupffer cells,Megakaryocytes,Blood,Blood,1,13,2.94,3.55,2.727e-03,9,3.69,2.090e-02,4,2.24,1.000e+00
+Spinal cord dorsal progenitors,GABAergic neurons,Neuroectoderm,Neuroectoderm,1,427,123.1,3.45,4.185e-85,317,3.53,2.820e-65,110,3.17,1.461e-22
+Myelinating Schwann cells,Sympathetic neurons,Neural crest,Neural crest,1,29,8.33,3.22,2.803e-06,18,2.76,3.419e-03,11,3.48,9.549e-03
+Neural crest (PNS glia),Sympathetic neurons,Neural crest,Neural crest,1,16,4.48,3.1,2.220e-03,10,2.63,9.796e-02,6,3.04,2.913e-01
+Hypothalamus,GABAergic cortical interneurons,Neuroectoderm,Neuroectoderm,1,436,140.15,3.1,4.010e-86,314,3.34,4.611e-69,122,2.58,4.929e-18
+Spinal cord/r7/r8,Spinal cord motor neurons,Neuroectoderm,Neuroectoderm,1,23,6.86,3.05,3.194e-04,18,3.15,1.527e-03,5,2.12,1.000e+00

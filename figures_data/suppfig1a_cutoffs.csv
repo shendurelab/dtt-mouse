@@ -1,0 +1,6 @@
+embryo,tag,n_whitelisted,total_bc_reads,freq_cutoff,reads_at_freq_cutoff,min_whitelisted_reads
+embryo 1,DTTz_1_S1,129,14177471,0.002,28355,38437
+embryo 2,DTTz_2_S2,17,8136677,0.002,16273,155811
+embryo 3,DTTz_3_S3,11,8603061,0.002,17206,582019
+embryo 4,DTTz_4_S4,111,21540540,0.002,43081,47110
+embryo 6,DTTz_6_S6,5,28414333,0.002,56829,4879415

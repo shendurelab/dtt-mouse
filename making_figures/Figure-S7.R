@@ -11,10 +11,7 @@ library(ggplot2)
 library(tidyr)
 library(dplyr)
 
-data_path = "/Users/cxqiu/GitHub/mouse_sprint/figures/fig_S3"
-save_path = "/Volumes/f0085ts/work/tapemouse/making_figures"
-
-dat = read.csv(paste0(data_path, "/panel_B_ltt_vs_ceiling.csv"))
+dat = read.csv("./figures_data/panel_B_ltt_vs_ceiling.csv")
 
 ### regroup
 summary(dat$day[dat$series == "cell ceiling, unused (> E7.5)"])
@@ -41,7 +38,6 @@ p = ggplot(dat[dat$log10_count > 1,], aes(x = day, y = log10_count, color = seri
                                   "cell ceiling, unused (> E6.5)" = "#8a8881", "constrained dating" = "#108441")) +
     theme(legend.position = "none")
 
-ggsave(paste0(save_path, "/FigS7/FigS3A_update.pdf"), p, height = 5, width = 6.5)
 
 
 ##########################################################################################################
@@ -52,10 +48,7 @@ library(tidyr)
 library(dplyr)
 library(ggrastr)
 
-data_path = "/Users/cxqiu/GitHub/mouse_sprint/figures/fig_S3"
-save_path = "/Volumes/f0085ts/work/tapemouse/making_figures"
-
-dat = read.csv(paste0(data_path, "/panel_C_date_shift.csv"))
+dat = read.csv("./figures_data/panel_C_date_shift.csv")
 
 p = ggplot(dat, aes(x = old, y = shift, color = blast)) +
     rasterise(geom_point(size = 0.1), dpi = 300) + 
@@ -68,7 +61,6 @@ p = ggplot(dat, aes(x = old, y = shift, color = blast)) +
     scale_color_manual(values = c("B1" = "#4783B5", "B2" = "#F78C1E")) +
     theme(legend.position = "none")
 
-ggsave(paste0(save_path, "/FigS7/FigS3B.pdf"), p, height = 5, width = 6.5)
 
 
 ###################################################################################
@@ -79,10 +71,7 @@ library(tidyr)
 library(dplyr)
 library(ggrastr)
 
-data_path = "/Users/cxqiu/GitHub/dtt-mouse-analysis/figures/sensitivity"
-save_path = "/Volumes/f0085ts/work/tapemouse/making_figures"
-
-dat = read.csv(paste0(data_path, "/node_time_shifts.csv"))
+dat = read.csv("./figures_data/node_time_shifts.csv")
 
 p <- ggplot(dat, aes(x = original_depth, y = depth_diff_hours, color = sensitivity)) +
     geom_hline(yintercept = 0, linetype = "solid", color = "black") +
@@ -106,7 +95,6 @@ p <- ggplot(dat, aes(x = original_depth, y = depth_diff_hours, color = sensitivi
           panel.grid.minor = element_blank(),
           strip.background = element_rect(fill = "white"))
 
-ggsave(paste0(save_path, "/FigS7/FigSR1_node_time_shifts.pdf"), p, width = 10, height = 5)
 
 
 
@@ -117,10 +105,7 @@ library(ggplot2)
 library(tidyr)
 library(dplyr)
 
-data_path = "/Users/cxqiu/GitHub/mouse_sprint/figures/fig_S3"
-save_path = "/Volumes/f0085ts/work/tapemouse/making_figures"
-
-dat = read.csv(paste0(data_path, "/panel_A_support_histogram.csv"))
+dat = read.csv("./figures_data/panel_A_support_histogram.csv")
 
 dat_frac <- dat %>%
     group_by(blastomere, support) %>%
@@ -144,4 +129,4 @@ p = ggplot(dat_frac, aes(x = support, y = frac, fill = blastomere)) +
     scale_fill_manual(values = c("B1" = "#4783B5", "B2" = "#F78C1E")) +
     theme(legend.position = "none")
 
-ggsave(paste0(save_path, "/FigS7/FigS3C.pdf"), p, height = 5, width = 6.5)
+

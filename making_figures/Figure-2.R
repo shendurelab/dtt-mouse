@@ -11,20 +11,12 @@ library(ggplot2)
 library(tidyr)
 library(dplyr)
 
-data_path = "/Users/cxqiu/GitHub/mouse_sprint/tape_pipeline/tables"
-save_path = "/Volumes/f0085ts/work/tapemouse/making_figures"
-
-dat = read.csv(paste0(data_path, "/e3v8.saturation_sites_written.csv"), skip = 2)
+dat = read.csv("./Figures_data/e3v8.saturation_sites_written.csv", skip = 2)
 
 p = ggplot(dat, aes(x = sites_written, y = pct_of_cells)) +
     geom_bar(stat="identity") +
     labs(x = "# of sites written", y = "% of cells", fill = NULL) +
     theme_classic()
-
-ggsave(paste0(save_path, "/Fig2/Fig2_saturation_sites_written.pdf"), p, height =4, width = 6)
-
-x = rep(dat$sites_written, times = dat$n_cells)
-print(paste0(mean(x), " +/- ", sd(x)))
 
 
 ###################################################################################################
@@ -34,18 +26,12 @@ library(ggplot2)
 library(tidyr)
 library(dplyr)
 
-data_path = "/Users/cxqiu/GitHub/mouse_sprint/tape_pipeline/tables"
-save_path = "/Volumes/f0085ts/work/tapemouse/making_figures"
-
-dat = read.csv(paste0(data_path, "/e3v8.lineage_rarefaction_curve.csv"))
+dat = read.csv("./Figures_data/e3v8.lineage_rarefaction_curve.csv")
 
 p = ggplot(data = filter(dat, region == "observed"), aes(x = cells_sampled, y = expected_genotypes)) +
-#    geom_line(linewidth = 1) +
     geom_point() +
     labs(x = "# of genome equivalents sampled", y = "Expected distinct lineage genotypes", fill = NULL) +
     theme_classic()
-
-ggsave(paste0(save_path, "/Fig2/Fig2_lineage_rarefaction_curve.pdf"), p, height = 4, width = 6)
 
 
 ###############################################################################################
@@ -55,13 +41,38 @@ library(ggplot2)
 library(tidyr)
 library(dplyr)
 
-data_path = "/Users/cxqiu/GitHub/mouse_sprint/tape_pipeline/tables"
-save_path = "/Volumes/f0085ts/work/tapemouse/making_figures"
-work_path = "/Volumes/f0085ts/work/tapemouse/tree_analysis"
+major_trajectory_color_plate = c(
+    "Neuroectoderm_and_glia"             = "#f96100",
+    "Intermediate_neuronal_progenitors"  = "#2e0ab7",
+    "Eye_and_other"                      = "#00d450",
+    "Ependymal_cells"                    = "#b75bff",
+    "CNS_neurons"                        = "#e5c000",
+    "Mesoderm"                           = "#bb46c5",
+    "Definitive_erythroid"               = "#dc453e",
+    "Epithelium"                         = "#af9fb6",
+    "Endothelium"                        = "#00a34e",
+    "Muscle_cells"                       = "#ffa1f5",
+    "Hepatocytes"                        = "#185700",
+    "White_blood_cells"                  = "#7ca0ff",
+    "Neural_crest_PNS_glia"              = "#fff167",
+    "Adipocytes"                         = "#7f3e39",
+    "Primitive_erythroid"                = "#ffa9a1",
+    "Neural_crest_PNS_neurons"           = "#b5ce92",
+    "T_cells"                            = "#ff9d47",
+    "Lung_and_airway"                    = "#02b0d1",
+    "Intestine"                          = "#ff007a",
+    "B_cells"                            = "#01b7a6",
+    "Olfactory_sensory_neurons"          = "#e6230b",
+    "Cardiomyocytes"                     = "#643e8c",
+    "Oligodendrocytes"                   = "#916e00",
+    "Mast_cells"                         = "#005361",
+    "Megakaryocytes"                     = "#3f283d",
+    "Testis_and_adrenal"                 = "#585d3b"
+)
 
-dat = read.table(paste0(data_path, "/v8/e3v8.routing_labels.tsv.gz"), sep='\t', header=T)
-celltype = read.table(paste0(work_path, "/cell_metadata.v8.txt"), sep='\t', header=T)
-major_trajectory_celltype = read.table(paste0(work_path, "/major_trajectory_celltype_table.txt"), sep='\t', header=T)
+dat = read.table("./support_data/e3v8.routing_labels.tsv.gz", sep='\t', header=T)
+celltype = read.table("./support_data/cell_metadata.v8.txt", sep='\t', header=T)
+major_trajectory_celltype = read.table("./support_data/major_trajectory_celltype_table.txt", sep='\t', header=T)
 
 all_celltypes = unique(celltype$celltype[celltype$cell_id %in% dat$cell[dat$blastomere %in% c("B1","B2")]])
 ### 141 cell types
@@ -95,11 +106,6 @@ p = ggplot(df, aes(x = B1_log2_frac, y = B2_log2_frac, color = major_trajectory)
     labs(x = "Log2[Fraction (%) + 1], B1 blastomere", y = "Log2[Fraction (%) + 1], B2 blastomere") +
     scale_color_manual(values=major_trajectory_color_plate)
 
-ggsave(paste0(save_path, "/Fig2/Fig2_celltype_frac_two_blastomere.pdf"), p, height = 5, width = 5)
-
-fit = cor.test(df$B1_log2_frac, df$B2_log2_frac, method = "spearman")
-print(fit$estimate) ### 0.9931551
-print(fit$p.value)  ### 1.617634e-131
 
 
 ######################################################################
@@ -109,10 +115,7 @@ library(ggplot2)
 library(tidyr)
 library(dplyr)
 
-data_path = "/Users/cxqiu/GitHub/mouse_sprint/figures/fig_3"
-save_path = "/Volumes/f0085ts/work/tapemouse/making_figures"
-
-dat = read.csv(paste0(data_path, "/panel_F_temporal_resolution.csv"))
+dat = read.csv("./figures_data/panel_F_temporal_resolution.csv")
 
 dat$rate[dat$architecture == "empirical_11x6" & dat$day == 0] = 13.33
 
@@ -126,7 +129,6 @@ p = ggplot(dat, aes(x = day, y = rate, color = architecture)) +
                                   "empirical_11x6" = "black", "sequential_11x6_constant_rate" = "#108441")) +
     theme(legend.position = "none")
 
-ggsave(paste0(save_path, "/Fig2/Fig2I.pdf"), p, height = 4, width = 5.5)
 
 
 ####################################################################################################
@@ -136,10 +138,7 @@ library(ggplot2)
 library(tidyr)
 library(dplyr)
 
-data_path = "/Users/cxqiu/GitHub/mouse_sprint/figures/fig_3"
-save_path = "/Volumes/f0085ts/work/tapemouse/making_figures"
-
-dat = read.csv(paste0(data_path, "/panel_D_editing_rate.csv"))
+dat = read.csv("./figures_data/panel_D_editing_rate.csv")
 
 p <- ggplot(dat[!is.na(dat$rate),], aes(x = day_mid, y = rate, color = blastomere)) +
     geom_point() +
@@ -151,8 +150,6 @@ p <- ggplot(dat[!is.na(dat$rate),], aes(x = day_mid, y = rate, color = blastomer
     theme(legend.position = "none") +
     labs(x = "Time (days)", y = "Editing rate (edits/day)", fill = NULL)
 
-ggsave(paste0(save_path, "/Fig2/Fig2J.pdf"), p, height = 4, width = 5)
-
 
 ###################################################################################
 ### Fig. 2K: Internal node support across developmental time for blastomere A and B
@@ -161,10 +158,7 @@ library(ggplot2)
 library(tidyr)
 library(dplyr)
 
-data_path = "/Users/cxqiu/GitHub/mouse_sprint/figures/fig_3"
-save_path = "/Volumes/f0085ts/work/tapemouse/making_figures"
-
-dat = read.csv(paste0(data_path, "/panel_E_support_over_time.csv"))
+dat = read.csv("./figures_data/panel_E_support_over_time.csv")
 
 # Reshape to long format so both pct columns can be plotted as separate lines
 dat_long <- dat %>%
@@ -186,8 +180,6 @@ p <- ggplot(dat_long[!is.na(dat_long$pct),], aes(x = day_mid, y = pct,
     theme(legend.position = "none") +
     labs(x = "Time (days)", y = "% of internal nodes",
          color = "Blastomere", linetype = "Threshold")
-
-ggsave(paste0(save_path, "/Fig2/Fig2K.pdf"), p, height = 4, width = 5)
 
 
 

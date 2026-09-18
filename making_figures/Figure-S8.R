@@ -11,10 +11,22 @@ library(tidyr)
 library(dplyr)
 library(tidyverse)
 
-data_path = "/Volumes/f0085ts/work/tapemouse/making_figures/FigSR7"
-save_path = "/Volumes/f0085ts/work/tapemouse/making_figures"
+tapebc_color_plate = c(
+    "AATAGAAAACGA" = "#A6CEE3",
+    "ATATCAAATTGA" = "#1F78B4",
+    "CAGCTAACGCCT" = "#B2DF8A",
+    "CATATAATCGCA" = "#33A02C",
+    "CGGCGAAAAGGT" = "#FB9A99",
+    "CGGGGAATTGTA" = "#E31A1C",
+    "GTGTAAATCGGC" = "#FDBF6F",
+    "TAACGAATGCCG" = "#FF7F00",
+    "TCCGGAAGACCC" = "#CAB2D6",
+    "TGACTAAAGCGG" = "#6A3D9A",
+    "TGGGGAACATAT" = "#B15928"
+)
 
-dat = read.csv(paste0(data_path, "/panel_heldout_tape_distance_correlation.csv"))
+
+dat = read.csv("./figures_data/panel_heldout_tape_distance_correlation.csv")
 
 dat_long <- dat |>
     pivot_longer(
@@ -38,4 +50,4 @@ p = ggplot(dat_long, aes(x = type, y = rho)) +
     theme(legend.position = "none") +
     scale_color_manual(values = tapebc_color_plate)
 
-ggsave(paste0(save_path, "/FigS8/FigSR7_Leave-one-tape-out.pdf"), p, height = 6, width = 6)
+

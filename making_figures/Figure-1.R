@@ -11,10 +11,7 @@ library(ggplot2)
 library(tidyr)
 library(dplyr)
 
-data_path = "/Users/cxqiu/GitHub/mouse_sprint/tape_pipeline/tables"
-save_path = "/Volumes/f0085ts/work/tapemouse/making_figures"
-
-dat = read.csv(paste0(data_path, "/panel1_barcode_copies.csv"))
+dat = read.csv("./figures_data/panel1_barcode_copies.csv")
 dat = dat[dat$embryo %in% paste0("embryo ", c(2,3,6)),]
 
 df = dat %>% group_by(embryo) %>% 
@@ -38,8 +35,6 @@ p = ggplot(df_long, aes(x = embryo, y = value, fill = metric)) +
     theme_classic() +
     theme(legend.position = "top")
 
-ggsave(paste0(save_path, "/Fig1/Fig1_integration_barcode_summary.pdf"), p, height = 4, width = 4.5)
-
 
 #############################################################################################################
 ### Fig. 1C: Per-monomer editing rates for each embryo, expressed as the fraction of resolved reads edited 
@@ -48,10 +43,16 @@ ggsave(paste0(save_path, "/Fig1/Fig1_integration_barcode_summary.pdf"), p, heigh
 library(ggplot2)
 library(dplyr)
 
-data_path = "/Users/cxqiu/GitHub/mouse_sprint/tape_pipeline/tables"
-save_path = "/Volumes/f0085ts/work/tapemouse/making_figures"
+site_color_plate = c(
+    "site_1" = "#440154",
+    "site_2" = "#414487",
+    "site_3" = "#2a788e",
+    "site_4" = "#22a884",
+    "site_5" = "#7ad151",
+    "site_6" = "#ec1b37"
+)
 
-dat = read.csv(paste0(data_path, "/panel2_persite_by_embryo.csv"))
+dat = read.csv("./figures_data/panel2_persite_by_embryo.csv")
 dat = dat[dat$embryo %in% paste0("embryo ", c(2,3,6)),]
 dat$site = factor(paste0("site_", dat$site), levels = paste0("site_", 1:6))
 
@@ -63,8 +64,6 @@ p = ggplot(dat, aes(x = embryo, y = edit_rate, fill = site)) +
     scale_fill_manual(values = site_color_plate) +
     guides(fill = guide_legend(nrow = 1))
 
-ggsave(paste0(save_path, "/Fig1/Fig1_per_site_editing_rate_per_embryo.pdf"), p, height = 4, width = 4.5)
-
 
 ####################################################################
 ### Fig. 1D: Per-monomer editing rate in embryo #3, shown separately 
@@ -73,10 +72,22 @@ ggsave(paste0(save_path, "/Fig1/Fig1_per_site_editing_rate_per_embryo.pdf"), p, 
 library(ggplot2)
 library(dplyr)
 
-data_path = "/Users/cxqiu/GitHub/mouse_sprint/tape_pipeline/tables"
-save_path = "/Volumes/f0085ts/work/tapemouse/making_figures"
+tapebc_color_plate = c(
+    "AATAGAAAACGA" = "#A6CEE3",
+    "ATATCAAATTGA" = "#1F78B4",
+    "CAGCTAACGCCT" = "#B2DF8A",
+    "CATATAATCGCA" = "#33A02C",
+    "CGGCGAAAAGGT" = "#FB9A99",
+    "CGGGGAATTGTA" = "#E31A1C",
+    "GTGTAAATCGGC" = "#FDBF6F",
+    "TAACGAATGCCG" = "#FF7F00",
+    "TCCGGAAGACCC" = "#CAB2D6",
+    "TGACTAAAGCGG" = "#6A3D9A",
+    "TGGGGAACATAT" = "#B15928"
+)
 
-dat = read.csv(paste0(data_path, "/panel3_persite_by_integration.csv"))
+
+dat = read.csv("./figures_data/panel3_persite_by_integration.csv")
 dat = dat[dat$embryo == "embryo 3",]
 dat$site = factor(dat$site, levels = 1:6)
 
@@ -89,8 +100,6 @@ p = ggplot(dat, aes(x = site, y = edit_rate, group = tapebc, color = tapebc)) +
                        limits = c(0, 1)) +
     theme_classic()
 
-ggsave(paste0(save_path, "/Fig1/Fig1_per_site_editing_rate_per_integration_embryo3.pdf"), p, height = 4, width = 6)
-
 
 
 ####################################################################
@@ -100,10 +109,25 @@ ggsave(paste0(save_path, "/Fig1/Fig1_per_site_editing_rate_per_integration_embry
 library(ggplot2)
 library(dplyr)
 
-data_path = "/Users/cxqiu/GitHub/mouse_sprint/tape_pipeline/tables"
-save_path = "/Volumes/f0085ts/work/tapemouse/making_figures"
+edits_color_plate = c(
+    "CTG"      = "#E62C8B",
+    "GCC"      = "#A6CEE3",
+    "AAG"      = "#1F78B4",
+    "CAC"      = "#B2DF8A",
+    "GATG"     = "#33A02C",
+    "CCC"      = "#FB9A99",
+    "GGC"      = "#E31A1C",
+    "ACG"      = "#FDBF6F",
+    "GAA"      = "#FF7F00",
+    "ACC"      = "#CAB2D6",
+    "ACA"      = "#6A3D9A",
+    "CCG"      = "#FFFF99",
+    "ACT"      = "#B15928",
+    "other"    = "grey70",
+    "Unedited" = "#E1E0D9"
+)
 
-dat = read.csv(paste0(data_path, "/DTTz_3_S3.site_insertion_freq.csv")) 
+dat = read.csv("./figures_data/DTTz_3_S3.site_insertion_freq.csv")
 
 top_ins = dat %>% filter(freq_within_site >= 0.005) %>% 
     pull(insertion)
@@ -113,16 +137,12 @@ dat = dat %>%
     mutate(insertion = if_else(insertion %in% top_ins, insertion, "other"),
            insertion = factor(insertion, levels = c(top_ins, "other")))
 
+dat$insertion = factor(dat$insertion, levels = names(edits_color_plate))
+
 p = ggplot(dat, aes(x = factor(site), y = freq_within_site, fill = insertion)) +
     geom_col() +
     theme_classic() +
     scale_fill_manual(values = edits_color_plate) +
     labs(x = "Site (position in TAPE)", y = "Fraction of edits", fill = NULL) 
 
-ggsave(paste0(save_path, "/Fig1/Fig1_site_insertion_freq.pdf"), p, height = 3, width = 4)
-
-### The 5 symbols that are present at ≥0.5% frequency only at site-1 and/or site-2 are marked with an asterisk
-site_1 = dat %>% filter(site %in% c(1,2), freq_within_site >= 0.005) %>% pull(insertion) %>% unique()
-site_2 = dat %>% filter(site %in% c(3:6), freq_within_site >= 0.005) %>% pull(insertion) %>% unique()
-x = site_1[!site_1 %in% site_2]
 

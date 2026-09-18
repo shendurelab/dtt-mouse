@@ -8,17 +8,25 @@
 library(ggplot2)
 library(dplyr)
 
-data_path = "/Users/cxqiu/GitHub/mouse_sprint/tape_pipeline/tables"
-save_path = "/Volumes/f0085ts/work/tapemouse/making_figures"
+tapebc_color_plate = c(
+    "AATAGAAAACGA" = "#A6CEE3",
+    "ATATCAAATTGA" = "#1F78B4",
+    "CAGCTAACGCCT" = "#B2DF8A",
+    "CATATAATCGCA" = "#33A02C",
+    "CGGCGAAAAGGT" = "#FB9A99",
+    "CGGGGAATTGTA" = "#E31A1C",
+    "GTGTAAATCGGC" = "#FDBF6F",
+    "TAACGAATGCCG" = "#FF7F00",
+    "TCCGGAAGACCC" = "#CAB2D6",
+    "TGACTAAAGCGG" = "#6A3D9A",
+    "TGGGGAACATAT" = "#B15928"
+)
 
-dat = read.csv(paste0(data_path, "/DTTz_3_S3.rarefaction_curve.csv"))
+dat = read.csv("./figures_data/DTTz_3_S3.rarefaction_curve.csv")
 
 p = ggplot(data = filter(dat, region == "observed"), aes(x = cells_sampled, y = expected_lineages, color = tapebc)) +
     geom_point() +
     scale_color_manual(values = tapebc_color_plate) +
     labs(x = "# of genome equivalents sampled", y = "Expected distinct lineage genotypes", fill = NULL) +
     theme_classic()
-
-ggsave(paste0(save_path, "/FigS2/FigS1_rarefaction_curve.pdf"), p, height = 3, width = 6)
-
 

@@ -6,16 +6,12 @@
 #######################################################################################################
 ### Fig. 15D: Fold-enrichment of each progenitor & post-mitotic pairing computed separately for A and B
 
-
 library(ggplot2)
 library(tidyr)
 library(dplyr)
 library(scales)
 
-data_path = "/Users/cxqiu/GitHub/mouse_sprint/tape_pipeline/figures/v8/heterotypic"
-save_path = "/Volumes/f0085ts/work/tapemouse/making_figures"
-
-dat = read.csv(paste0(data_path, "/figSX_captured_divisions_AB_replication.csv"))
+dat = read.csv("./figures_data/figSX_captured_divisions_AB_replication.csv")
 
 library(ggplot2)
 library(scales)
@@ -48,7 +44,6 @@ p = ggplot(d, aes(fold_A, fold_B, color = group, size = group)) +
          title = sprintf("Spearman = %.2f    Pearson(log2) = %.2f", sp, pe)) +
     theme_classic()
 
-ggsave(paste0(save_path, "/FigS15/FigS7C.pdf"), p, height = 5, width = 6)
 
 
 

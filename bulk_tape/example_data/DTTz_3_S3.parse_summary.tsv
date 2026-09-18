@@ -1,0 +1,7 @@
+metric	count	pct_of_total
+total_reads	9060176	100.00
+bc_extractable	8603061	94.95
+bc_in_whitelist	8235027	90.89
+ordering_errors	2073	0.02
+all_sites_resolved	6193640	68.36
+valid_reads	5542393	61.17

@@ -1,0 +1,191 @@
+major_trajectory	celltype
+Adipocytes	Adipocyte cells (Cyp2e1+)
+Adipocytes	Adipocyte progenitor cells
+Adipocytes	Brown adipocyte cells
+B_cells	B cell progenitors
+B_cells	B cells
+CNS_neurons	Amacrine cells
+CNS_neurons	Amacrine/Horizontal precursor cells
+CNS_neurons	Cajal-Retzius cells
+CNS_neurons	Cerebellar Purkinje cells
+CNS_neurons	Cholinergic amacrine cells
+CNS_neurons	Cranial motor neurons
+CNS_neurons	GABAergic cortical interneurons
+CNS_neurons	GABAergic neurons
+CNS_neurons	Glutamatergic neurons
+CNS_neurons	Horizontal cells
+CNS_neurons	Neural progenitor cells (Neurod1+)
+CNS_neurons	Neural progenitor cells (Ror1+)
+CNS_neurons	Neurons (Slc17a8+)
+CNS_neurons	PV-containing retinal ganglion cells
+CNS_neurons	Retinal ganglion cells
+CNS_neurons	Spinal cord dorsal progenitors
+CNS_neurons	Spinal cord motor neurons
+CNS_neurons	Spinal cord ventral progenitors
+CNS_neurons	Thalamic neuronal precursors
+Cardiomyocytes	Atrial cardiomyocytes
+Cardiomyocytes	First heart field
+Cardiomyocytes	Second heart field
+Cardiomyocytes	Ventricular cardiomyocytes
+Definitive_erythroid	Definitive early erythroblasts (CD36-)
+Definitive_erythroid	Definitive erythroblasts (CD36+)
+Endothelium	Arterial endothelial cells
+Endothelium	Brain capillary endothelial cells
+Endothelium	Brain pericytes
+Endothelium	Endocardial cells
+Endothelium	Endothelium
+Endothelium	Glomerular endothelial cells
+Endothelium	Hematoendothelial progenitors
+Endothelium	Liver sinusoidal endothelial cells
+Endothelium	Lymphatic vessel endothelial cells
+Endothelium	Microvascular endothelial cells
+Endothelium	Pericytes
+Endothelium	Venous and capillary endothelial cells
+Ependymal_cells	Choroid plexus
+Ependymal_cells	Ciliated nodal cells
+Ependymal_cells	Ependymal cells
+Epithelium	Amniotic ectoderm
+Epithelium	Anterior intermediate mesoderm
+Epithelium	Apical ectodermal ridge
+Epithelium	Ascending loop of Henle
+Epithelium	Basal keratinocytes
+Epithelium	Biliary epithelial cells
+Epithelium	Bladder urothelial cells
+Epithelium	Branchial arch epithelium
+Epithelium	Collecting duct intercalated cells
+Epithelium	Collecting duct principal cells
+Epithelium	Conjunctival goblet cells
+Epithelium	Connecting tubule
+Epithelium	Corneal epithelial cells
+Epithelium	Dental epithelial cells
+Epithelium	Distal convoluted tubule
+Epithelium	Foregut epithelial cells
+Epithelium	Granular keratinocytes
+Epithelium	Gut
+Epithelium	Lens epithelial cells
+Epithelium	Metanephric mesenchyme
+Epithelium	Nephron progenitors
+Epithelium	Notochord
+Epithelium	Olfactory bulb cells
+Epithelium	Olfactory epithelial cells
+Epithelium	Olfactory pit cells
+Epithelium	Otic epithelial cells
+Epithelium	Pancreatic acinar cells
+Epithelium	Parathyroid epithelial cells
+Epithelium	Pituitary/Pineal gland progenitors
+Epithelium	Placodal area
+Epithelium	Podocytes
+Epithelium	Posterior intermediate mesoderm
+Epithelium	Pre-epidermal keratinocytes
+Epithelium	Primordial germ cells
+Epithelium	Proximal tubule cells
+Epithelium	Thymic epithelial cells
+Epithelium	Thyroid gland cells
+Epithelium	Tooth junctional epithelium
+Epithelium	Ureteric bud
+Eye_and_other	Bipolar precursor cells
+Eye_and_other	Ciliary margin cells
+Eye_and_other	Cochlear hair cells
+Eye_and_other	Cone precursor cells
+Eye_and_other	Naive retinal progenitor cells
+Eye_and_other	Nonsensory cochlear epithelium
+Eye_and_other	Pancreatic islets
+Eye_and_other	Photoreceptor precursor cells
+Eye_and_other	Pineal gland
+Eye_and_other	Pituitary gland cells
+Eye_and_other	Retinal progenitor cells
+Eye_and_other	Rod precursor cells
+Eye_and_other	Suprachiasmatic nucleus
+Hepatocytes	Hepatocytes
+Intermediate_neuronal_progenitors	Cortical Interneurons (Prox1+)
+Intermediate_neuronal_progenitors	Deep-layer neurons
+Intermediate_neuronal_progenitors	Intermediate neuronal progenitors
+Intermediate_neuronal_progenitors	Subplate neurons
+Intermediate_neuronal_progenitors	Upper-layer neurons
+Intestine	Extraembryonic visceral endoderm
+Intestine	Intestinal enteroendocrine cells
+Intestine	Intestinal goblet cells
+Intestine	Midgut/Hindgut epithelial cells
+Lung_and_airway	Airway club cells
+Lung_and_airway	Airway goblet cells
+Lung_and_airway	Alveolar Type 1 cells
+Lung_and_airway	Alveolar Type 2 cells
+Lung_and_airway	Lung cells (Eln+)
+Lung_and_airway	Lung progenitor cells
+Mast_cells	Mast cells
+Mast_cells	Mast cells (P2rx7+)
+Megakaryocytes	Megakaryocytes
+Mesoderm	Chondrocytes (Atp1a2+)
+Mesoderm	Chondrocytes (Otor+)
+Mesoderm	Dermatome
+Mesoderm	Dermomyotome
+Mesoderm	Early chondrocytes
+Mesoderm	Facial mesenchyme
+Mesoderm	Fibroblasts
+Mesoderm	Lateral plate and intermediate mesoderm
+Mesoderm	Limb mesenchyme progenitors
+Mesoderm	Mesodermal progenitors (Tbx6+)
+Mesoderm	Pre-osteoblasts (Sp7+)
+Mesoderm	Sclerotome
+Muscle_cells	Muscle progenitor cells
+Muscle_cells	Muscle progenitor cells (Prdm1+)
+Muscle_cells	Myoblasts
+Muscle_cells	Myofibroblasts
+Muscle_cells	Myotubes
+Neural_crest_PNS_glia	Melanocyte cells
+Neural_crest_PNS_glia	Myelinating Schwann cells
+Neural_crest_PNS_glia	Myelinating Schwann cells (Tgfb2+)
+Neural_crest_PNS_glia	Neural crest (PNS glia)
+Neural_crest_PNS_glia	Olfactory ensheathing cells
+Neural_crest_PNS_glia	Satellite glial cells
+Neural_crest_PNS_neurons	Dorsal root ganglion neurons
+Neural_crest_PNS_neurons	Enteric neurons
+Neural_crest_PNS_neurons	Neural crest (PNS neurons)
+Neural_crest_PNS_neurons	Otic sensory neurons
+Neural_crest_PNS_neurons	Parasympathetic neurons
+Neural_crest_PNS_neurons	Sympathetic neurons
+Neuroectoderm_and_glia	Anterior floor plate
+Neuroectoderm_and_glia	Anterior roof plate
+Neuroectoderm_and_glia	Astrocytes
+Neuroectoderm_and_glia	Cerebellum-related cells
+Neuroectoderm_and_glia	Diencephalon
+Neuroectoderm_and_glia	Dorsal telencephalon
+Neuroectoderm_and_glia	Eye field
+Neuroectoderm_and_glia	Floorplate and p3 domain
+Neuroectoderm_and_glia	Hindbrain
+Neuroectoderm_and_glia	Hypothalamus
+Neuroectoderm_and_glia	Hypothalamus (Sim1+)
+Neuroectoderm_and_glia	Midbrain
+Neuroectoderm_and_glia	Midbrain-hindbrain boundary
+Neuroectoderm_and_glia	Multiciliated ependymal cells
+Neuroectoderm_and_glia	NMPs and spinal cord progenitors
+Neuroectoderm_and_glia	Posterior roof plate
+Neuroectoderm_and_glia	Retinal pigment cells
+Neuroectoderm_and_glia	Spinal cord/r7/r8
+Neuroectoderm_and_glia	Telencephalon
+Olfactory_sensory_neurons	Corticofugal neurons
+Olfactory_sensory_neurons	Olfactory sensory neurons
+Oligodendrocytes	Committed oligodendrocyte precursors
+Oligodendrocytes	Oligodendrocyte progenitor cells
+Primitive_erythroid	Primitive erythroid cells
+T_cells	Activated T cells
+T_cells	Natural killer cells
+T_cells	Regulatory T cells
+T_cells	T cells
+Testis_and_adrenal	Adrenocortical cells
+Testis_and_adrenal	Leydig cells
+White_blood_cells	Adipose tissue macrophages
+White_blood_cells	Border-associated macrophages
+White_blood_cells	Border-associated macrophages (Cd74+)
+White_blood_cells	Border-associated macrophages (Ms4a8a+)
+White_blood_cells	Conventional dendritic cells
+White_blood_cells	Granulocytes
+White_blood_cells	Hematopoietic stem cells (Cd34+)
+White_blood_cells	Hematopoietic stem cells (Mpo+)
+White_blood_cells	Kupffer cells
+White_blood_cells	Microglia
+White_blood_cells	Monocytes
+White_blood_cells	Monocytic myeloid-derived suppressor cells
+White_blood_cells	Osteoclasts
+White_blood_cells	PMN myeloid-derived suppressor cells
+White_blood_cells	Plasmacytoid dendritic cells

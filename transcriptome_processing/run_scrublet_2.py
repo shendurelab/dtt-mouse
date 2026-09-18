@@ -9,7 +9,7 @@ import numpy as np
 import scrublet as scr
 import os, sys
 
-WORK_PATH = '/net/shendure/vol8/projects/cxqiu/work/tapemouse/data_analysis/' + str(sys.argv[1])
+WORK_PATH = 'XXX' + str(sys.argv[1])
 
 #######################################
 ### run scanpy for doublet clusters ###

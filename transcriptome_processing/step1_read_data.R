@@ -1,6 +1,6 @@
 
-#############################################################
-### Processing the TapeMouse experiment1_20260618_seq4_AD
+#########################################################################
+### Processing the TapeMouse experiment1_20260618_seq4_AD (as an example)
 ### Please contact: CX Qiu (Chengxiang.Qiu@dartmouth.edu)
 
 ##########################################################################################
@@ -14,15 +14,13 @@ library(gridExtra)
 library(viridis)
 library(patchwork)
 
-work_path = "/net/shendure/vol2/projects/cxqiu/work/tapemouse"
-
-mouse_gene = read.table("/net/gs/vol1/home/cxqiu/work/tome/code/mouse.v37.geneID.txt", header=T, sep="\t", as.is=T)
+mouse_gene = read.table("mouse.v37.geneID.txt", header=T, sep="\t", as.is=T)
 
 experiment_id = "experiment1_20260618_seq4_AD"
 
 batch_num = 8
 
-### how many reads in this experiment (after UMI attach)
+### how many reads in this experiment
 read_num_fastq = NULL
 for(cnt in 1:batch_num){
     print(cnt)
@@ -30,7 +28,7 @@ for(cnt in 1:batch_num){
     read_num_fastq = rbind(read_num_fastq, read_num_cnt)
 }
 print(sum(read_num_fastq$V1))
-### 1,752,100,203
+
 
 ### summary the duplication rate
 read_num = NULL
@@ -40,17 +38,10 @@ for(cnt in 1:batch_num){
   read_num = rbind(read_num, read_num_cnt)
 }
 
-print(summary(1 - read_num$V2/read_num$V1)) 
-#   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
-# 0.1017  0.6384  0.6615  0.6587  0.6891  0.7480
-
+print(summary(1 - read_num$V2/read_num$V1))
 print(sum(read_num$V1))
-### 1,618,837,684
-
 print(sum(read_num$V2))
-### 533,319,833
 
-### saving and performing doublets removing on individual batches if necessary
 
 df_cell_merge = NULL
 
@@ -109,16 +100,12 @@ for(cnt in 1:batch_num){
 }
 
 print(nrow(df_cell_merge))
-### nrow(df_cell) = 297,290
 
 print(median(df_cell_merge$UMI_count))
-### 1,052
 
 print(median(df_cell_merge$gene_count))
-### 732
 
 print(sum(is.na(df_cell_merge$SampleName)))
-### 0
 
 saveRDS(df_cell_merge, paste0(work_path, "/data_analysis/", experiment_id, "/df_cell.rds"))
 
@@ -175,6 +162,8 @@ write.csv(df_cell_4, paste0(work_path, "/data_analysis/", experiment_id, "/df_ce
 write.csv(df_gene, paste0(work_path, "/data_analysis/", experiment_id, "/df_gene.csv"))
 
 ### run scrublet using python to detect doublets
+### run_scrublet_1.py
+### run_scrublet_2.py
 
 ###########################################
 ### after running scrublet using python ###
@@ -204,7 +193,6 @@ print(sum(rownames(df) != rownames(df_cell)))
 df_cell$doublet_score = as.vector(df$doublet_score)
 df_cell$detected_doublets = df_cell$doublet_score > 0.2
 
-### sum(df_cell$detected_doublets)/nrow(df_cell) = 0.03942951
 
 ###############################################################
 ### checking if sub-clusters include over 15% doublet cells ###
@@ -259,13 +247,7 @@ rownames(res) = as.vector(res$cell_id)
 res = res[rownames(df_cell),]
 df_cell$doublet_cluster = res$doublet_cluster
 
-### sum(df_cell$detected_doublets | df_cell$doublet_cluster) = 19363
-### sum(df_cell$detected_doublets | df_cell$doublet_cluster)/nrow(df_cell) = 0.06513169
 saveRDS(df_cell, paste0(work_path, "/data_analysis/", experiment_id, "/df_cell.rds"))
-
-### mv doublet_scores_observed_cells_*.csv doublet_cluster/
-### mv doublet_scores_simulated_doublets_*.csv doublet_cluster/
-### rm df_cell_*.csv gene_count_*.mtx df_gene.csv
 
 
 

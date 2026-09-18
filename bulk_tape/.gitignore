@@ -1,0 +1,13 @@
+# Generated pipeline outputs (regenerable)
+data/
+
+# Raw sequencing data is never checked in
+*.fastq
+*.fastq.gz
+
+# Python
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store

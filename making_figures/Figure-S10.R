@@ -10,10 +10,7 @@ library(ggplot2)
 library(tidyr)
 library(dplyr)
 
-data_path = "/Users/cxqiu/GitHub/mouse_sprint/tape_pipeline/figures/v8"
-save_path = "/Volumes/f0085ts/work/tapemouse/making_figures"
-
-dat = read.csv(paste0(data_path, "/figS5EF_placement_concordance.csv"))
+dat = read.csv("./figures_data/figS5EF_placement_concordance.csv")
 
 plot_dat <- dat %>%
     filter(tier != "overall", side != "all") %>%
@@ -39,7 +36,6 @@ p <- ggplot(plot_dat, aes(x = bar, y = pct_of_origin, fill = tier)) +
     theme(axis.text.x = element_text(angle = 20, hjust = 1),
           panel.grid.major.x = element_blank())
 
-ggsave(paste0(save_path, "/FigS10/FigS5E.pdf"), p, height = 4, width = 7)
 
 
 ############################################################################################################
@@ -49,10 +45,7 @@ library(ggplot2)
 library(tidyr)
 library(dplyr)
 
-data_path = "/Users/cxqiu/GitHub/mouse_sprint/tape_pipeline/figures/v8"
-save_path = "/Volumes/f0085ts/work/tapemouse/making_figures"
-
-dat = read.csv(paste0(data_path, "/figS5EF_placement_concordance.csv"))
+dat = read.csv("./figures_data/figS5EF_placement_concordance.csv")
 
 plot_dat <- dat %>%
     filter(origin != "backbone_orig", side != "all") %>%
@@ -79,8 +72,6 @@ p = ggplot(plot_dat, aes(x = tier, y = concordance, fill = group)) +
     labs(x = NULL, y = "% nearest neighbor shares cell type", fill = NULL) +
     theme_classic(base_size = 12) +
     theme(panel.grid.major.x = element_blank())
-
-ggsave(paste0(save_path, "/FigS10/FigS5F.pdf"), p, height = 4, width = 8)
 
 
 

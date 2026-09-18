@@ -1,0 +1,28 @@
+# Supplementary Table 1. Ubiquitous edits identifying the two blastomeres of the first cell division.
+"# Blastomere-defining edit prefixes (embryo 3, e3v8 = seq8+seq8_long, cross-talk-corrected re-demux (replaces seq4+seq5))"
+# criterion: modal edit allele present in >=95% of that blastomere's recovered cells at each site; contiguous run from site 1
+"# blastomere A = B1 (larger routed group, 889,849 cells); blastomere B = B2 (653,335 cells)"
+"# total defining edit/site combos: A=23, B=19"
+integration,blastomere,blastomere_B1B2,n_defining_sites,defining_prefix,prefix_with_fractions
+ATATCAAATTGA,A,B1,6,GATG-ACT-ACT-AAG-ACT-AAG,GATG(0.999)-ACT(1.000)-ACT(0.999)-AAG(0.999)-ACT(1.000)-AAG(0.999)
+TGACTAAAGCGG,A,B1,3,GCC-AAG-GCC,GCC(0.994)-AAG(0.993)-GCC(0.992)
+AATAGAAAACGA,A,B1,2,ACG-GCC,ACG(0.996)-GCC(0.995)
+CAGCTAACGCCT,A,B1,2,CCG-CAC,CCG(0.990)-CAC(0.990)
+CGGCGAAAAGGT,A,B1,2,CAC-AAG,CAC(0.998)-AAG(0.997)
+CGGGGAATTGTA,A,B1,2,AAG-AAG,AAG(0.987)-AAG(0.987)
+TGGGGAACATAT,A,B1,2,GAA-GATG,GAA(0.997)-GATG(0.996)
+CATATAATCGCA,A,B1,1,AAG,AAG(0.999)
+GTGTAAATCGGC,A,B1,1,GCC,GCC(0.998)
+TAACGAATGCCG,A,B1,1,GGC,GGC(0.998)
+TCCGGAAGACCC,A,B1,1,AAG,AAG(0.998)
+GTGTAAATCGGC,B,B2,4,ACC-ACC-CCC-GCC,ACC(0.995)-ACC(0.994)-CCC(0.991)-GCC(0.986)
+TGGGGAACATAT,B,B2,4,GCC-GCC-CCC-ACT,GCC(0.994)-GCC(0.993)-CCC(0.982)-ACT(0.979)
+TAACGAATGCCG,B,B2,3,CAC-ACT-GCC,CAC(0.999)-ACT(0.999)-GCC(0.996)
+ATATCAAATTGA,B,B2,2,AAG-ACT,AAG(0.964)-ACT(0.999)
+CGGGGAATTGTA,B,B2,2,GCC-GCC,GCC(0.998)-GCC(0.997)
+AATAGAAAACGA,B,B2,1,GATG,GATG(0.998)
+CATATAATCGCA,B,B2,1,ACA,ACA(0.998)
+CGGCGAAAAGGT,B,B2,1,CCC,CCC(0.997)
+TCCGGAAGACCC,B,B2,1,CAC,CAC(0.998)
+CAGCTAACGCCT,B,B2,0,none,none
+TGACTAAAGCGG,B,B2,0,none,none

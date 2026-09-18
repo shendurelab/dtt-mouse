@@ -1,0 +1,15 @@
+"# circTAPE recovery per integration; denominator = 1,584,848 transcriptome cells (cell_metadata.v8.txt)"
+"# cells with >=1 consensus = 1,559,419 (98.4%); cells in matrix not in metadata = 0"
+"# molecules/cell over all 1,584,848 cells (0 if none recovered): mean 62.4, median 50; over recovered cells only: mean 63.5, median 51"
+integration,n_cells_recovered,recovery_pct
+CGGCGAAAAGGT,1097988,69.3
+ATATCAAATTGA,1075992,67.9
+TAACGAATGCCG,1045601,66.0
+AATAGAAAACGA,1038909,65.6
+CATATAATCGCA,1026290,64.8
+TGACTAAAGCGG,1019956,64.4
+TCCGGAAGACCC,966006,61.0
+CAGCTAACGCCT,773793,48.8
+GTGTAAATCGGC,768805,48.5
+CGGGGAATTGTA,344816,21.8
+TGGGGAACATAT,59255,3.7

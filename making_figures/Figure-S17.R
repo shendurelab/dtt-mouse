@@ -13,10 +13,7 @@ library(tidyr)
 library(dplyr)
 library(tidyverse)
 
-data_path = "/Users/cxqiu/GitHub/mouse_sprint/tape_pipeline/figures/v8/coupling_depth"
-save_path = "/Volumes/f0085ts/work/tapemouse/making_figures"
-
-dat = read.csv(paste0(data_path, "/c18_s8c_k15_vs_k200_AB.csv"))
+dat = read.csv("./figures_data/c18_s8c_k15_vs_k200_AB.csv")
 
 df_A = dat[,c("log2_enr_A_K200", "log2_enr_A_K15", "category")]
 colnames(df_A) = c("log2_enr_K200", "log2_enr_K15", "category")
@@ -43,7 +40,6 @@ p = ggplot() +
                    K200_only = "#1F77B4",
                    both_K      = "#7A1F5C"))
 
-ggsave(paste0(save_path, "/FigS17/FigS8C.pdf"), p, height = 5, width = 11)
 
 
 
@@ -55,10 +51,7 @@ library(tidyr)
 library(dplyr)
 library(viridis)
 
-data_path = "/Users/cxqiu/GitHub/mouse_sprint/tape_pipeline/figures/v8/coupling_depth"
-save_path = "/Volumes/f0085ts/work/tapemouse/making_figures"
-
-df = read.csv(paste0(data_path, "/figSXa_coupling_depth_AB.csv"))
+df = read.csv("./figures_data/figSXa_coupling_depth_AB.csv")
 
 df_count = df %>% group_by(coupling_depth_A_E, coupling_depth_B_E) %>% tally()
 df_count$n = factor(df_count$n)
@@ -73,6 +66,4 @@ p = ggplot() +
     theme_classic() +
     scale_color_viridis(discrete=TRUE) 
 
-
-ggsave(paste0(save_path, "/FigS17/FigS8D.pdf"), p, height = 5, width = 6)
 

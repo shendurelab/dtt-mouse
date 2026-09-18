@@ -11,10 +11,7 @@ library(ggplot2)
 library(tidyr)
 library(dplyr)
 
-data_path = "/Volumes/f0085ts/work/tapemouse/making_figures/FigSR6"
-save_path = "/Volumes/f0085ts/work/tapemouse/making_figures"
-
-dat = read.csv(paste0(data_path, "/figSR5b_integrations.csv"))
+dat = read.csv("./figures_data/figSR5b_integrations.csv")
 
 df_long <- dat %>% 
     pivot_longer(cols = c(n_tapebc, n_integrations), 
@@ -36,8 +33,6 @@ p = ggplot(df_long, aes(x = embryo, y = value, fill = metric)) +
     theme_classic() +
     theme(legend.position = "top")
 
-ggsave(paste0(save_path, "/FigS4/FigSR6_integration_barcode_summary.pdf"), p, height = 4, width = 6)
-
 
 #######################################################
 ### Fig. S4B: Per-monomer editing rates for each embryo
@@ -45,10 +40,16 @@ ggsave(paste0(save_path, "/FigS4/FigSR6_integration_barcode_summary.pdf"), p, he
 library(ggplot2)
 library(dplyr)
 
-data_path = "/Volumes/f0085ts/work/tapemouse/making_figures/FigSR6"
-save_path = "/Volumes/f0085ts/work/tapemouse/making_figures"
+site_color_plate = c(
+    "site_1" = "#440154",
+    "site_2" = "#414487",
+    "site_3" = "#2a788e",
+    "site_4" = "#22a884",
+    "site_5" = "#7ad151",
+    "site_6" = "#ec1b37"
+)
 
-dat = read.csv(paste0(data_path, "/figSR5c_persite_editrate.csv"))
+dat = read.csv("./figures_data/figSR5c_persite_editrate.csv")
 dat$site = factor(paste0("site_", dat$site), levels = paste0("site_", 1:6))
 dat$embryo = factor(dat$embryo, levels = c("embryo #2", "embryo #3", "E14.5", "E18.5 #1", "E18.5 #2", "E19.5"))
 
@@ -60,7 +61,6 @@ p = ggplot(dat, aes(x = embryo, y = edit_rate, fill = site)) +
     scale_fill_manual(values = site_color_plate) +
     guides(fill = guide_legend(nrow = 1))
 
-ggsave(paste0(save_path, "/FigS4/FigSR6_per_site_editing_rate_per_embryo.pdf"), p, height = 4, width = 6)
 
 
 ###############################################################################
@@ -69,10 +69,7 @@ ggsave(paste0(save_path, "/FigS4/FigSR6_per_site_editing_rate_per_embryo.pdf"), 
 library(ggplot2)
 library(dplyr)
 
-data_path = "/Volumes/f0085ts/work/tapemouse/making_figures/FigSR6"
-save_path = "/Volumes/f0085ts/work/tapemouse/making_figures"
-
-dat = read.csv(paste0(data_path, "/figSR5d_rarefaction_curve.csv"))
+dat = read.csv("./figures_data/figSR5d_rarefaction_curve.csv")
 dat$embryo = factor(dat$embryo, levels = c("embryo #2", "embryo #3", "E14.5", "E18.5 #1", "E18.5 #2", "E19.5"))
 
 p = ggplot(data = filter(dat, region == "observed"), 
@@ -84,7 +81,5 @@ p = ggplot(data = filter(dat, region == "observed"),
          fill = NULL) +
     theme_classic() +
     theme(legend.position = "none")
-
-ggsave(paste0(save_path, "/FigS4/FigSR6_rarefaction_curve.pdf"), p, height = 6, width = 9)
 
 

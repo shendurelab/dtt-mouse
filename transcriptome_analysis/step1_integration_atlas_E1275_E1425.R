@@ -12,8 +12,6 @@ import numpy as np
 import os, sys
 import gc
 
-work_path = '/net/shendure/vol2/projects/cxqiu/work/tapemouse'
-
 experiment_list = ["experiment1_20260618_seq4_AD", 
                    "experiment1_20260618_seq4_EH",
                    "experiment1_20260618_seq5_IL",
@@ -33,7 +31,7 @@ adata = ad.concat(adatas, axis=0)
 del adatas
 gc.collect()
 
-mouse_gene = pd.read_csv("/net/gs/vol1/home/cxqiu/work/tome/code/mouse.v37.geneID.txt", sep="\t", index_col=4)
+mouse_gene = pd.read_csv("mouse.v37.geneID.txt", sep="\t", index_col=4)
 adata.var = mouse_gene.loc[adata.var_names]
 
 # exclude sex + mito chromosomes, only keep lncRNA and protein_coding
@@ -48,7 +46,7 @@ day_list = ["E12.75","E13.0","E13.25","E13.5","E13.75","E14.0","E14.25"]
 adatas = []
 for day_id in day_list:
     print(day_id)
-    a = sc.read_h5ad(f"/net/shendure/vol2/projects/cxqiu/JAX_rna_mm39/gene_count/adata.{day_id}.h5ad")
+    a = sc.read_h5ad(f"adata.{day_id}.h5ad")
     adatas.append(a)
 
 adata_jax = ad.concat(adatas, axis=0)
@@ -116,8 +114,6 @@ import pandas as pd
 import numpy as np
 from annoy import AnnoyIndex
 
-work_path = '/net/shendure/vol2/projects/cxqiu/work/tapemouse'
-
 OBS_PATH = f"{work_path}/transcriptome_analysis/adata_integration.obs.csv"
 PCA_PATH = f"{work_path}/transcriptome_analysis/adata_integration.pca.csv"
 N_NEIGHBORS = 20
@@ -160,16 +156,13 @@ pd.Series(jax_ids).to_csv(f"{work_path}/transcriptome_analysis/adata_integration
 ########################
 ### Plotting the 3D UMAP
 
-source("~/work/scripts/utils.R")
-work_path = "/net/shendure/vol2/projects/cxqiu/work/tapemouse"
-save_path = "/net/shendure/vol10/www/content/members/cxqiu/private/nobackup/tapemouse"
 
 pd = read.csv(paste0(work_path, "/transcriptome_analysis/adata_integration.obs.csv"), row.names=1)
 pd$cell_id = rownames(pd)
 pd_1 = pd[pd$dataset == 'jax',]
 pd_2 = pd[pd$dataset == 'tapemouse',]
 
-pd_jax = readRDS("/net/shendure/vol2/projects/cxqiu/JAX_rna_mm39/pd.rds")
+pd_jax = readRDS("pd.rds")
 pd_1_x = pd_1 %>% left_join(pd_jax, by = "cell_id") %>% as.data.frame()
 rownames(pd_1_x) = pd_1_x$cell_id
 
@@ -224,16 +217,11 @@ pd_out = pd[pd$dataset == "tapemouse", c("cell_id", "major_trajectory", "celltyp
 write.table(pd_out, paste0(save_path, "/cell_metadata.v8.txt"), row.names=F, quote=F, sep='\t')
 
 
-https://shendure-web.gs.washington.edu/content/members/cxqiu/private/nobackup/tapemouse/cell_metadata.v8.txt
 
 
 
 ########################
 ### Plotting the 2D UMAP
-
-source("~/work/scripts/utils.R")
-work_path = "/net/shendure/vol2/projects/cxqiu/work/tapemouse"
-save_path = "/net/shendure/vol10/www/content/members/cxqiu/private/nobackup/tapemouse"
 
 pd = readRDS(paste0(work_path, "/transcriptome_analysis/adata_integration.obs.rds"))
 
@@ -340,10 +328,6 @@ ggsave("~/share/Fig2_celltype_frac_2.pdf", p, height = 5, width = 4)
 ###########################################################################################
 ### Comparing cell-type-compositions between backbone tree vs. placed cells vs. E13.5 atlas
 
-source("~/work/scripts/utils.R")
-work_path = "/net/shendure/vol2/projects/cxqiu/work/tapemouse"
-library(ape)
-library(tidyr)
 
 pd = readRDS(paste0(work_path, "/transcriptome_analysis/adata_integration.obs.rds"))
 all_celltypes = unique(pd$celltype)
@@ -457,7 +441,7 @@ p6 <- plot_celltype_cor(pd_placed_B, pd_E135,
 pp <- (p1 | p3 | p5) / (p2 | p4 | p6) &
   theme(plot.margin = margin(t = 20, r = 20, b = 20, l = 20))
 
-ggsave("~/share/celltype_cor_grid.pdf", pp, width = 15, height = 10)
+ggsave("celltype_cor_grid.pdf", pp, width = 15, height = 10)
 
 
 

@@ -1,0 +1,131 @@
+celltype_1,celltype_2,germ_layer_1,germ_layer_2,coupling_depth_A_E,coupling_depth_B_E,abs_difference_days,coupling_depth_both_E
+Choroid plexus,Anterior roof plate,Neuroectoderm,Neuroectoderm,8.5,9.0,0.5,9.0
+Astrocytes,Floorplate and p3 domain,Neuroectoderm,Neuroectoderm,13.25,13.0,0.25,13.25
+Astrocytes,GABAergic neurons,Neuroectoderm,Neuroectoderm,12.25,11.25,1.0,12.25
+Astrocytes,Glutamatergic neurons,Neuroectoderm,Neuroectoderm,13.25,13.25,0.0,13.25
+Astrocytes,Spinal cord dorsal progenitors,Neuroectoderm,Neuroectoderm,12.75,12.75,0.0,12.75
+Astrocytes,Spinal cord motor neurons,Neuroectoderm,Neuroectoderm,9.5,10.75,1.25,10.75
+Astrocytes,Spinal cord ventral progenitors,Neuroectoderm,Neuroectoderm,12.5,12.75,0.25,12.75
+Astrocytes,Spinal cord/r7/r8,Neuroectoderm,Neuroectoderm,12.0,10.75,1.25,12.0
+Border-associated macrophages,Definitive erythroblasts (CD36+),Blood,Blood,11.25,11.25,0.0,11.25
+Border-associated macrophages,Hematopoietic stem cells (Mpo+),Blood,Blood,11.5,11.5,0.0,11.5
+Border-associated macrophages,Kupffer cells,Blood,Blood,11.5,11.25,0.25,11.5
+Border-associated macrophages,Mast cells,Blood,Blood,10.75,11.0,0.25,11.0
+Border-associated macrophages,Megakaryocytes,Blood,Blood,12.0,12.25,0.25,12.25
+Border-associated macrophages,Microglia,Blood,Blood,10.25,10.5,0.25,10.5
+Border-associated macrophages,Monocytes,Blood,Blood,10.0,10.25,0.25,10.25
+Endothelium,Brain capillary endothelial cells,Mesoderm,Mesoderm,10.25,10.75,0.5,10.75
+Branchial arch epithelium,Granular keratinocytes,Surface ectoderm,Surface ectoderm,12.0,11.0,1.0,12.0
+Branchial arch epithelium,Lung progenitor cells,Surface ectoderm,Endoderm,12.0,12.25,0.25,12.25
+Olfactory epithelial cells,Branchial arch epithelium,Surface ectoderm,Surface ectoderm,12.5,12.75,0.25,12.75
+Branchial arch epithelium,Olfactory sensory neurons,Surface ectoderm,Surface ectoderm,12.75,13.25,0.5,13.25
+Pre-epidermal keratinocytes,Branchial arch epithelium,Surface ectoderm,Surface ectoderm,12.0,11.75,0.25,12.0
+Cajal-Retzius cells,Deep-layer neurons,Neuroectoderm,Neuroectoderm,13.0,13.0,0.0,13.0
+Cajal-Retzius cells,Dorsal telencephalon,Neuroectoderm,Neuroectoderm,11.75,11.25,0.5,11.75
+Cajal-Retzius cells,Intermediate neuronal progenitors,Neuroectoderm,Neuroectoderm,13.25,13.25,0.0,13.25
+Hindbrain,Cerebellar Purkinje cells,Neuroectoderm,Neuroectoderm,11.5,11.0,0.5,11.5
+Cerebellar Purkinje cells,Spinal cord dorsal progenitors,Neuroectoderm,Neuroectoderm,12.75,12.75,0.0,12.75
+Chondrocytes (Atp1a2+),Early chondrocytes,Mesoderm,Mesoderm,13.0,13.25,0.25,13.25
+Choroid plexus,Dorsal telencephalon,Neuroectoderm,Neuroectoderm,10.75,11.75,1.0,11.75
+Cranial motor neurons,Myelinating Schwann cells (Tgfb2+),Neuroectoderm,Neural crest,9.75,10.0,0.25,10.0
+Cranial motor neurons,Parasympathetic neurons,Neuroectoderm,Neural crest,9.5,10.0,0.5,10.0
+Intermediate neuronal progenitors,Deep-layer neurons,Neuroectoderm,Neuroectoderm,11.5,11.25,0.25,11.5
+Hematopoietic stem cells (Mpo+),Definitive erythroblasts (CD36+),Blood,Blood,10.75,10.75,0.0,10.75
+Definitive erythroblasts (CD36+),Kupffer cells,Blood,Blood,10.0,9.75,0.25,10.0
+Mast cells,Definitive erythroblasts (CD36+),Blood,Blood,8.75,9.0,0.25,9.0
+Definitive erythroblasts (CD36+),Megakaryocytes,Blood,Blood,10.5,11.0,0.5,11.0
+Definitive erythroblasts (CD36+),Microglia,Blood,Blood,9.0,9.0,0.0,9.0
+Definitive erythroblasts (CD36+),Monocytes,Blood,Blood,9.75,8.75,1.0,9.75
+Primitive erythroid cells,Definitive erythroblasts (CD36+),Blood,Blood,10.75,9.25,1.5,10.75
+Dermatome,Early chondrocytes,Mesoderm,Mesoderm,13.25,13.25,0.0,13.25
+Facial mesenchyme,Dermatome,Mesoderm,Mesoderm,13.0,13.25,0.25,13.25
+Dermatome,Fibroblasts,Mesoderm,Mesoderm,10.5,8.75,1.75,10.5
+Dermatome,Sclerotome,Mesoderm,Mesoderm,12.0,11.5,0.5,12.0
+Diencephalon,Dorsal telencephalon,Neuroectoderm,Neuroectoderm,12.75,13.25,0.5,13.25
+Diencephalon,Neural progenitor cells (Neurod1+),Neuroectoderm,Neuroectoderm,10.0,10.0,0.0,10.0
+Diencephalon,Thalamic neuronal precursors,Neuroectoderm,Neuroectoderm,11.25,11.0,0.25,11.25
+Dorsal root ganglion neurons,Myelinating Schwann cells,Neural crest,Neural crest,10.75,12.5,1.75,12.5
+Neural crest (PNS glia),Dorsal root ganglion neurons,Neural crest,Neural crest,9.0,10.0,1.0,10.0
+Neural crest (PNS neurons),Dorsal root ganglion neurons,Neural crest,Neural crest,8.75,9.5,0.75,9.5
+Early chondrocytes,Fibroblasts,Mesoderm,Mesoderm,13.0,13.0,0.0,13.0
+Early chondrocytes,Sclerotome,Mesoderm,Mesoderm,13.0,13.25,0.25,13.25
+Endothelium,Liver sinusoidal endothelial cells,Mesoderm,Mesoderm,12.75,13.0,0.25,13.0
+Endothelium,Lymphatic vessel endothelial cells,Mesoderm,Mesoderm,12.0,12.75,0.75,12.75
+Eye field,Naive retinal progenitor cells,Neuroectoderm,Neuroectoderm,9.75,10.0,0.25,10.0
+Eye field,Retinal ganglion cells,Neuroectoderm,Neuroectoderm,9.25,9.5,0.25,9.5
+Eye field,Retinal pigment cells,Neuroectoderm,Neuroectoderm,8.75,9.5,0.75,9.5
+Eye field,Retinal progenitor cells,Neuroectoderm,Neuroectoderm,8.5,9.0,0.5,9.0
+Facial mesenchyme,Pre-osteoblasts (Sp7+),Mesoderm,Mesoderm,11.0,11.25,0.25,11.25
+Facial mesenchyme,Sclerotome,Mesoderm,Mesoderm,11.25,11.0,0.25,11.25
+Fibroblasts,Sclerotome,Mesoderm,Mesoderm,12.0,11.25,0.75,12.0
+GABAergic neurons,Glutamatergic neurons,Neuroectoderm,Neuroectoderm,12.25,11.75,0.5,12.25
+GABAergic neurons,Spinal cord dorsal progenitors,Neuroectoderm,Neuroectoderm,11.25,11.5,0.25,11.5
+GABAergic neurons,Spinal cord motor neurons,Neuroectoderm,Neuroectoderm,12.5,13.0,0.5,13.0
+GABAergic neurons,Spinal cord ventral progenitors,Neuroectoderm,Neuroectoderm,13.25,11.25,2.0,13.25
+Spinal cord/r7/r8,GABAergic neurons,Neuroectoderm,Neuroectoderm,11.25,11.0,0.25,11.25
+Glutamatergic neurons,Spinal cord dorsal progenitors,Neuroectoderm,Neuroectoderm,12.25,12.75,0.5,12.75
+Spinal cord/r7/r8,Glutamatergic neurons,Neuroectoderm,Neuroectoderm,12.5,13.25,0.75,13.25
+Olfactory epithelial cells,Granular keratinocytes,Surface ectoderm,Surface ectoderm,13.25,13.25,0.0,13.25
+Pre-epidermal keratinocytes,Granular keratinocytes,Surface ectoderm,Surface ectoderm,10.0,9.75,0.25,10.0
+Hematopoietic stem cells (Cd34+),Hematopoietic stem cells (Mpo+),Blood,Blood,11.0,11.25,0.25,11.25
+Hematopoietic stem cells (Cd34+),Megakaryocytes,Blood,Blood,11.5,11.5,0.0,11.5
+Hematopoietic stem cells (Cd34+),Microglia,Blood,Blood,11.25,12.0,0.75,12.0
+Hematopoietic stem cells (Cd34+),Monocytes,Blood,Blood,10.0,10.25,0.25,10.25
+Hematopoietic stem cells (Mpo+),Kupffer cells,Blood,Blood,11.75,11.25,0.5,11.75
+Hematopoietic stem cells (Mpo+),Mast cells,Blood,Blood,9.75,10.0,0.25,10.0
+Hematopoietic stem cells (Mpo+),Megakaryocytes,Blood,Blood,10.75,10.75,0.0,10.75
+Hematopoietic stem cells (Mpo+),Microglia,Blood,Blood,9.5,10.0,0.5,10.0
+Hematopoietic stem cells (Mpo+),Monocytes,Blood,Blood,8.5,8.5,0.0,8.5
+Hindbrain,Midbrain-hindbrain boundary,Neuroectoderm,Neuroectoderm,12.75,13.25,0.5,
+Hindbrain,Spinal cord dorsal progenitors,Neuroectoderm,Neuroectoderm,13.0,12.75,0.25,13.0
+Telencephalon,Intermediate neuronal progenitors,Neuroectoderm,Neuroectoderm,12.25,12.0,0.25,12.25
+Mast cells,Kupffer cells,Blood,Blood,9.75,10.0,0.25,10.0
+Kupffer cells,Megakaryocytes,Blood,Blood,11.75,12.0,0.25,12.0
+Kupffer cells,Microglia,Blood,Blood,9.5,9.5,0.0,9.5
+Kupffer cells,Monocytes,Blood,Blood,9.5,9.5,0.0,9.5
+Liver sinusoidal endothelial cells,Lymphatic vessel endothelial cells,Mesoderm,Mesoderm,11.75,11.75,0.0,11.75
+Mast cells,Megakaryocytes,Blood,Blood,10.25,10.75,0.5,10.75
+Mast cells,Microglia,Blood,Blood,9.0,9.25,0.25,9.25
+Mast cells,Monocytes,Blood,Blood,8.5,8.75,0.25,8.75
+Primitive erythroid cells,Mast cells,Blood,Blood,10.5,11.75,1.25,11.75
+Megakaryocytes,Microglia,Blood,Blood,10.25,10.5,0.25,10.5
+Megakaryocytes,Monocytes,Blood,Blood,9.5,9.5,0.0,9.5
+Neural crest (PNS glia),Melanocyte cells,Neural crest,Neural crest,12.0,12.75,0.75,13.0
+Metanephric mesenchyme,Nephron progenitors,Mesoderm,Mesoderm,9.0,9.0,0.0,9.0
+Metanephric mesenchyme,Ureteric bud,Mesoderm,Mesoderm,12.5,12.75,0.25,12.75
+Microglia,Monocytes,Blood,Blood,8.0,8.75,0.75,8.75
+Primitive erythroid cells,Microglia,Blood,Blood,10.5,10.5,0.0,10.5
+Midbrain,Midbrain-hindbrain boundary,Neuroectoderm,Neuroectoderm,12.75,13.25,0.5,13.25
+Midgut/Hindgut epithelial cells,Pancreatic acinar cells,Endoderm,Endoderm,12.0,12.25,0.25,12.25
+Muscle progenitor cells,Myoblasts,Mesoderm,Mesoderm,10.5,13.25,2.75,13.25
+Myelinating Schwann cells,Myelinating Schwann cells (Tgfb2+),Neural crest,Neural crest,12.0,12.0,0.0,12.0
+Neural crest (PNS glia),Myelinating Schwann cells,Neural crest,Neural crest,10.0,10.0,0.0,10.0
+Neural crest (PNS neurons),Myelinating Schwann cells,Neural crest,Neural crest,11.0,10.75,0.25,11.0
+Myelinating Schwann cells,Parasympathetic neurons,Neural crest,Neural crest,12.25,12.25,0.0,12.25
+Myelinating Schwann cells,Sympathetic neurons,Neural crest,Neural crest,11.25,12.25,1.0,12.25
+Myelinating Schwann cells (Tgfb2+),Parasympathetic neurons,Neural crest,Neural crest,9.25,9.25,0.0,9.25
+Myoblasts,Myofibroblasts,Mesoderm,Mesoderm,10.25,9.75,0.5,10.25
+Naive retinal progenitor cells,Retinal ganglion cells,Neuroectoderm,Neuroectoderm,9.5,9.75,0.25,9.75
+Naive retinal progenitor cells,Retinal pigment cells,Neuroectoderm,Neuroectoderm,10.0,10.5,0.5,10.5
+Naive retinal progenitor cells,Retinal progenitor cells,Neuroectoderm,Neuroectoderm,9.0,9.25,0.25,9.25
+Nephron progenitors,Ureteric bud,Mesoderm,Mesoderm,10.25,10.75,0.5,10.75
+Neural crest (PNS glia),Neural crest (PNS neurons),Neural crest,Neural crest,9.5,9.75,0.25,9.75
+Neural crest (PNS glia),Spinal cord/r7/r8,Neural crest,Neuroectoderm,13.0,13.0,0.0,13.0
+Neural crest (PNS glia),Sympathetic neurons,Neural crest,Neural crest,12.0,12.75,0.75,12.75
+Neural crest (PNS neurons),Spinal cord dorsal progenitors,Neural crest,Neuroectoderm,13.25,13.25,0.0,13.25
+Neural crest (PNS neurons),Spinal cord/r7/r8,Neural crest,Neuroectoderm,13.0,13.0,0.0,13.0
+Neural crest (PNS neurons),Sympathetic neurons,Neural crest,Neural crest,12.0,12.0,0.0,12.0
+Neural progenitor cells (Neurod1+),Thalamic neuronal precursors,Neuroectoderm,Neuroectoderm,10.5,10.25,0.25,10.5
+Olfactory epithelial cells,Olfactory bulb cells,Surface ectoderm,Neuroectoderm,9.5,9.25,0.25,9.5
+Olfactory bulb cells,Olfactory sensory neurons,Neuroectoderm,Surface ectoderm,9.25,9.5,0.25,9.5
+Olfactory epithelial cells,Olfactory sensory neurons,Surface ectoderm,Surface ectoderm,10.0,10.0,0.0,10.0
+Otic epithelial cells,Otic sensory neurons,Surface ectoderm,Surface ectoderm,10.5,11.75,1.25,11.75
+Posterior roof plate,Spinal cord/r7/r8,Neuroectoderm,Neuroectoderm,12.25,13.0,0.75,13.0
+Pre-osteoblasts (Sp7+),Sclerotome,Mesoderm,Mesoderm,12.25,12.75,0.5,12.75
+Retinal ganglion cells,Retinal pigment cells,Neuroectoderm,Neuroectoderm,8.5,10.5,2.0,10.5
+Retinal progenitor cells,Retinal ganglion cells,Neuroectoderm,Neuroectoderm,8.25,9.0,0.75,9.0
+Retinal progenitor cells,Retinal pigment cells,Neuroectoderm,Neuroectoderm,7.75,8.25,0.5,8.25
+Spinal cord motor neurons,Spinal cord dorsal progenitors,Neuroectoderm,Neuroectoderm,12.75,13.0,0.25,13.0
+Spinal cord/r7/r8,Spinal cord dorsal progenitors,Neuroectoderm,Neuroectoderm,9.75,10.25,0.5,10.25
+Spinal cord/r7/r8,Spinal cord motor neurons,Neuroectoderm,Neuroectoderm,12.5,12.5,0.0,12.5
+Spinal cord/r7/r8,Sympathetic neurons,Neuroectoderm,Neural crest,13.25,13.25,0.0,13.25

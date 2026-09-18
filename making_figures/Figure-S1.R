@@ -8,15 +8,12 @@
 library(ggplot2)
 library(dplyr)
 
-data_path = "/Users/cxqiu/GitHub/mouse_sprint/tape_pipeline/tables"
-save_path = "/Volumes/f0085ts/work/tapemouse/making_figures"
-
-dat = read.csv(paste0(data_path, "/suppfig1a_barcode_rank_abundance.csv"))
+dat = read.csv("./figures_data/suppfig1a_barcode_rank_abundance.csv")
 dat = dat[dat$embryo %in% paste0("embryo ", c(2,3,6)),]
 dat$log_reads = log(dat$reads)
 dat$copies = factor(dat$copies, levels = names(table(dat$copies)))
 
-dat_cutoff = read.csv(paste0(data_path, "/suppfig1a_cutoffs.csv"))
+dat_cutoff = read.csv("./figures_data/suppfig1a_cutoffs.csv")
 dat_cutoff = dat_cutoff[dat_cutoff$embryo %in% paste0("embryo ", c(2,3,6)),]
 dat_cutoff$log_reads_at_freq_cutoff = log(dat_cutoff$reads_at_freq_cutoff)
 
@@ -29,7 +26,6 @@ p = dat %>%
     scale_y_continuous(breaks = seq(0, 20, by = 2)) +
     theme_classic()
 
-ggsave(paste0(save_path, "/FigS1/FigS1_TAPE-BC_read-count_rank-abundance.pdf"), p, height = 3, width = 10)
 
 
 #################################################################################
@@ -49,7 +45,7 @@ library(readr)
 
 # --- 1. Input --------------------------------------------------------------
 
-csv_path <- "/Volumes/f0085ts/work/tapemouse/figures_data/E13_emrby_1_through_10_CN_analysis.csv"   # <-- edit path
+csv_path <- "./figures_data/E13_emrby_1_through_10_CN_analysis.csv"   # <-- edit path
 
 df <- read_csv(csv_path, show_col_types = FALSE,
                locale = locale(encoding = "UTF-8"))
@@ -158,9 +154,5 @@ p <- ggplot(results, aes(x = Sample, y = CN_plot, fill = category)) +
   )
 
 print(p)
-
-# --- 6. Save ---------------------------------------------------------------
-
-ggsave("/Volumes/f0085ts/work/tapemouse/making_figures/FigS1_copy_number_plot.pdf", p, width = 7, height = 5)
 
 

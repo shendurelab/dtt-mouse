@@ -12,10 +12,7 @@ library(ggplot2)
 library(tidyr)
 library(dplyr)
 
-data_path = "/Users/cxqiu/GitHub/mouse_sprint/tape_pipeline/figures/v8/heterotypic"
-save_path = "/Volumes/f0085ts/work/tapemouse/making_figures"
-
-dat = read.csv(paste0(data_path, "/fig6B_captured_divisions.csv"))
+dat = read.csv("./figures_data/fig6B_captured_divisions.csv")
 
 plot_dat <- dat %>%
     mutate(log2_fold = log2(fold))
@@ -86,7 +83,6 @@ p = ggplot(plot_dat, aes(x = postmitotic, y = progenitor, fill = log2_fold)) +
     theme(axis.text.x = element_text(angle = 45, hjust = 1),
           plot.title = element_text(hjust = 0.5))
 
-ggsave(paste0(save_path, "/Fig5/Fig5A.pdf"), p, height = 9, width = 4.5)
 
 
 ####################################################
@@ -96,10 +92,7 @@ library(ggplot2)
 library(dplyr)
 library(forcats)
 
-data_path = "/Users/cxqiu/GitHub/mouse_sprint/tape_pipeline/figures/v8/coupling_depth"
-save_path = "/Volumes/f0085ts/work/tapemouse/making_figures"
-
-dat = read.csv(paste0(data_path, "/figXa_coupling_carpet.csv"))
+dat = read.csv("./figures_data/figXa_coupling_carpet.csv")
 
 plot_dat <- dat |>
     mutate(
@@ -146,10 +139,6 @@ p = ggplot(plot_dat, aes(clade_ancestor_age_E, pair, fill = log2_enrichment_mean
         legend.key.width   = unit(0.35, "cm")
     )
 
-ggsave(paste0(save_path, "/Fig5/Fig5C.pdf"), p, height = 9, width = 9)
-
-write.table(unique(plot_dat$pair), paste0(save_path, "/Fig5/Fig5C_rownames.txt"), row.names=F, col.names=F, sep="\t", quote=F)
-
 
 ######################################################
 ### Fig. 5D: A draft hierarchy of timed fate couplings
@@ -157,21 +146,18 @@ write.table(unique(plot_dat$pair), paste0(save_path, "/Fig5/Fig5C_rownames.txt")
 library(ggplot2)
 library(ggdendro)
 
-data_path = "/Users/cxqiu/GitHub/mouse_sprint/tape_pipeline/figures/v8/coupling_depth"
-save_path = "/Volumes/f0085ts/work/tapemouse/making_figures"
-
 INK  <- "#1f2328"
 INK2 <- "#4a5158"
 EDGE <- "#7f868d"
 DATE <- "#8a3324"
 
 # ---- 1. Read data --------------------------------------------------------
-depth_mat <- read.csv(file.path(data_path, "figXb_coupling_depth_matrix.csv"),
+depth_mat <- read.csv("./figures_data/figXb_coupling_depth_matrix.csv",
                       row.names = 1, check.names = FALSE)
 labels   <- rownames(depth_mat)
 n_leaves <- length(labels)
 
-hier <- read.csv(file.path(data_path, "figXb_coupling_hierarchy.csv"),
+hier <- read.csv("./figures_data/figXb_coupling_hierarchy.csv",
                  check.names = FALSE, stringsAsFactors = FALSE)
 hier <- hier[order(hier$merge_order), ]
 hier$member_list <- strsplit(hier$members, "; ", fixed = TRUE)
@@ -318,6 +304,4 @@ p <- ggplot() +
         plot.caption  = element_text(size = 9,   hjust = 0.5, colour = INK2, margin = margin(t = 10)),
         plot.margin   = margin(12, 14, 12, 14)
     )
-
-ggsave(paste0(save_path, "/Fig5/Fig5D.pdf"), p, height = 10, width = 4)
 

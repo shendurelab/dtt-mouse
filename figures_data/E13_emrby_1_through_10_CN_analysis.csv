@@ -1,0 +1,27 @@
+Well,Sample description 1,Sample description 2,Sample description 3,Sample description 4,Target,Conc(copies/µL),Status,Experiment,SampleType,TargetType,Supermix,DyeName(s),Accepted Droplets,Positives,Negatives
+A01,E1,,,,Cas9,No Call,CHECK,CNV,Unknown,Unknown,ddPCR Supermix for Probes (No dUTP),FAM,21005,0,21005
+A01,E1,,,,GAPDH,21.8669490814209,OK,CNV,Unknown,Reference,ddPCR Supermix for Probes (No dUTP),Cy5.5,21005,362,20643
+B01,E2,,,,Cas9,26.601676940918,OK,CNV,Unknown,Unknown,ddPCR Supermix for Probes (No dUTP),FAM,21743,455,21288
+B01,E2,,,,GAPDH,26.0109367370605,OK,CNV,Unknown,Reference,ddPCR Supermix for Probes (No dUTP),Cy5.5,21743,445,21298
+C01,E3,,,,Cas9,61.6257438659668,OK,CNV,Unknown,Unknown,ddPCR Supermix for Probes (No dUTP),FAM,21752,1040,20712
+C01,E3,,,,GAPDH,18.4074897766113,OK,CNV,Unknown,Reference,ddPCR Supermix for Probes (No dUTP),Cy5.5,21752,316,21436
+D01,E4,,,,Cas9,0.640444219112396,OK,CNV,Unknown,Unknown,ddPCR Supermix for Probes (No dUTP),FAM,21610,11,21599
+D01,E4,,,,GAPDH,43.2256660461426,OK,CNV,Unknown,Reference,ddPCR Supermix for Probes (No dUTP),Cy5.5,21610,730,20880
+E01,E5,,,,Cas9,0.227317556738853,OK,CNV,Unknown,Unknown,ddPCR Supermix for Probes (No dUTP),FAM,22136,4,22132
+E01,E5,,,,GAPDH,84.9745254516602,OK,CNV,Unknown,Reference,ddPCR Supermix for Probes (No dUTP),Cy5.5,22136,1446,20690
+F01,E6,,,,Cas9,11.4383678436279,OK,CNV,Unknown,Unknown,ddPCR Supermix for Probes (No dUTP),FAM,21652,196,21456
+F01,E6,,,,GAPDH,53.5846214294434,OK,CNV,Unknown,Reference,ddPCR Supermix for Probes (No dUTP),Cy5.5,21652,903,20749
+G01,E7,,,,Cas9,46.2264556884766,OK,CNV,Unknown,Unknown,ddPCR Supermix for Probes (No dUTP),FAM,21700,783,20917
+G01,E7,,,,GAPDH,56.0669937133789,OK,CNV,Unknown,Reference,ddPCR Supermix for Probes (No dUTP),Cy5.5,21700,946,20754
+H01,E8,,,,Cas9,No Call,CHECK,CNV,Unknown,Unknown,ddPCR Supermix for Probes (No dUTP),FAM,21899,0,21899
+H01,E8,,,,GAPDH,63.9788475036621,OK,CNV,Unknown,Reference,ddPCR Supermix for Probes (No dUTP),Cy5.5,21899,1086,20813
+A02,E9,,,,Cas9,No Call,CHECK,CNV,Unknown,Unknown,ddPCR Supermix for Probes (No dUTP),FAM,22585,0,22585
+A02,E9,,,,GAPDH,57.4897880554199,OK,CNV,Unknown,Reference,ddPCR Supermix for Probes (No dUTP),Cy5.5,22585,1009,21576
+B02,E10,,,,Cas9,1.06729364395142,OK,CNV,Unknown,Unknown,ddPCR Supermix for Probes (No dUTP),FAM,22402,19,22383
+B02,E10,,,,GAPDH,51.402229309082,OK,CNV,Unknown,Reference,ddPCR Supermix for Probes (No dUTP),Cy5.5,22402,897,21505
+C02,Cas9 het,,,,Cas9,185.355072021484,OK,CNV,Unknown,Unknown,ddPCR Supermix for Probes (No dUTP),FAM,21932,3005,18927
+C02,Cas9 het,,,,GAPDH,420.966369628906,OK,CNV,Unknown,Reference,ddPCR Supermix for Probes (No dUTP),Cy5.5,21932,6238,15694
+D02,WT,,,,Cas9,0.634948432445526,OK,CNV,Unknown,Unknown,ddPCR Supermix for Probes (No dUTP),FAM,21797,11,21786
+D02,WT,,,,GAPDH,322.532409667969,OK,CNV,Unknown,Reference,ddPCR Supermix for Probes (No dUTP),Cy5.5,21797,4930,16867
+E02,NTC,,,,Cas9,0.166358128190041,OK,CNV,Unknown,Unknown,ddPCR Supermix for Probes (No dUTP),FAM,22685,3,22682
+E02,NTC,,,,GAPDH,0.388203203678131,OK,CNV,Unknown,Reference,ddPCR Supermix for Probes (No dUTP),Cy5.5,22685,7,22678

@@ -1,0 +1,641 @@
+progenitor,postmitotic,n_cells_A,fold_A,q_A,n_cells_B,fold_B,q_B,tested_in_both,captured
+Olfactory bulb cells,Olfactory sensory neurons,46,25.94,6.852e-46,17,13.08,3.020e-12,1,1
+Olfactory epithelial cells,Olfactory sensory neurons,126,25.04,1.102e-123,64,24.34,5.197e-62,1,1
+Myelinating Schwann cells (Tgfb2+),Parasympathetic neurons,29,23.51,9.889e-28,8,7.71,3.532e-04,1,1
+Myelinating Schwann cells (Tgfb2+),Cranial motor neurons,12,10.6,1.153e-07,11,10.89,3.950e-07,1,1
+Border-associated macrophages,Osteoclasts,16,13.2,1.352e-11,8,7.72,3.532e-04,1,1
+Otic epithelial cells,Otic sensory neurons,33,16.82,4.678e-27,4,3.61,4.145e-01,1,1
+Naive retinal progenitor cells,Retinal ganglion cells,24,13.72,9.431e-18,22,8.84,1.837e-12,1,1
+Eye field,Retinal ganglion cells,15,11.19,6.704e-10,12,7.79,2.994e-06,1,1
+Neural crest (PNS glia),Neural crest (PNS neurons),90,10.89,6.072e-58,26,7.75,2.114e-13,1,1
+Kupffer cells,Osteoclasts,5,5.57,4.985e-02,4,4.81,2.032e-01,1,1
+Pre-epidermal keratinocytes,Granular keratinocytes,215,8.89,1.468e-104,63,6.82,3.238e-29,1,1
+Dorsal telencephalon,Cajal-Retzius cells,127,8.17,1.477e-67,50,6.25,1.286e-21,1,1
+Hindbrain,Cerebellar Purkinje cells,367,7.39,5.775e-181,181,7.44,1.071e-89,1,1
+Definitive early erythroblasts (CD36-),Granulocytes,16,6.05,7.374e-07,11,5.67,1.713e-04,1,1
+Branchial arch epithelium,Granular keratinocytes,78,6.58,1.043e-27,35,6.57,3.993e-14,1,1
+Hematopoietic stem cells (Cd34+),Megakaryocytes,65,6.57,3.672e-26,39,5.49,3.953e-15,1,1
+Definitive early erythroblasts (CD36-),Osteoclasts,26,5.22,9.626e-10,19,6.7,8.181e-09,1,1
+Spinal cord dorsal progenitors,Cerebellar Purkinje cells,115,6.1,1.488e-41,46,5.81,1.054e-18,1,1
+Intermediate neuronal progenitors,Deep-layer neurons,820,6.45,0.000e+00,414,5.64,4.049e-163,1,1
+Definitive early erythroblasts (CD36-),Megakaryocytes,558,5.87,2.565e-187,405,6.42,1.342e-178,1,1
+Retinal progenitor cells,Retinal ganglion cells,5,5.37,5.534e-02,,,,0,1
+Border-associated macrophages,Megakaryocytes,37,4.67,2.424e-12,40,6.21,2.826e-17,1,1
+Myelinating Schwann cells,Parasympathetic neurons,11,4.25,3.419e-03,8,4.36,1.377e-02,1,1
+Astrocytes,Spinal cord motor neurons,15,5.05,1.739e-05,4,2.73,7.878e-01,1,1
+Myelinating Schwann cells (Tgfb2+),Sympathetic neurons,5,2.92,4.468e-01,6,4.82,3.770e-02,1,1
+Hematopoietic stem cells (Cd34+),Granulocytes,,,,4,4.5,2.443e-01,0,0
+Cone precursor cells,Retinal ganglion cells,,,,,,,0,0
+Hematopoietic stem cells (Cd34+),Osteoclasts,5,4.3,1.200e-01,,,,0,0
+Floorplate and p3 domain,Neurons (Slc17a8+),4,4.37,2.371e-01,,,,0,0
+Telencephalon,Deep-layer neurons,4501,4.25,0.000e+00,2471,3.7,0.000e+00,1,1
+Spinal cord/r7/r8,GABAergic neurons,827,4.08,4.493e-234,267,3.64,7.400e-66,1,1
+Hematopoietic stem cells (Mpo+),Megakaryocytes,7,3.28,1.088e-01,5,3.17,3.534e-01,1,1
+Myelinating Schwann cells,Neural crest (PNS neurons),49,3.48,1.185e-11,24,4.39,1.452e-07,1,1
+Hematopoietic stem cells (Mpo+),Granulocytes,,,,,,,0,0
+Definitive early erythroblasts (CD36-),Primitive erythroid cells,30,3.45,3.800e-07,19,3.99,1.920e-05,1,1
+Hematopoietic stem cells (Cd34+),Primitive erythroid cells,6,4.06,9.796e-02,,,,0,0
+Hematopoietic stem cells (Mpo+),Osteoclasts,3,3.75,6.639e-01,,,,0,0
+Branchial arch epithelium,Olfactory sensory neurons,40,4.13,1.004e-11,10,2.12,3.265e-01,1,1
+Oligodendrocyte progenitor cells,Spinal cord motor neurons,3,3.66,6.826e-01,,,,0,0
+Kupffer cells,Megakaryocytes,9,3.69,2.090e-02,4,2.24,1.000e+00,1,1
+Myelinating Schwann cells,Dorsal root ganglion neurons,5,2.74,5.336e-01,3,2.84,1.000e+00,1,0
+Spinal cord dorsal progenitors,GABAergic neurons,317,3.53,2.820e-65,110,3.17,1.461e-22,1,1
+Border-associated macrophages,Granulocytes,,,,,,,0,0
+Myelinating Schwann cells,Sympathetic neurons,18,2.76,3.419e-03,11,3.48,9.549e-03,1,1
+Neural crest (PNS glia),Dorsal root ganglion neurons,3,2.44,1.000e+00,,,,0,0
+Myoblasts,Myotubes,5,2.82,4.916e-01,,,,0,0
+Neural crest (PNS glia),Sympathetic neurons,10,2.63,9.796e-02,6,3.04,2.913e-01,1,1
+Hypothalamus,GABAergic cortical interneurons,314,3.34,4.611e-69,122,2.58,4.929e-18,1,1
+T cells,Megakaryocytes,,,,3,3.56,7.606e-01,0,0
+Spinal cord/r7/r8,Spinal cord motor neurons,18,3.15,1.527e-03,5,2.12,1.000e+00,1,1
+Spinal cord dorsal progenitors,Spinal cord motor neurons,9,3.19,4.985e-02,,,,0,0
+Olfactory epithelial cells,Granular keratinocytes,15,2.62,1.817e-02,7,2.81,2.671e-01,1,0
+Anterior floor plate,Glutamatergic neurons,122,3.12,1.040e-24,31,1.98,7.154e-03,1,0
+Astrocytes,GABAergic neurons,234,2.7,2.344e-37,101,2.95,1.118e-18,1,0
+Mast cells,Megakaryocytes,3,2.48,1.000e+00,,,,0,0
+Telencephalon,GABAergic cortical interneurons,6503,2.67,0.000e+00,4146,2.77,0.000e+00,1,0
+Spinal cord/r7/r8,Glutamatergic neurons,1048,2.67,9.295e-147,389,2.57,1.206e-56,1,0
+Spinal cord ventral progenitors,GABAergic neurons,27,1.96,1.915e-02,23,3.55,6.966e-05,1,0
+Midbrain-hindbrain boundary,Cerebellar Purkinje cells,5,2.3,8.518e-01,,,,0,0
+Border-associated macrophages,Primitive erythroid cells,3,2.53,1.000e+00,,,,0,0
+Microglia,Megakaryocytes,3,2.58,1.000e+00,,,,0,0
+Hypothalamus (Sim1+),Glutamatergic neurons,20,2.47,8.785e-03,10,2.02,4.719e-01,1,0
+Spinal cord dorsal progenitors,Glutamatergic neurons,439,2.52,2.655e-50,144,2.03,5.796e-13,1,0
+Midbrain,Glutamatergic neurons,2756,2.32,0.000e+00,1430,2.46,3.390e-191,1,0
+Neural crest (PNS glia),Parasympathetic neurons,,,,3,2.58,1.000e+00,0,0
+Oligodendrocyte progenitor cells,GABAergic cortical interneurons,13,2.66,3.167e-02,,,,0,0
+Telencephalon,Cajal-Retzius cells,1336,2.22,1.715e-144,825,2.19,1.958e-80,1,0
+Amacrine/Horizontal precursor cells,GABAergic cortical interneurons,5,2.97,4.252e-01,,,,0,0
+Spinal cord/r7/r8,Sympathetic neurons,19,2.06,5.061e-02,7,2.01,7.682e-01,1,0
+Intermediate neuronal progenitors,Cajal-Retzius cells,167,2.3,6.369e-20,74,1.77,8.834e-05,1,0
+Spinal cord dorsal progenitors,Neural crest (PNS neurons),18,2.0,1.031e-01,7,2.08,7.682e-01,1,0
+Spinal cord/r7/r8,Neural crest (PNS neurons),44,2.23,4.109e-05,10,1.58,1.000e+00,1,0
+Hindbrain,Primitive erythroid cells,,,,,,,0,0
+Dermatome,Myotubes,,,,,,,0,0
+Spinal cord dorsal progenitors,Otic sensory neurons,6,2.41,5.513e-01,,,,0,0
+Choroid plexus,Cajal-Retzius cells,8,1.43,1.000e+00,10,2.25,2.473e-01,1,0
+Spinal cord/r7/r8,Dorsal root ganglion neurons,4,1.84,1.000e+00,,,,0,0
+Midbrain,GABAergic neurons,1038,1.69,2.487e-53,539,1.91,2.724e-40,1,0
+Hindbrain,Glutamatergic neurons,859,1.85,1.677e-58,343,1.52,4.145e-12,1,0
+Astrocytes,Glutamatergic neurons,317,1.87,3.802e-20,98,1.41,1.422e-02,1,0
+Pre-epidermal keratinocytes,Olfactory sensory neurons,39,2.01,2.236e-03,8,1.02,1.000e+00,1,0
+Hypothalamus,Retinal ganglion cells,,,,3,1.8,1.000e+00,0,0
+Ureteric bud,Granular keratinocytes,,,,,,,0,0
+Myelinating Schwann cells,Cranial motor neurons,4,2.1,1.000e+00,,,,0,0
+Pituitary/Pineal gland progenitors,Deep-layer neurons,4,1.86,1.000e+00,,,,0,0
+Posterior roof plate,GABAergic neurons,11,1.49,1.000e+00,6,1.86,1.000e+00,1,0
+Hindbrain,GABAergic neurons,415,1.72,6.641e-23,167,1.51,5.867e-06,1,0
+Spinal cord/r7/r8,Cerebellar Purkinje cells,71,1.73,2.645e-04,22,1.42,7.246e-01,1,0
+Facial mesenchyme,Myotubes,3,1.94,1.000e+00,,,,0,0
+Spinal cord/r7/r8,Parasympathetic neurons,6,1.92,1.000e+00,,,,0,0
+Otic epithelial cells,Granular keratinocytes,6,1.57,1.000e+00,,,,0,0
+Telencephalon,Primitive erythroid cells,11,1.2,1.000e+00,11,2.21,2.462e-01,1,0
+Posterior roof plate,Glutamatergic neurons,22,1.6,3.602e-01,9,1.45,1.000e+00,1,0
+Olfactory epithelial cells,Otic sensory neurons,3,1.63,1.000e+00,,,,0,0
+Spinal cord ventral progenitors,Glutamatergic neurons,44,1.68,3.131e-02,15,1.22,1.000e+00,1,0
+Cone precursor cells,GABAergic cortical interneurons,3,1.31,1.000e+00,4,1.58,1.000e+00,1,0
+Definitive erythroblasts (CD36+),GABAergic neurons,6,1.1,1.000e+00,7,2.1,7.072e-01,1,0
+Eye field,GABAergic cortical interneurons,47,1.47,9.546e-02,44,1.51,8.794e-02,1,0
+Naive retinal progenitor cells,GABAergic cortical interneurons,125,1.93,5.336e-10,62,1.03,1.000e+00,1,0
+Retinal pigment cells,GABAergic cortical interneurons,8,1.97,6.639e-01,3,0.88,1.000e+00,1,0
+Hypothalamus,Glutamatergic neurons,226,1.46,8.814e-07,101,1.47,4.351e-03,1,0
+Sclerotome,Osteoclasts,3,1.49,1.000e+00,,,,0,0
+Pre-epidermal keratinocytes,Enteric neurons,,,,,,,0,0
+Midbrain-hindbrain boundary,Glutamatergic neurons,26,1.6,1.938e-01,5,0.94,1.000e+00,1,0
+Brain capillary endothelial cells,Granular keratinocytes,4,1.85,1.000e+00,,,,0,0
+Spinal cord dorsal progenitors,Sympathetic neurons,5,1.24,1.000e+00,3,1.63,1.000e+00,1,0
+Limb mesenchyme progenitors,Primitive erythroid cells,,,,3,1.96,1.000e+00,0,0
+Myelinating Schwann cells (Tgfb2+),Neural crest (PNS neurons),4,1.47,1.000e+00,,,,0,0
+Eye field,Cajal-Retzius cells,12,1.48,1.000e+00,10,1.29,1.000e+00,1,0
+Neural progenitor cells (Neurod1+),Cajal-Retzius cells,15,1.87,2.677e-01,3,0.67,1.000e+00,1,0
+Satellite glial cells,Glutamatergic neurons,5,1.11,1.000e+00,4,1.83,1.000e+00,1,0
+Astrocytes,Neural crest (PNS neurons),12,1.38,1.000e+00,4,1.3,1.000e+00,1,0
+Dorsal telencephalon,Deep-layer neurons,37,1.45,2.231e-01,16,1.23,1.000e+00,1,0
+Definitive erythroblasts (CD36+),Cajal-Retzius cells,,,,,,,0,0
+Thalamic neuronal precursors,Cajal-Retzius cells,118,1.5,4.184e-04,58,1.14,1.000e+00,1,0
+Myelinating Schwann cells,Otic sensory neurons,6,1.74,1.000e+00,,,,0,0
+Neural progenitor cells (Ror1+),Glutamatergic neurons,7,1.69,1.000e+00,,,,0,0
+Hindbrain,Neurons (Slc17a8+),3,1.66,1.000e+00,,,,0,0
+Pituitary gland cells,GABAergic cortical interneurons,3,1.31,1.000e+00,,,,0,0
+Lung progenitor cells,Neural crest (PNS neurons),4,1.25,1.000e+00,,,,0,0
+Oligodendrocyte progenitor cells,Glutamatergic neurons,11,1.41,1.000e+00,,,,0,0
+Lateral plate and intermediate mesoderm,Primitive erythroid cells,5,1.29,1.000e+00,,,,0,0
+Endothelium,Otic sensory neurons,3,0.99,1.000e+00,3,1.56,1.000e+00,1,0
+Midbrain,Primitive erythroid cells,4,1.37,1.000e+00,,,,0,0
+Brain pericytes,Glutamatergic neurons,3,1.48,1.000e+00,,,,0,0
+Dorsal telencephalon,GABAergic cortical interneurons,79,1.35,1.035e-01,27,0.96,1.000e+00,1,0
+Neural crest (PNS glia),GABAergic neurons,92,1.17,6.434e-01,38,1.29,7.262e-01,1,0
+Retinal pigment cells,Glutamatergic neurons,8,1.31,1.000e+00,5,1.01,1.000e+00,1,0
+Definitive erythroblasts (CD36+),GABAergic cortical interneurons,4,0.7,1.000e+00,8,1.82,8.708e-01,1,0
+Hindbrain,Spinal cord motor neurons,9,1.46,1.000e+00,,,,0,0
+Pre-osteoblasts (Sp7+),Granular keratinocytes,,,,,,,0,0
+Hypothalamus (Sim1+),GABAergic neurons,5,1.23,1.000e+00,,,,0,0
+Hindbrain,Cranial motor neurons,3,1.2,1.000e+00,,,,0,0
+Fibroblasts,Myotubes,5,1.42,1.000e+00,,,,0,0
+Anterior roof plate,Deep-layer neurons,,,,3,1.71,1.000e+00,0,0
+Fibroblasts,Primitive erythroid cells,10,1.23,1.000e+00,3,0.84,1.000e+00,1,0
+Anterior floor plate,GABAergic cortical interneurons,30,1.28,1.000e+00,6,0.62,1.000e+00,1,0
+Midbrain,Cerebellar Purkinje cells,140,1.13,6.641e-01,57,0.96,1.000e+00,1,0
+Naive retinal progenitor cells,Cajal-Retzius cells,19,1.21,1.000e+00,14,0.93,1.000e+00,1,0
+Myelinating Schwann cells,GABAergic neurons,152,1.09,1.000e+00,56,1.0,1.000e+00,1,0
+Choroid plexus,Cerebellar Purkinje cells,4,1.12,1.000e+00,,,,0,0
+Floorplate and p3 domain,GABAergic neurons,20,0.87,1.000e+00,14,1.5,9.043e-01,1,0
+Arterial endothelial cells,Deep-layer neurons,3,1.43,1.000e+00,,,,0,0
+Facial mesenchyme,Primitive erythroid cells,4,1.39,1.000e+00,,,,0,0
+Retinal progenitor cells,Cajal-Retzius cells,4,1.64,1.000e+00,,,,0,0
+Early chondrocytes,Primitive erythroid cells,,,,,,,0,0
+Myofibroblasts,Spinal cord motor neurons,3,0.94,1.000e+00,,,,0,0
+Pituitary/Pineal gland progenitors,GABAergic cortical interneurons,4,1.04,1.000e+00,,,,0,0
+Facial mesenchyme,Olfactory sensory neurons,38,1.09,1.000e+00,14,0.81,1.000e+00,1,0
+Diencephalon,Cajal-Retzius cells,46,1.15,1.000e+00,20,0.77,1.000e+00,1,0
+Placodal area,Glutamatergic neurons,5,1.4,1.000e+00,,,,0,0
+Anterior floor plate,Cajal-Retzius cells,6,1.07,1.000e+00,,,,0,0
+Oligodendrocyte progenitor cells,GABAergic neurons,4,1.04,1.000e+00,,,,0,0
+Placodal area,GABAergic cortical interneurons,,,,,,,0,0
+Myofibroblasts,Otic sensory neurons,,,,,,,0,0
+Adrenocortical cells,GABAergic neurons,5,1.04,1.000e+00,,,,0,0
+Facial mesenchyme,Dorsal root ganglion neurons,4,0.83,1.000e+00,3,1.16,1.000e+00,1,0
+Floorplate and p3 domain,Cerebellar Purkinje cells,,,,4,1.81,1.000e+00,0,0
+Floorplate and p3 domain,GABAergic cortical interneurons,25,0.92,1.000e+00,12,0.94,1.000e+00,1,0
+Definitive erythroblasts (CD36+),Deep-layer neurons,4,1.36,1.000e+00,,,,0,0
+Thalamic neuronal precursors,GABAergic cortical interneurons,335,1.05,1.000e+00,142,0.7,1.000e+00,1,0
+Neural crest (PNS glia),Glutamatergic neurons,141,0.94,1.000e+00,50,0.83,1.000e+00,1,0
+Lung progenitor cells,Granular keratinocytes,3,1.22,1.000e+00,,,,0,0
+Limb mesenchyme progenitors,Neurons (Slc17a8+),3,1.0,1.000e+00,,,,0,0
+Sclerotome,Primitive erythroid cells,4,1.21,1.000e+00,,,,0,0
+Myelinating Schwann cells,Glutamatergic neurons,236,0.87,1.000e+00,108,0.94,1.000e+00,1,0
+Endocardial cells,Cerebellar Purkinje cells,3,1.2,1.000e+00,,,,0,0
+Spinal cord ventral progenitors,GABAergic cortical interneurons,13,0.82,1.000e+00,8,0.98,1.000e+00,1,0
+Astrocytes,Cajal-Retzius cells,19,0.76,1.000e+00,13,1.07,1.000e+00,1,0
+Intermediate neuronal progenitors,GABAergic cortical interneurons,239,0.83,1.000e+00,151,0.92,1.000e+00,1,0
+Astrocytes,Sympathetic neurons,,,,,,,0,0
+Spinal cord ventral progenitors,Cajal-Retzius cells,3,0.82,1.000e+00,,,,0,0
+Midbrain-hindbrain boundary,GABAergic neurons,7,0.88,1.000e+00,,,,0,0
+Lateral plate and intermediate mesoderm,Neurons (Slc17a8+),6,1.22,1.000e+00,,,,0,0
+Sclerotome,Neurons (Slc17a8+),,,,3,1.27,1.000e+00,0,0
+Retinal progenitor cells,GABAergic cortical interneurons,6,0.74,1.000e+00,7,0.96,1.000e+00,1,0
+Definitive erythroblasts (CD36+),Glutamatergic neurons,6,0.61,1.000e+00,7,1.21,1.000e+00,1,0
+Hypothalamus (Sim1+),GABAergic cortical interneurons,4,0.94,1.000e+00,,,,0,0
+Hypothalamus,Cajal-Retzius cells,21,0.92,1.000e+00,7,0.62,1.000e+00,1,0
+Facial mesenchyme,Otic sensory neurons,11,0.89,1.000e+00,4,0.68,1.000e+00,1,0
+Otic epithelial cells,Olfactory sensory neurons,3,1.0,1.000e+00,,,,0,0
+Endothelium,Granular keratinocytes,8,0.78,1.000e+00,4,0.86,1.000e+00,1,0
+Floorplate and p3 domain,Glutamatergic neurons,37,0.82,1.000e+00,13,0.73,1.000e+00,1,0
+Myelinating Schwann cells,Granular keratinocytes,8,0.79,1.000e+00,3,0.81,1.000e+00,1,0
+Chondrocytes (Atp1a2+),Spinal cord motor neurons,8,0.92,1.000e+00,,,,0,0
+Spinal cord dorsal progenitors,Cajal-Retzius cells,22,0.87,1.000e+00,7,0.6,1.000e+00,1,0
+Pre-epidermal keratinocytes,Otic sensory neurons,7,1.03,1.000e+00,,,,0,0
+First heart field,GABAergic cortical interneurons,4,0.59,1.000e+00,5,1.07,1.000e+00,1,0
+First heart field,GABAergic neurons,5,0.8,1.000e+00,,,,0,0
+Spinal cord/r7/r8,Cajal-Retzius cells,43,0.73,1.000e+00,22,0.84,1.000e+00,1,0
+Telencephalon,Osteoclasts,3,0.71,1.000e+00,,,,0,0
+Definitive early erythroblasts (CD36-),Myotubes,3,0.97,1.000e+00,,,,0,0
+Myofibroblasts,Sympathetic neurons,5,0.91,1.000e+00,,,,0,0
+Pancreatic acinar cells,GABAergic neurons,,,,,,,0,0
+Hindbrain,Cajal-Retzius cells,48,0.69,1.000e+00,34,0.87,1.000e+00,1,0
+Nephron progenitors,GABAergic neurons,9,0.87,1.000e+00,,,,0,0
+Neural progenitor cells (Neurod1+),GABAergic neurons,19,0.77,1.000e+00,9,0.69,1.000e+00,1,0
+Sclerotome,Dorsal root ganglion neurons,4,0.7,1.000e+00,,,,0,0
+Endothelium,Megakaryocytes,6,0.85,1.000e+00,,,,0,0
+Dermatome,Parasympathetic neurons,4,0.79,1.000e+00,,,,0,0
+Telencephalon,Myotubes,,,,,,,0,0
+Primordial germ cells,GABAergic cortical interneurons,,,,4,1.21,1.000e+00,0,0
+Melanocyte cells,Glutamatergic neurons,9,0.63,1.000e+00,6,0.9,1.000e+00,1,0
+Otic epithelial cells,Neural crest (PNS neurons),,,,,,,0,0
+Astrocytes,Cerebellar Purkinje cells,11,0.66,1.000e+00,6,0.85,1.000e+00,1,0
+Facial mesenchyme,Granular keratinocytes,32,0.75,1.000e+00,12,0.62,1.000e+00,1,0
+Diencephalon,Glutamatergic neurons,199,0.76,1.000e+00,92,0.61,1.000e+00,1,0
+Hindbrain,Retinal ganglion cells,,,,3,0.83,1.000e+00,0,0
+Thalamic neuronal precursors,Glutamatergic neurons,357,0.68,1.000e+00,215,0.74,1.000e+00,1,0
+Adrenocortical cells,GABAergic cortical interneurons,3,0.63,1.000e+00,,,,0,0
+Hindbrain,Otic sensory neurons,,,,4,1.48,1.000e+00,0,0
+Microglia,Cajal-Retzius cells,,,,,,,0,0
+Sclerotome,Cranial motor neurons,7,0.98,1.000e+00,,,,0,0
+Neural progenitor cells (Neurod1+),GABAergic cortical interneurons,26,0.87,1.000e+00,8,0.43,1.000e+00,1,0
+Diencephalon,GABAergic cortical interneurons,108,0.67,1.000e+00,74,0.71,1.000e+00,1,0
+Neural crest (PNS glia),Granular keratinocytes,4,0.74,1.000e+00,,,,0,0
+Lateral plate and intermediate mesoderm,Dorsal root ganglion neurons,5,0.71,1.000e+00,,,,0,0
+Pituitary/Pineal gland progenitors,Glutamatergic neurons,6,0.95,1.000e+00,,,,0,0
+Dermatome,Cranial motor neurons,3,0.76,1.000e+00,,,,0,0
+Melanocyte cells,GABAergic neurons,5,0.7,1.000e+00,,,,0,0
+Spinal cord/r7/r8,GABAergic cortical interneurons,158,0.66,1.000e+00,69,0.67,1.000e+00,1,0
+Choroid plexus,Deep-layer neurons,4,0.5,1.000e+00,6,0.93,1.000e+00,1,0
+Thalamic neuronal precursors,Deep-layer neurons,83,0.6,1.000e+00,68,0.75,1.000e+00,1,0
+First heart field,Glutamatergic neurons,9,0.76,1.000e+00,3,0.52,1.000e+00,1,0
+Brain capillary endothelial cells,GABAergic cortical interneurons,20,0.76,1.000e+00,7,0.49,1.000e+00,1,0
+Brain capillary endothelial cells,Cerebellar Purkinje cells,4,0.92,1.000e+00,,,,0,0
+Choroid plexus,GABAergic cortical interneurons,12,0.6,1.000e+00,11,0.73,1.000e+00,1,0
+Retinal pigment cells,GABAergic neurons,3,1.02,1.000e+00,,,,0,0
+Myofibroblasts,GABAergic neurons,84,0.64,1.000e+00,43,0.67,1.000e+00,1,0
+Myelinating Schwann cells,Olfactory sensory neurons,4,0.54,1.000e+00,3,0.92,1.000e+00,1,0
+Floorplate and p3 domain,Cajal-Retzius cells,3,0.51,1.000e+00,3,0.95,1.000e+00,1,0
+Hindbrain,Sympathetic neurons,8,0.82,1.000e+00,,,,0,0
+Retinal progenitor cells,Deep-layer neurons,3,0.86,1.000e+00,,,,0,0
+First heart field,Deep-layer neurons,3,0.91,1.000e+00,,,,0,0
+Fibroblasts,Parasympathetic neurons,15,0.62,1.000e+00,10,0.66,1.000e+00,1,0
+Endocardial cells,Cajal-Retzius cells,,,,,,,0,0
+Sclerotome,Parasympathetic neurons,8,0.87,1.000e+00,,,,0,0
+Anterior floor plate,Cerebellar Purkinje cells,,,,,,,0,0
+Brain capillary endothelial cells,Glutamatergic neurons,29,0.68,1.000e+00,11,0.51,1.000e+00,1,0
+Sclerotome,Sympathetic neurons,18,0.6,1.000e+00,9,0.66,1.000e+00,1,0
+Liver sinusoidal endothelial cells,Cerebellar Purkinje cells,3,0.54,1.000e+00,,,,0,0
+Myoblasts,Otic sensory neurons,10,0.7,1.000e+00,3,0.48,1.000e+00,1,0
+Adrenocortical cells,Glutamatergic neurons,5,0.61,1.000e+00,,,,0,0
+Spinal cord dorsal progenitors,GABAergic cortical interneurons,64,0.62,1.000e+00,27,0.56,1.000e+00,1,0
+Limb mesenchyme progenitors,Otic sensory neurons,4,0.43,1.000e+00,5,0.96,1.000e+00,1,0
+Endocardial cells,GABAergic cortical interneurons,7,0.53,1.000e+00,6,0.74,1.000e+00,1,0
+Midbrain,Cranial motor neurons,5,0.86,1.000e+00,,,,0,0
+Telencephalon,Retinal ganglion cells,24,0.74,1.000e+00,18,0.48,1.000e+00,1,0
+Pre-osteoblasts (Sp7+),GABAergic cortical interneurons,13,0.52,1.000e+00,13,0.71,1.000e+00,1,0
+Anterior roof plate,Glutamatergic neurons,5,0.47,1.000e+00,4,0.97,1.000e+00,1,0
+Lateral plate and intermediate mesoderm,Cranial motor neurons,5,0.64,1.000e+00,,,,0,0
+Sclerotome,Otic sensory neurons,11,0.73,1.000e+00,,,,0,0
+Olfactory epithelial cells,Neural crest (PNS neurons),4,0.65,1.000e+00,,,,0,0
+Chondrocytes (Atp1a2+),Parasympathetic neurons,3,0.73,1.000e+00,,,,0,0
+Eye field,Deep-layer neurons,8,0.62,1.000e+00,7,0.58,1.000e+00,1,0
+Brain capillary endothelial cells,GABAergic neurons,10,0.47,1.000e+00,9,0.86,1.000e+00,1,0
+Olfactory epithelial cells,Cerebellar Purkinje cells,5,0.41,1.000e+00,6,0.99,1.000e+00,1,0
+Pre-osteoblasts (Sp7+),Glutamatergic neurons,24,0.57,1.000e+00,16,0.61,1.000e+00,1,0
+Neural crest (PNS glia),Cajal-Retzius cells,12,0.54,1.000e+00,7,0.69,1.000e+00,1,0
+Dorsal telencephalon,Cerebellar Purkinje cells,4,0.44,1.000e+00,4,0.94,1.000e+00,1,0
+Dermomyotome,GABAergic cortical interneurons,6,0.66,1.000e+00,,,,0,0
+Ureteric bud,Cajal-Retzius cells,3,0.95,1.000e+00,,,,0,0
+Dorsal telencephalon,Glutamatergic neurons,51,0.54,1.000e+00,27,0.66,1.000e+00,1,0
+Thalamic neuronal precursors,Retinal ganglion cells,4,0.94,1.000e+00,,,,0,0
+Early chondrocytes,Dorsal root ganglion neurons,,,,,,,0,0
+Dermatome,Otic sensory neurons,5,0.61,1.000e+00,,,,0,0
+Dermatome,Sympathetic neurons,8,0.49,1.000e+00,6,0.75,1.000e+00,1,0
+Hindbrain,GABAergic cortical interneurons,158,0.56,1.000e+00,88,0.57,1.000e+00,1,0
+Lymphatic vessel endothelial cells,Cerebellar Purkinje cells,,,,,,,0,0
+Astrocytes,GABAergic cortical interneurons,59,0.58,1.000e+00,25,0.53,1.000e+00,1,0
+Lymphatic vessel endothelial cells,GABAergic neurons,14,0.71,1.000e+00,,,,0,0
+Dermatome,Neural crest (PNS neurons),21,0.54,1.000e+00,10,0.62,1.000e+00,1,0
+Neural progenitor cells (Neurod1+),Glutamatergic neurons,28,0.58,1.000e+00,14,0.51,1.000e+00,1,0
+Spinal cord/r7/r8,Deep-layer neurons,60,0.58,1.000e+00,22,0.49,1.000e+00,1,0
+Pre-epidermal keratinocytes,Parasympathetic neurons,,,,,,,0,0
+Lung progenitor cells,Cajal-Retzius cells,5,0.59,1.000e+00,3,0.54,1.000e+00,1,0
+Anterior roof plate,GABAergic cortical interneurons,3,0.49,1.000e+00,,,,0,0
+Dorsal telencephalon,GABAergic neurons,22,0.46,1.000e+00,15,0.77,1.000e+00,1,0
+Lateral plate and intermediate mesoderm,Granular keratinocytes,36,0.58,1.000e+00,12,0.47,1.000e+00,1,0
+Arterial endothelial cells,Glutamatergic neurons,4,0.63,1.000e+00,,,,0,0
+Myelinating Schwann cells (Tgfb2+),GABAergic neurons,16,0.65,1.000e+00,3,0.34,1.000e+00,1,0
+Endothelium,Glutamatergic neurons,145,0.51,1.000e+00,83,0.59,1.000e+00,1,0
+Facial mesenchyme,Spinal cord motor neurons,7,0.52,1.000e+00,4,0.62,1.000e+00,1,0
+Endothelium,GABAergic neurons,79,0.55,1.000e+00,35,0.51,1.000e+00,1,0
+Early chondrocytes,GABAergic neurons,286,0.57,1.000e+00,95,0.44,1.000e+00,1,0
+Sclerotome,Granular keratinocytes,28,0.53,1.000e+00,12,0.55,1.000e+00,1,0
+Endothelium,Cerebellar Purkinje cells,15,0.53,1.000e+00,8,0.58,1.000e+00,1,0
+Facial mesenchyme,Cerebellar Purkinje cells,70,0.6,1.000e+00,24,0.41,1.000e+00,1,0
+Anterior floor plate,GABAergic neurons,13,0.67,1.000e+00,,,,0,0
+Facial mesenchyme,GABAergic neurons,317,0.55,1.000e+00,143,0.5,1.000e+00,1,0
+Arterial endothelial cells,GABAergic cortical interneurons,,,,3,1.21,1.000e+00,0,0
+Limb mesenchyme progenitors,Granular keratinocytes,19,0.52,1.000e+00,9,0.58,1.000e+00,1,0
+Spinal cord ventral progenitors,Deep-layer neurons,4,0.65,1.000e+00,,,,0,0
+Early chondrocytes,Olfactory sensory neurons,20,0.68,1.000e+00,,,,0,0
+Astrocytes,Granular keratinocytes,,,,,,,0,0
+Hindbrain,Neural crest (PNS neurons),13,0.6,1.000e+00,3,0.39,1.000e+00,1,0
+Myofibroblasts,Granular keratinocytes,5,0.55,1.000e+00,,,,0,0
+Cone precursor cells,Glutamatergic neurons,,,,,,,0,0
+Eye field,Glutamatergic neurons,30,0.59,1.000e+00,18,0.44,1.000e+00,1,0
+Facial mesenchyme,Parasympathetic neurons,6,0.83,1.000e+00,,,,0,0
+Neural crest (PNS glia),Cerebellar Purkinje cells,9,0.59,1.000e+00,,,,0,0
+Facial mesenchyme,Cajal-Retzius cells,81,0.48,1.000e+00,58,0.57,1.000e+00,1,0
+Spinal cord/r7/r8,Olfactory sensory neurons,6,0.53,1.000e+00,,,,0,0
+Lymphatic vessel endothelial cells,Glutamatergic neurons,17,0.45,1.000e+00,13,0.67,1.000e+00,1,0
+Myoblasts,GABAergic neurons,372,0.54,1.000e+00,142,0.45,1.000e+00,1,0
+Dermomyotome,Glutamatergic neurons,8,0.55,1.000e+00,3,0.49,1.000e+00,1,0
+Naive retinal progenitor cells,Glutamatergic neurons,63,0.6,1.000e+00,35,0.41,1.000e+00,1,0
+Brain capillary endothelial cells,Cajal-Retzius cells,,,,4,0.99,1.000e+00,0,0
+Myoblasts,Sympathetic neurons,18,0.64,1.000e+00,3,0.28,1.000e+00,1,0
+Early chondrocytes,Neural crest (PNS neurons),24,0.51,1.000e+00,9,0.52,1.000e+00,1,0
+Telencephalon,Glutamatergic neurons,1997,0.5,1.000e+00,1135,0.52,1.000e+00,1,0
+Limb mesenchyme progenitors,Parasympathetic neurons,4,0.67,1.000e+00,,,,0,0
+Midbrain,GABAergic cortical interneurons,353,0.49,1.000e+00,213,0.53,1.000e+00,1,0
+Endothelium,Sympathetic neurons,,,,,,,0,0
+Myoblasts,Spinal cord motor neurons,8,0.5,1.000e+00,4,0.56,1.000e+00,1,0
+Hindbrain,Granular keratinocytes,8,0.49,1.000e+00,4,0.59,1.000e+00,1,0
+Hypothalamus,GABAergic neurons,43,0.55,1.000e+00,13,0.41,1.000e+00,1,0
+Myofibroblasts,Glutamatergic neurons,130,0.5,1.000e+00,65,0.49,1.000e+00,1,0
+Sclerotome,GABAergic neurons,359,0.5,1.000e+00,166,0.5,1.000e+00,1,0
+Foregut epithelial cells,GABAergic cortical interneurons,,,,,,,0,0
+Pre-osteoblasts (Sp7+),Deep-layer neurons,9,0.83,1.000e+00,,,,0,0
+Hypothalamus,Deep-layer neurons,18,0.45,1.000e+00,12,0.6,1.000e+00,1,0
+Hindbrain,Deep-layer neurons,63,0.52,1.000e+00,31,0.46,1.000e+00,1,0
+Dermatome,Spinal cord motor neurons,6,0.62,1.000e+00,,,,0,0
+Pre-osteoblasts (Sp7+),Cajal-Retzius cells,,,,3,0.7,1.000e+00,0,0
+Thalamic neuronal precursors,GABAergic neurons,136,0.5,1.000e+00,66,0.47,1.000e+00,1,0
+Microglia,Deep-layer neurons,4,0.64,1.000e+00,,,,0,0
+Fibroblasts,Granular keratinocytes,73,0.51,1.000e+00,26,0.44,1.000e+00,1,0
+Dermatome,Cerebellar Purkinje cells,38,0.46,1.000e+00,23,0.56,1.000e+00,1,0
+Branchial arch epithelium,Sympathetic neurons,4,0.68,1.000e+00,,,,0,0
+Liver sinusoidal endothelial cells,Cajal-Retzius cells,4,0.5,1.000e+00,,,,0,0
+Muscle progenitor cells,GABAergic neurons,3,0.67,1.000e+00,,,,0,0
+Fibroblasts,Otic sensory neurons,25,0.61,1.000e+00,4,0.25,1.000e+00,1,0
+Facial mesenchyme,Glutamatergic neurons,573,0.51,1.000e+00,255,0.43,1.000e+00,1,0
+Midbrain,Cajal-Retzius cells,93,0.53,1.000e+00,41,0.41,1.000e+00,1,0
+Naive retinal progenitor cells,Deep-layer neurons,13,0.49,1.000e+00,13,0.5,1.000e+00,1,0
+Dermatome,GABAergic neurons,200,0.48,1.000e+00,97,0.49,1.000e+00,1,0
+Intermediate neuronal progenitors,Olfactory sensory neurons,8,0.57,1.000e+00,,,,0,0
+Lateral plate and intermediate mesoderm,Parasympathetic neurons,4,0.43,1.000e+00,4,0.62,1.000e+00,1,0
+Sclerotome,Glutamatergic neurons,705,0.5,1.000e+00,298,0.43,1.000e+00,1,0
+Fibroblasts,GABAergic neurons,974,0.5,1.000e+00,381,0.43,1.000e+00,1,0
+Early chondrocytes,Cranial motor neurons,,,,,,,0,0
+Eye field,GABAergic neurons,12,0.47,1.000e+00,10,0.51,1.000e+00,1,0
+Fibroblasts,Sympathetic neurons,43,0.53,1.000e+00,13,0.37,1.000e+00,1,0
+Early chondrocytes,Spinal cord motor neurons,7,0.6,1.000e+00,,,,0,0
+Olfactory epithelial cells,Deep-layer neurons,11,0.33,1.000e+00,14,0.76,1.000e+00,1,0
+Chondrocytes (Atp1a2+),Granular keratinocytes,12,0.46,1.000e+00,6,0.55,1.000e+00,1,0
+Lateral plate and intermediate mesoderm,Enteric neurons,3,0.59,1.000e+00,,,,0,0
+Endothelium,GABAergic cortical interneurons,76,0.45,1.000e+00,51,0.53,1.000e+00,1,0
+Intermediate neuronal progenitors,Glutamatergic neurons,234,0.49,1.000e+00,103,0.44,1.000e+00,1,0
+Spinal cord dorsal progenitors,Olfactory sensory neurons,,,,,,,0,0
+Olfactory epithelial cells,Cajal-Retzius cells,11,0.57,1.000e+00,3,0.35,1.000e+00,1,0
+Pancreatic acinar cells,Glutamatergic neurons,3,0.54,1.000e+00,,,,0,0
+Facial mesenchyme,Neural crest (PNS neurons),20,0.37,1.000e+00,17,0.72,1.000e+00,1,0
+Intermediate neuronal progenitors,GABAergic neurons,118,0.48,1.000e+00,52,0.46,1.000e+00,1,0
+Choroid plexus,Glutamatergic neurons,17,0.5,1.000e+00,9,0.44,1.000e+00,1,0
+Dermatome,Granular keratinocytes,14,0.48,1.000e+00,6,0.5,1.000e+00,1,0
+Liver sinusoidal endothelial cells,Glutamatergic neurons,23,0.4,1.000e+00,16,0.65,1.000e+00,1,0
+Myelinating Schwann cells,Cajal-Retzius cells,17,0.44,1.000e+00,11,0.56,1.000e+00,1,0
+Limb mesenchyme progenitors,GABAergic neurons,233,0.46,1.000e+00,115,0.48,1.000e+00,1,0
+Sclerotome,Olfactory sensory neurons,21,0.5,1.000e+00,8,0.42,1.000e+00,1,0
+Fibroblasts,Spinal cord motor neurons,26,0.56,1.000e+00,6,0.3,1.000e+00,1,0
+Pre-epidermal keratinocytes,GABAergic neurons,160,0.51,1.000e+00,45,0.36,1.000e+00,1,0
+Astrocytes,Deep-layer neurons,24,0.55,1.000e+00,6,0.31,1.000e+00,1,0
+Limb mesenchyme progenitors,Olfactory sensory neurons,16,0.55,1.000e+00,4,0.32,1.000e+00,1,0
+Spinal cord dorsal progenitors,Deep-layer neurons,17,0.39,1.000e+00,13,0.62,1.000e+00,1,0
+Myofibroblasts,GABAergic cortical interneurons,71,0.46,1.000e+00,41,0.45,1.000e+00,1,0
+Myofibroblasts,Cerebellar Purkinje cells,13,0.5,1.000e+00,5,0.41,1.000e+00,1,0
+Myelinating Schwann cells (Tgfb2+),Glutamatergic neurons,24,0.49,1.000e+00,8,0.39,1.000e+00,1,0
+Hypothalamus,Cerebellar Purkinje cells,8,0.52,1.000e+00,,,,0,0
+Myoblasts,Parasympathetic neurons,5,0.61,1.000e+00,,,,0,0
+Early chondrocytes,Sympathetic neurons,8,0.41,1.000e+00,5,0.59,1.000e+00,1,0
+Sclerotome,Cajal-Retzius cells,89,0.43,1.000e+00,58,0.5,1.000e+00,1,0
+Branchial arch epithelium,Cajal-Retzius cells,20,0.47,1.000e+00,10,0.44,1.000e+00,1,0
+Facial mesenchyme,GABAergic cortical interneurons,284,0.42,1.000e+00,203,0.5,1.000e+00,1,0
+Anterior roof plate,GABAergic neurons,,,,,,,0,0
+Dermatome,Glutamatergic neurons,369,0.45,1.000e+00,169,0.42,1.000e+00,1,0
+Fibroblasts,Cranial motor neurons,10,0.54,1.000e+00,,,,0,0
+Intermediate neuronal progenitors,Cerebellar Purkinje cells,15,0.32,1.000e+00,17,0.71,1.000e+00,1,0
+Early chondrocytes,Glutamatergic neurons,454,0.47,1.000e+00,164,0.37,1.000e+00,1,0
+Pre-epidermal keratinocytes,GABAergic cortical interneurons,175,0.47,1.000e+00,65,0.37,1.000e+00,1,0
+Lateral plate and intermediate mesoderm,Otic sensory neurons,9,0.53,1.000e+00,,,,0,0
+Retinal progenitor cells,Glutamatergic neurons,8,0.62,1.000e+00,,,,0,0
+Diencephalon,Deep-layer neurons,28,0.41,1.000e+00,22,0.49,1.000e+00,1,0
+Hypothalamus,Granular keratinocytes,,,,,,,0,0
+Facial mesenchyme,Deep-layer neurons,141,0.48,1.000e+00,66,0.37,1.000e+00,1,0
+Endothelium,Neural crest (PNS neurons),6,0.47,1.000e+00,,,,0,0
+Lateral plate and intermediate mesoderm,GABAergic neurons,381,0.45,1.000e+00,156,0.4,1.000e+00,1,0
+Telencephalon,GABAergic neurons,878,0.42,1.000e+00,461,0.44,1.000e+00,1,0
+Hematopoietic stem cells (Mpo+),Cajal-Retzius cells,3,0.43,1.000e+00,,,,0,0
+Chondrocytes (Atp1a2+),Sympathetic neurons,7,0.49,1.000e+00,,,,0,0
+Dermatome,GABAergic cortical interneurons,194,0.4,1.000e+00,130,0.46,1.000e+00,1,0
+Myelinating Schwann cells,GABAergic cortical interneurons,64,0.39,1.000e+00,38,0.48,1.000e+00,1,0
+Lateral plate and intermediate mesoderm,Cerebellar Purkinje cells,76,0.44,1.000e+00,31,0.38,1.000e+00,1,0
+Myoblasts,Glutamatergic neurons,569,0.43,1.000e+00,261,0.4,1.000e+00,1,0
+Myelinating Schwann cells (Tgfb2+),Cajal-Retzius cells,,,,,,,0,0
+Lymphatic vessel endothelial cells,GABAergic cortical interneurons,9,0.41,1.000e+00,6,0.47,1.000e+00,1,0
+Sclerotome,GABAergic cortical interneurons,325,0.38,1.000e+00,226,0.47,1.000e+00,1,0
+Telencephalon,Cerebellar Purkinje cells,169,0.41,1.000e+00,95,0.43,1.000e+00,1,0
+Sclerotome,Spinal cord motor neurons,8,0.48,1.000e+00,,,,0,0
+Chondrocytes (Atp1a2+),GABAergic neurons,155,0.43,1.000e+00,64,0.38,1.000e+00,1,0
+Myelinating Schwann cells (Tgfb2+),GABAergic cortical interneurons,11,0.39,1.000e+00,7,0.5,1.000e+00,1,0
+Kupffer cells,GABAergic cortical interneurons,13,0.34,1.000e+00,14,0.54,1.000e+00,1,0
+Endocardial cells,Glutamatergic neurons,9,0.41,1.000e+00,5,0.45,1.000e+00,1,0
+Early chondrocytes,GABAergic cortical interneurons,241,0.41,1.000e+00,125,0.41,1.000e+00,1,0
+Primordial germ cells,Glutamatergic neurons,,,,,,,0,0
+Midbrain,Sympathetic neurons,12,0.48,1.000e+00,3,0.3,1.000e+00,1,0
+Endothelium,Cajal-Retzius cells,17,0.41,1.000e+00,10,0.43,1.000e+00,1,0
+Thalamic neuronal precursors,Otic sensory neurons,3,0.59,1.000e+00,,,,0,0
+Fibroblasts,Glutamatergic neurons,1593,0.42,1.000e+00,672,0.37,1.000e+00,1,0
+Pre-epidermal keratinocytes,Glutamatergic neurons,258,0.42,1.000e+00,92,0.36,1.000e+00,1,0
+Brain capillary endothelial cells,Deep-layer neurons,4,0.39,1.000e+00,3,0.51,1.000e+00,1,0
+Early chondrocytes,Megakaryocytes,12,0.5,1.000e+00,3,0.27,1.000e+00,1,0
+Limb mesenchyme progenitors,Sympathetic neurons,10,0.5,1.000e+00,,,,0,0
+Telencephalon,Cranial motor neurons,10,0.51,1.000e+00,,,,0,0
+Facial mesenchyme,Sympathetic neurons,8,0.36,1.000e+00,6,0.54,1.000e+00,1,0
+Diencephalon,GABAergic neurons,56,0.41,1.000e+00,28,0.39,1.000e+00,1,0
+Pre-epidermal keratinocytes,Cajal-Retzius cells,38,0.42,1.000e+00,16,0.37,1.000e+00,1,0
+Muscle progenitor cells,GABAergic cortical interneurons,,,,,,,0,0
+Lateral plate and intermediate mesoderm,Sympathetic neurons,16,0.47,1.000e+00,4,0.29,1.000e+00,1,0
+Midbrain,Spinal cord motor neurons,6,0.45,1.000e+00,,,,0,0
+Naive retinal progenitor cells,GABAergic neurons,18,0.34,1.000e+00,20,0.48,1.000e+00,1,0
+Myoblasts,Granular keratinocytes,20,0.41,1.000e+00,8,0.4,1.000e+00,1,0
+Dermatome,Olfactory sensory neurons,11,0.46,1.000e+00,3,0.31,1.000e+00,1,0
+Dermomyotome,GABAergic neurons,,,,,,,0,0
+Myoblasts,Cajal-Retzius cells,83,0.42,1.000e+00,40,0.35,1.000e+00,1,0
+Fibroblasts,Dorsal root ganglion neurons,6,0.39,1.000e+00,3,0.48,1.000e+00,1,0
+Lateral plate and intermediate mesoderm,Glutamatergic neurons,646,0.39,1.000e+00,321,0.4,1.000e+00,1,0
+Kupffer cells,Glutamatergic neurons,23,0.35,1.000e+00,18,0.48,1.000e+00,1,0
+Chondrocytes (Atp1a2+),Otic sensory neurons,4,0.56,1.000e+00,,,,0,0
+Neural progenitor cells (Neurod1+),Deep-layer neurons,,,,6,0.72,1.000e+00,0,0
+Branchial arch epithelium,GABAergic neurons,59,0.39,1.000e+00,26,0.39,1.000e+00,1,0
+Pre-osteoblasts (Sp7+),GABAergic neurons,8,0.39,1.000e+00,5,0.42,1.000e+00,1,0
+Fibroblasts,GABAergic cortical interneurons,863,0.38,1.000e+00,494,0.39,1.000e+00,1,0
+Neural crest (PNS glia),GABAergic cortical interneurons,31,0.35,1.000e+00,19,0.47,1.000e+00,1,0
+Telencephalon,Sympathetic neurons,25,0.3,1.000e+00,24,0.56,1.000e+00,1,0
+Fibroblasts,Olfactory sensory neurons,47,0.41,1.000e+00,17,0.33,1.000e+00,1,0
+Early chondrocytes,Granular keratinocytes,17,0.47,1.000e+00,,,,0,0
+Facial mesenchyme,Megakaryocytes,12,0.43,1.000e+00,5,0.32,1.000e+00,1,0
+Limb mesenchyme progenitors,GABAergic cortical interneurons,212,0.36,1.000e+00,139,0.41,1.000e+00,1,0
+Chondrocytes (Atp1a2+),Glutamatergic neurons,273,0.39,1.000e+00,119,0.34,1.000e+00,1,0
+Telencephalon,Granular keratinocytes,55,0.36,1.000e+00,28,0.4,1.000e+00,1,0
+Fibroblasts,Cajal-Retzius cells,195,0.35,1.000e+00,132,0.42,1.000e+00,1,0
+Myofibroblasts,Deep-layer neurons,27,0.4,1.000e+00,13,0.33,1.000e+00,1,0
+Endocardial cells,GABAergic neurons,3,0.31,1.000e+00,3,0.57,1.000e+00,1,0
+Endocardial cells,Deep-layer neurons,,,,,,,0,0
+Myoblasts,GABAergic cortical interneurons,268,0.33,1.000e+00,192,0.42,1.000e+00,1,0
+Midbrain,Granular keratinocytes,17,0.39,1.000e+00,6,0.34,1.000e+00,1,0
+Lateral plate and intermediate mesoderm,Neural crest (PNS neurons),28,0.35,1.000e+00,13,0.41,1.000e+00,1,0
+Liver sinusoidal endothelial cells,GABAergic neurons,7,0.25,1.000e+00,8,0.68,1.000e+00,1,0
+Telencephalon,Parasympathetic neurons,8,0.33,1.000e+00,8,0.44,1.000e+00,1,0
+Endothelium,Olfactory sensory neurons,,,,,,,0,0
+Pre-epidermal keratinocytes,Sympathetic neurons,,,,5,0.99,1.000e+00,0,0
+Endothelium,Deep-layer neurons,29,0.4,1.000e+00,13,0.31,1.000e+00,1,0
+Limb mesenchyme progenitors,Spinal cord motor neurons,5,0.45,1.000e+00,,,,0,0
+Early chondrocytes,Otic sensory neurons,5,0.51,1.000e+00,,,,0,0
+Early chondrocytes,Cajal-Retzius cells,51,0.36,1.000e+00,28,0.37,1.000e+00,1,0
+Thalamic neuronal precursors,Cerebellar Purkinje cells,18,0.34,1.000e+00,12,0.42,1.000e+00,1,0
+Lung progenitor cells,Cerebellar Purkinje cells,,,,,,,0,0
+Ureteric bud,GABAergic cortical interneurons,5,0.42,1.000e+00,3,0.34,1.000e+00,1,0
+Sclerotome,Cerebellar Purkinje cells,48,0.33,1.000e+00,29,0.42,1.000e+00,1,0
+Pre-epidermal keratinocytes,Neural crest (PNS neurons),10,0.35,1.000e+00,4,0.44,1.000e+00,1,0
+Early chondrocytes,Retinal ganglion cells,,,,3,0.45,1.000e+00,0,0
+Branchial arch epithelium,GABAergic cortical interneurons,67,0.38,1.000e+00,30,0.32,1.000e+00,1,0
+Olfactory epithelial cells,GABAergic neurons,28,0.42,1.000e+00,6,0.23,1.000e+00,1,0
+Midgut/Hindgut epithelial cells,Glutamatergic neurons,21,0.36,1.000e+00,11,0.37,1.000e+00,1,0
+Chondrocytes (Atp1a2+),GABAergic cortical interneurons,146,0.34,1.000e+00,89,0.37,1.000e+00,1,0
+Myoblasts,Cerebellar Purkinje cells,45,0.33,1.000e+00,26,0.4,1.000e+00,1,0
+Olfactory epithelial cells,GABAergic cortical interneurons,35,0.44,1.000e+00,7,0.19,1.000e+00,1,0
+Otic epithelial cells,Deep-layer neurons,9,0.39,1.000e+00,3,0.32,1.000e+00,1,0
+Otic epithelial cells,Glutamatergic neurons,36,0.39,1.000e+00,9,0.27,1.000e+00,1,0
+Lateral plate and intermediate mesoderm,Megakaryocytes,17,0.41,1.000e+00,6,0.27,1.000e+00,1,0
+Midbrain,Otic sensory neurons,4,0.35,1.000e+00,,,,0,0
+Midbrain-hindbrain boundary,GABAergic cortical interneurons,3,0.37,1.000e+00,,,,0,0
+Monocytes,Glutamatergic neurons,,,,,,,0,0
+Myofibroblasts,Megakaryocytes,,,,3,0.81,1.000e+00,0,0
+Midbrain,Olfactory sensory neurons,14,0.4,1.000e+00,4,0.27,1.000e+00,1,0
+Lateral plate and intermediate mesoderm,Retinal ganglion cells,4,0.35,1.000e+00,5,0.39,1.000e+00,1,0
+Limb mesenchyme progenitors,Glutamatergic neurons,358,0.36,1.000e+00,152,0.31,1.000e+00,1,0
+Lung progenitor cells,Deep-layer neurons,3,0.23,1.000e+00,6,0.56,1.000e+00,1,0
+Limb mesenchyme progenitors,Neural crest (PNS neurons),15,0.32,1.000e+00,8,0.43,1.000e+00,1,0
+Nephron progenitors,GABAergic cortical interneurons,5,0.45,1.000e+00,,,,0,0
+Metanephric mesenchyme,GABAergic neurons,9,0.32,1.000e+00,6,0.44,1.000e+00,1,0
+Fibroblasts,Cerebellar Purkinje cells,149,0.38,1.000e+00,50,0.27,1.000e+00,1,0
+Fibroblasts,Neural crest (PNS neurons),73,0.39,1.000e+00,16,0.23,1.000e+00,1,0
+Microglia,GABAergic cortical interneurons,4,0.31,1.000e+00,4,0.44,1.000e+00,1,0
+Myelinating Schwann cells,Megakaryocytes,,,,,,,0,0
+Lateral plate and intermediate mesoderm,Olfactory sensory neurons,22,0.44,1.000e+00,3,0.16,1.000e+00,1,0
+Lateral plate and intermediate mesoderm,GABAergic cortical interneurons,325,0.32,1.000e+00,202,0.36,1.000e+00,1,0
+Midgut/Hindgut epithelial cells,GABAergic neurons,8,0.28,1.000e+00,7,0.48,1.000e+00,1,0
+Dermatome,Cajal-Retzius cells,47,0.39,1.000e+00,17,0.25,1.000e+00,1,0
+Spinal cord/r7/r8,Granular keratinocytes,5,0.38,1.000e+00,,,,0,0
+Telencephalon,Otic sensory neurons,16,0.38,1.000e+00,6,0.29,1.000e+00,1,0
+Sclerotome,Deep-layer neurons,121,0.33,1.000e+00,73,0.35,1.000e+00,1,0
+Chondrocytes (Atp1a2+),Neural crest (PNS neurons),9,0.27,1.000e+00,7,0.51,1.000e+00,1,0
+Midbrain,Retinal ganglion cells,,,,4,0.44,1.000e+00,0,0
+Liver sinusoidal endothelial cells,GABAergic cortical interneurons,11,0.32,1.000e+00,6,0.38,1.000e+00,1,0
+Floorplate and p3 domain,Deep-layer neurons,5,0.48,1.000e+00,,,,0,0
+Foregut epithelial cells,Glutamatergic neurons,3,0.48,1.000e+00,,,,0,0
+Muscle progenitor cells,Glutamatergic neurons,,,,4,0.89,1.000e+00,0,0
+Sclerotome,Neural crest (PNS neurons),22,0.33,1.000e+00,9,0.34,1.000e+00,1,0
+Olfactory bulb cells,GABAergic cortical interneurons,4,0.3,1.000e+00,3,0.43,1.000e+00,1,0
+Thalamic neuronal precursors,Granular keratinocytes,7,0.38,1.000e+00,,,,0,0
+Sclerotome,Retinal ganglion cells,5,0.47,1.000e+00,,,,0,0
+Neural crest (PNS glia),Deep-layer neurons,10,0.27,1.000e+00,8,0.45,1.000e+00,1,0
+Pre-epidermal keratinocytes,Cerebellar Purkinje cells,14,0.23,1.000e+00,14,0.55,1.000e+00,1,0
+Chondrocytes (Atp1a2+),Cajal-Retzius cells,38,0.37,1.000e+00,14,0.24,1.000e+00,1,0
+Diencephalon,Megakaryocytes,,,,,,,0,0
+Myelinating Schwann cells,Deep-layer neurons,21,0.3,1.000e+00,12,0.36,1.000e+00,1,0
+Fibroblasts,Megakaryocytes,30,0.31,1.000e+00,18,0.33,1.000e+00,1,0
+Olfactory epithelial cells,Glutamatergic neurons,42,0.32,1.000e+00,18,0.31,1.000e+00,1,0
+Myofibroblasts,Neural crest (PNS neurons),4,0.36,1.000e+00,,,,0,0
+Branchial arch epithelium,Glutamatergic neurons,77,0.27,1.000e+00,58,0.42,1.000e+00,1,0
+Diencephalon,Granular keratinocytes,,,,,,,0,0
+Choroid plexus,GABAergic neurons,4,0.27,1.000e+00,4,0.44,1.000e+00,1,0
+Sclerotome,Megakaryocytes,12,0.35,1.000e+00,5,0.27,1.000e+00,1,0
+Pre-epidermal keratinocytes,Deep-layer neurons,48,0.3,1.000e+00,25,0.33,1.000e+00,1,0
+Telencephalon,Olfactory sensory neurons,39,0.32,1.000e+00,18,0.29,1.000e+00,1,0
+Branchial arch epithelium,Cerebellar Purkinje cells,10,0.35,1.000e+00,3,0.26,1.000e+00,1,0
+Early chondrocytes,Cerebellar Purkinje cells,32,0.32,1.000e+00,12,0.28,1.000e+00,1,0
+Limb mesenchyme progenitors,Cajal-Retzius cells,43,0.3,1.000e+00,27,0.32,1.000e+00,1,0
+Myoblasts,Neural crest (PNS neurons),21,0.33,1.000e+00,6,0.25,1.000e+00,1,0
+Ureteric bud,GABAergic neurons,4,0.4,1.000e+00,,,,0,0
+Border-associated macrophages,GABAergic neurons,41,0.29,1.000e+00,27,0.32,1.000e+00,1,0
+Limb mesenchyme progenitors,Cerebellar Purkinje cells,30,0.3,1.000e+00,15,0.31,1.000e+00,1,0
+Early chondrocytes,Deep-layer neurons,82,0.32,1.000e+00,34,0.26,1.000e+00,1,0
+Otic epithelial cells,GABAergic neurons,9,0.2,1.000e+00,10,0.59,1.000e+00,1,0
+Border-associated macrophages,Deep-layer neurons,16,0.23,1.000e+00,21,0.4,1.000e+00,1,0
+Microglia,Glutamatergic neurons,4,0.19,1.000e+00,7,0.51,1.000e+00,1,0
+Myelinating Schwann cells,Cerebellar Purkinje cells,8,0.31,1.000e+00,3,0.31,1.000e+00,1,0
+Intermediate neuronal progenitors,Neural crest (PNS neurons),8,0.37,1.000e+00,,,,0,0
+Kupffer cells,GABAergic neurons,5,0.17,1.000e+00,10,0.55,1.000e+00,1,0
+Midbrain,Parasympathetic neurons,,,,,,,0,0
+Myoblasts,Olfactory sensory neurons,9,0.24,1.000e+00,8,0.43,1.000e+00,1,0
+Olfactory bulb cells,Glutamatergic neurons,7,0.31,1.000e+00,3,0.31,1.000e+00,1,0
+Myelinating Schwann cells (Tgfb2+),Deep-layer neurons,3,0.29,1.000e+00,,,,0,0
+Metanephric mesenchyme,Glutamatergic neurons,14,0.25,1.000e+00,11,0.38,1.000e+00,1,0
+Border-associated macrophages,GABAergic cortical interneurons,30,0.18,1.000e+00,53,0.43,1.000e+00,1,0
+Border-associated macrophages,Glutamatergic neurons,74,0.27,1.000e+00,56,0.32,1.000e+00,1,0
+Midbrain,Deep-layer neurons,91,0.29,1.000e+00,50,0.28,1.000e+00,1,0
+Hematopoietic stem cells (Cd34+),Granular keratinocytes,3,0.28,1.000e+00,,,,0,0
+Chondrocytes (Atp1a2+),Deep-layer neurons,60,0.33,1.000e+00,23,0.22,1.000e+00,1,0
+Limb mesenchyme progenitors,Megakaryocytes,9,0.38,1.000e+00,,,,0,0
+Definitive early erythroblasts (CD36-),Otic sensory neurons,7,0.19,1.000e+00,10,0.49,1.000e+00,1,0
+Dermatome,Megakaryocytes,3,0.18,1.000e+00,6,0.51,1.000e+00,1,0
+Nephron progenitors,Glutamatergic neurons,6,0.32,1.000e+00,,,,0,0
+Microglia,GABAergic neurons,3,0.29,1.000e+00,,,,0,0
+Lateral plate and intermediate mesoderm,Cajal-Retzius cells,70,0.28,1.000e+00,40,0.29,1.000e+00,1,0
+Otic epithelial cells,Cajal-Retzius cells,3,0.27,1.000e+00,,,,0,0
+Branchial arch epithelium,Deep-layer neurons,21,0.28,1.000e+00,12,0.3,1.000e+00,1,0
+Fibroblasts,Enteric neurons,3,0.28,1.000e+00,,,,0,0
+Fibroblasts,Neurons (Slc17a8+),4,0.4,1.000e+00,,,,0,0
+Lung progenitor cells,Glutamatergic neurons,16,0.28,1.000e+00,10,0.29,1.000e+00,1,0
+Otic epithelial cells,Cerebellar Purkinje cells,3,0.36,1.000e+00,,,,0,0
+Myofibroblasts,Cajal-Retzius cells,11,0.3,1.000e+00,5,0.25,1.000e+00,1,0
+Midgut/Hindgut epithelial cells,GABAergic cortical interneurons,7,0.22,1.000e+00,8,0.4,1.000e+00,1,0
+Diencephalon,Cerebellar Purkinje cells,8,0.31,1.000e+00,3,0.24,1.000e+00,1,0
+Border-associated macrophages,Olfactory sensory neurons,3,0.42,1.000e+00,,,,0,0
+Thalamic neuronal precursors,Olfactory sensory neurons,4,0.29,1.000e+00,,,,0,0
+Limb mesenchyme progenitors,Deep-layer neurons,67,0.26,1.000e+00,43,0.29,1.000e+00,1,0
+Mast cells,GABAergic neurons,,,,5,0.6,1.000e+00,0,0
+Hematopoietic stem cells (Cd34+),GABAergic neurons,43,0.24,1.000e+00,31,0.32,1.000e+00,1,0
+Definitive early erythroblasts (CD36-),Spinal cord motor neurons,14,0.31,1.000e+00,4,0.2,1.000e+00,1,0
+Lung progenitor cells,GABAergic cortical interneurons,6,0.18,1.000e+00,10,0.41,1.000e+00,1,0
+Kupffer cells,Deep-layer neurons,5,0.33,1.000e+00,,,,0,0
+Lateral plate and intermediate mesoderm,Deep-layer neurons,119,0.27,1.000e+00,58,0.23,1.000e+00,1,0
+Telencephalon,Neural crest (PNS neurons),44,0.23,1.000e+00,29,0.34,1.000e+00,1,0
+Chondrocytes (Atp1a2+),Cerebellar Purkinje cells,23,0.33,1.000e+00,4,0.14,1.000e+00,1,0
+Lung progenitor cells,GABAergic neurons,8,0.28,1.000e+00,4,0.26,1.000e+00,1,0
+Fibroblasts,Deep-layer neurons,255,0.26,1.000e+00,139,0.25,1.000e+00,1,0
+Myoblasts,Deep-layer neurons,84,0.24,1.000e+00,55,0.28,1.000e+00,1,0
+Dermatome,Deep-layer neurons,47,0.22,1.000e+00,36,0.29,1.000e+00,1,0
+Border-associated macrophages,Cajal-Retzius cells,8,0.21,1.000e+00,9,0.31,1.000e+00,1,0
+Pre-epidermal keratinocytes,Megakaryocytes,4,0.3,1.000e+00,,,,0,0
+Mast cells,GABAergic cortical interneurons,3,0.25,1.000e+00,3,0.29,1.000e+00,1,0
+Liver sinusoidal endothelial cells,Deep-layer neurons,4,0.3,1.000e+00,,,,0,0
+Hematopoietic stem cells (Mpo+),GABAergic cortical interneurons,8,0.25,1.000e+00,4,0.25,1.000e+00,1,0
+Naive retinal progenitor cells,Cerebellar Purkinje cells,,,,,,,0,0
+Hepatocytes,GABAergic neurons,56,0.23,1.000e+00,47,0.25,1.000e+00,1,0
+Hematopoietic stem cells (Cd34+),Cajal-Retzius cells,9,0.19,1.000e+00,11,0.33,1.000e+00,1,0
+Facial mesenchyme,Retinal ganglion cells,3,0.38,1.000e+00,,,,0,0
+Hepatocytes,GABAergic cortical interneurons,69,0.24,1.000e+00,62,0.23,1.000e+00,1,0
+Thalamic neuronal precursors,Neural crest (PNS neurons),5,0.22,1.000e+00,3,0.31,1.000e+00,1,0
+Telencephalon,Spinal cord motor neurons,12,0.25,1.000e+00,5,0.22,1.000e+00,1,0
+Border-associated macrophages,Neural crest (PNS neurons),,,,3,0.48,1.000e+00,0,0
+Hindbrain,Olfactory sensory neurons,3,0.26,1.000e+00,,,,0,0
+Metanephric mesenchyme,GABAergic cortical interneurons,9,0.28,1.000e+00,3,0.18,1.000e+00,1,0
+Definitive early erythroblasts (CD36-),Enteric neurons,3,0.29,1.000e+00,,,,0,0
+Hematopoietic stem cells (Cd34+),Olfactory sensory neurons,,,,,,,0,0
+Hematopoietic stem cells (Cd34+),GABAergic cortical interneurons,38,0.18,1.000e+00,40,0.29,1.000e+00,1,0
+Kupffer cells,Cajal-Retzius cells,,,,,,,0,0
+Hepatocytes,Cerebellar Purkinje cells,10,0.22,1.000e+00,9,0.24,1.000e+00,1,0
+Hepatocytes,Olfactory sensory neurons,5,0.38,1.000e+00,,,,0,0
+Telencephalon,Dorsal root ganglion neurons,,,,3,0.42,1.000e+00,0,0
+Fibroblasts,Retinal ganglion cells,9,0.31,1.000e+00,4,0.15,1.000e+00,1,0
+Hepatocytes,Cajal-Retzius cells,16,0.24,1.000e+00,13,0.2,1.000e+00,1,0
+Chondrocytes (Atp1a2+),Olfactory sensory neurons,4,0.22,1.000e+00,,,,0,0
+Telencephalon,Enteric neurons,,,,,,,0,0
+Ureteric bud,Glutamatergic neurons,4,0.22,1.000e+00,3,0.24,1.000e+00,1,0
+Hepatocytes,Glutamatergic neurons,105,0.22,1.000e+00,72,0.19,1.000e+00,1,0
+Hematopoietic stem cells (Cd34+),Deep-layer neurons,19,0.21,1.000e+00,12,0.21,1.000e+00,1,0
+Telencephalon,Neurons (Slc17a8+),3,0.31,1.000e+00,,,,0,0
+Definitive early erythroblasts (CD36-),Cranial motor neurons,3,0.2,1.000e+00,,,,0,0
+Otic epithelial cells,GABAergic cortical interneurons,13,0.24,1.000e+00,3,0.15,1.000e+00,1,0
+Midbrain,Neural crest (PNS neurons),12,0.22,1.000e+00,4,0.2,1.000e+00,1,0
+Hindbrain,Megakaryocytes,,,,,,,0,0
+Olfactory bulb cells,GABAergic neurons,,,,,,,0,0
+Definitive early erythroblasts (CD36-),Sympathetic neurons,14,0.19,1.000e+00,8,0.21,1.000e+00,1,0
+Lateral plate and intermediate mesoderm,Spinal cord motor neurons,,,,3,0.38,1.000e+00,0,0
+Definitive early erythroblasts (CD36-),GABAergic cortical interneurons,385,0.17,1.000e+00,293,0.21,1.000e+00,1,0
+Hematopoietic stem cells (Cd34+),Neural crest (PNS neurons),3,0.22,1.000e+00,,,,0,0
+Branchial arch epithelium,Neural crest (PNS neurons),3,0.26,1.000e+00,,,,0,0
+Intermediate neuronal progenitors,Granular keratinocytes,3,0.21,1.000e+00,,,,0,0
+Hematopoietic stem cells (Cd34+),Glutamatergic neurons,51,0.15,1.000e+00,51,0.26,1.000e+00,1,0
+Definitive early erythroblasts (CD36-),GABAergic neurons,318,0.17,1.000e+00,200,0.21,1.000e+00,1,0
+Mast cells,Glutamatergic neurons,,,,5,0.3,1.000e+00,0,0
+Thalamic neuronal precursors,Megakaryocytes,,,,3,0.39,1.000e+00,0,0
+Myoblasts,Retinal ganglion cells,,,,,,,0,0
+Border-associated macrophages,Cerebellar Purkinje cells,5,0.2,1.000e+00,,,,0,0
+Definitive early erythroblasts (CD36-),Glutamatergic neurons,535,0.15,1.000e+00,376,0.19,1.000e+00,1,0
+Definitive early erythroblasts (CD36-),Granular keratinocytes,23,0.17,1.000e+00,9,0.15,1.000e+00,1,0
+Definitive early erythroblasts (CD36-),Cajal-Retzius cells,80,0.15,1.000e+00,61,0.18,1.000e+00,1,0
+Definitive early erythroblasts (CD36-),Dorsal root ganglion neurons,3,0.23,1.000e+00,,,,0,0
+Hepatocytes,Megakaryocytes,,,,,,,0,0
+Hepatocytes,Granular keratinocytes,3,0.21,1.000e+00,,,,0,0
+Metanephric mesenchyme,Deep-layer neurons,,,,,,,0,0
+Hematopoietic stem cells (Cd34+),Cerebellar Purkinje cells,6,0.19,1.000e+00,,,,0,0
+Midgut/Hindgut epithelial cells,Deep-layer neurons,,,,,,,0,0
+Telencephalon,Megakaryocytes,15,0.15,1.000e+00,9,0.15,1.000e+00,1,0
+Hepatocytes,Deep-layer neurons,15,0.13,1.000e+00,20,0.17,1.000e+00,1,0
+Myoblasts,Megakaryocytes,3,0.11,1.000e+00,4,0.23,1.000e+00,1,0
+Hematopoietic stem cells (Mpo+),Glutamatergic neurons,6,0.12,1.000e+00,5,0.22,1.000e+00,1,0
+Midbrain,Megakaryocytes,4,0.16,1.000e+00,,,,0,0
+Definitive early erythroblasts (CD36-),Cerebellar Purkinje cells,47,0.13,1.000e+00,32,0.16,1.000e+00,1,0
+Chondrocytes (Atp1a2+),Megakaryocytes,3,0.21,1.000e+00,,,,0,0
+Definitive early erythroblasts (CD36-),Deep-layer neurons,110,0.11,1.000e+00,89,0.15,1.000e+00,1,0
+Hepatocytes,Neural crest (PNS neurons),3,0.16,1.000e+00,,,,0,0
+Definitive early erythroblasts (CD36-),Olfactory sensory neurons,11,0.11,1.000e+00,9,0.16,1.000e+00,1,0
+Definitive early erythroblasts (CD36-),Neural crest (PNS neurons),18,0.1,1.000e+00,9,0.12,1.000e+00,1,0
+Definitive early erythroblasts (CD36-),Retinal ganglion cells,3,0.13,1.000e+00,3,0.11,1.000e+00,1,0
