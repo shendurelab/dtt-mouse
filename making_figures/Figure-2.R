@@ -3,6 +3,23 @@
 ### Figure 2. Single-nucleus RNA-seq of a DNA Typewriter embryo enables 
 ### reconstruction of a time-calibrated, zygote-rooted, tip-annotated phylogeny.
 
+
+###############################################################################
+### Fig. 2A: 2D UMAP co-embedding of 1.58M scRNA-seq profiles from embryo #3 and 
+### 1.65M from 7 timepoints of our high-temporal-resolution single-cell atlas of mouse development
+
+### scRNAseq_processing/step4_integration_atlas_E1275_E1425.R
+
+
+
+###############################################################################
+### Fig. 2B: Left: log2 percentage of cells per cell type (169 cell types from panel A), 
+### each point colored by major trajectory. Right: Spearman correlation of cell type proportions, embryo #3 vs. each wildtype atlas timepoint (E12.75–E14.25).
+
+### Please see the script: scRNAseq_processing/step4_integration_atlas_E1275_E1425.R
+
+
+
 ###############################################################################
 ### Fig. 2C: Histogram of the number of edited monomers per cell in embryo #3, 
 ### for the 4,371 cells with tape genotypes at all 11 tape integrations.

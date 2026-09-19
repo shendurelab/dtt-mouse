@@ -2,16 +2,30 @@
 #######################################################################
 ### Compare gene expression between wildtype E13.5 and tapemouse E13.5
 
-source("~/work/scripts/utils.R")
-work_path = "/net/shendure/vol2/projects/cxqiu/work/tapemouse"
+### Datasets
 
-mouse_gene = read.table("/net/gs/vol1/home/cxqiu/work/tome/code/mouse.v37.geneID.txt", header=T, sep="\t")
+### 1) Transcriptome data of emrbyo #3 in this study:
+### https://shendure-web.gs.washington.edu/content/members/cxqiu/public/backup/tapemouse/adata.{experiment_id}.h5a
 
-pd_all = readRDS(paste0(work_path, "/transcriptome_analysis/adata_integration.obs.rds"))
+### 2) Transcriptome data of single-cell atlas of mouse development:
+### https://shendure-web.gs.washington.edu/content/members/cxqiu/public/backup/jax/mm39_version/adata.{day_id}.h5ad
+### https://shendure-web.gs.washington.edu/content/members/cxqiu/public/backup/jax/mm39_version/pd.rds
+### https://shendure-web.gs.washington.edu/content/members/cxqiu/public/backup/jax/mm39_version/df_gene.rds
 
-pd_jax = readRDS("/net/shendure/vol2/projects/cxqiu/JAX_rna_mm39/pd.rds")
+### 3) Other support data:
+### https://github.com/shendurelab/dtt-mouse/tree/main/support_data
+### mouse.v37.geneID.txt
+### cell_metadata.v8.txt
+### insertion_sites.txt
+
+
+mouse_gene = read.table("mouse.v37.geneID.txt", header=T, sep="\t")
+
+pd_all = readRDS(paste0(work_path, "/adata_integration.obs.rds"))
+
+pd_jax = readRDS(paste0(work_path, "/pd.rds"))
 pd_jax = pd_jax[,c("cell_id", "UMI_count", "gene_count")]
-pd_tapemouse = read.table(paste0(work_path, "/transcriptome_analysis/df_cell_merge.txt"), header=T)
+pd_tapemouse = read.table(paste0(work_path, "/cell_metadata.v8.txt"), header=T)
 pd_tapemouse = pd_tapemouse[,c("cell_id", "UMI_count", "gene_count")]
 pd_x = rbind(pd_jax, pd_tapemouse)
 
@@ -68,7 +82,7 @@ p = ggplot(pd_all_sub, aes(log2_umi)) +
   facet_wrap(~ dataset, ncol = 1) +
   labs(x = "Log2(UMI count)", y = "# of cells") +
   theme_classic()
-ggsave("~/share/log2_umi_count.pdf", p, width = 4, height = 5)
+ggsave("log2_umi_count.pdf", p, width = 4, height = 5)
 
 
 pd_tmp = pd_all_sub %>%
@@ -82,7 +96,7 @@ set.seed(1234)
 pd = pd_all_sub %>% filter(celltype %in% common_celltype) %>%
     group_by(dataset, celltype) %>% slice_sample(n = 500) %>% as.data.frame()
 
-write.csv(pd[,c("cell_id","dataset","celltype")], paste0(work_path, "/transcriptome_analysis/compare_gene_exp/pd_E13.5_500_cells_per_celltype.csv"), row.names=F)
+write.csv(pd[,c("cell_id","dataset","celltype")], paste0(work_path, "/pd_E13.5_500_cells_per_celltype.csv"), row.names=F)
 
 
 ### subset the gene expression data
@@ -101,13 +115,13 @@ df_gene_sub = df_gene[df_gene$gene_type %in% c("protein_coding") & df_gene$chr %
 gene_count = NULL
 for(experiment_id in experiment_list){
   print(experiment_id)
-  obj_i = readRDS(paste0(work_path, "/data_analysis/", experiment_id, "/obj.rds"))
+  obj_i = readRDS(paste0(work_path, "/obj.rds"))
   gene_count_i = GetAssayData(obj_i, slot = "counts")
   gene_count_i = gene_count_i[df_gene_sub$gene_ID, colnames(gene_count_i) %in% pd$cell_id]
   gene_count = cbind(gene_count, gene_count_i)
 }
 
-gene_count_i = readRDS("/net/shendure/vol2/projects/cxqiu/JAX_rna_mm39/gene_count/gene_count_E13.5.rds")
+gene_count_i = readRDS(paste0(work_path, "/gene_count_E13.5.rds"))
 gene_count_i = gene_count_i[df_gene_sub$gene_ID, colnames(gene_count_i) %in% pd$cell_id]
 
 gene_count = cbind(gene_count, gene_count_i)
@@ -118,7 +132,7 @@ obj = CreateSeuratObject(gene_count, meta.data = pd)
 obj = NormalizeData(obj, normalization.method = "LogNormalize", scale.factor = 10000)
 Idents(obj) = obj$dataset
 
-saveRDS(obj, paste0(work_path, "/transcriptome_analysis/compare_gene_exp/obj.rds"))
+saveRDS(obj, paste0(work_path, "/obj.rds"))
 
 summary(obj$nCount_RNA[obj$dataset == "jax"])
 summary(obj$nCount_RNA[obj$dataset == "tapemouse"])
@@ -149,40 +163,9 @@ res = do.call(rbind, res_list)
 rownames(res) = NULL
 res = res %>% left_join(mouse_gene[,c("gene_ID", "gene_short_name")], by = "gene_ID")
 res$up_down = if_else(res$avg_log2FC > 0, "jax", "tapemouse")
-saveRDS(res, paste0(work_path, "/transcriptome_analysis/compare_gene_exp/DEG.rds"))
+saveRDS(res, paste0(work_path, "/DEG.rds"))
 
 res_x = res %>% filter(p_val_adj < 0.05) %>% group_by(gene_short_name, up_down) %>% tally() %>% arrange(-n) %>% filter(n >= 10)
-
-> data.frame(res_x)
-   gene_short_name   up_down  n
-1             Chd4       jax 26
-2           Hbb-bs       jax 26
-3            Hbb-y       jax 26
-4             Nnat       jax 26
-5             Tecr       jax 26
-6             Actb       jax 25
-7              Afp       jax 25
-8              Alb       jax 24
-9           Camk1d       jax 24
-10           Actg1 tapemouse 23
-11          Hbb-bt       jax 21
-12            Calr       jax 19
-13           Hspa5       jax 18
-14           Btaf1 tapemouse 17
-15           Cd24a       jax 17
-16             Mdk       jax 17
-17          Tuba1a       jax 16
-18             Bsg       jax 14
-19           Hba-x       jax 14
-20            Chd3       jax 13
-21           Prdx2       jax 13
-22            Rtn1       jax 13
-23          Il31ra       jax 12
-24           Sparc       jax 12
-25           Sox11       jax 11
-26           Celf2 tapemouse 10
-27          Prkcsh       jax 10
-28            Ssr2       jax 10
 
 res_x$gene_short_name = factor(res_x$gene_short_name, levels = as.vector(res_x$gene_short_name))
 
@@ -194,7 +177,7 @@ p = res_x %>%
   theme_classic() +
   theme(legend.position="none") +
   theme(axis.text.x = element_text(angle = 90))
-ggsave("~/share/DE.pdf", p, width = 6, height = 5)
+ggsave("DE.pdf", p, width = 6, height = 5)
 
 
 
@@ -205,7 +188,7 @@ read_gmt <- function(path) {
     sapply(strsplit(lines, "\t"), `[`, 1)
   )
 }
-programs = read_gmt(paste0(work_path, "/transcriptome_analysis/compare_gene_exp/gene_sets_mouse.gmt"))
+programs = read_gmt(paste0(work_path, "/gene_sets_mouse.gmt"))
 
 programs_update = list()
 for(program_i in names(programs)){
@@ -220,7 +203,7 @@ ms_cols <- paste0("MS_", seq_along(programs_update))
 new_cols <- paste0(names(programs_update), "_MS")
 colnames(obj@meta.data)[match(ms_cols, colnames(obj@meta.data))] <- new_cols
 
-saveRDS(obj, paste0(work_path, "/transcriptome_analysis/compare_gene_exp/obj.rds"))
+saveRDS(obj, paste0(work_path, "/obj.rds"))
 
 res_list <- list()
 for (celltype_i in common_celltype) {
@@ -252,7 +235,7 @@ res <- res %>%
   mutate(p_val_adj = p.adjust(p_val, "BH")) %>%
   ungroup() %>%
   mutate(up_down = if_else(cohens_d > 0, "jax", "tapemouse"))
-saveRDS(res, paste0(work_path, "/transcriptome_analysis/compare_gene_exp/DEpathway.rds"))
+saveRDS(res, paste0(work_path, "/DEpathway.rds"))
 
 res_x <- res %>%
   filter(p_val_adj < 0.05) %>%
@@ -260,25 +243,6 @@ res_x <- res %>%
   tally() %>%
   arrange(-n)
 
-> res_x
-# A tibble: 15 × 3
-# Groups:   program [8]
- program               up_down       n
-   <chr>                 <chr>     <int>
- 1 G2M                   tapemouse    14
- 2 NegCtrl_myo           tapemouse    10
- 3 Apoptosis             jax           9
- 4 Damage_response_mouse tapemouse     6
- 5 NegCtrl_myo           jax           4
- 6 S_phase               tapemouse     4
- 7 Stress_dissoc         jax           4
- 8 G2M                   jax           3
- 9 S_phase               jax           3
-10 P53_PATHWAY           jax           2
-11 Stress_dissoc         tapemouse     2
-12 Apoptosis             tapemouse     1
-13 Damage_response_mouse jax           1
-14 IFN_alpha             jax           1
 
 res_x$program_x = paste0(res_x$up_down, "_", res_x$program)
 res_x$program_x = factor(res_x$program_x, levels = unique(res_x$program_x))
@@ -291,19 +255,17 @@ p = res_x %>%
   theme_classic() +
   theme(legend.position="none") +
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
-ggsave("~/share/DEpathway.pdf", p, width = 6, height = 5)
+ggsave("DEpathway.pdf", p, width = 6, height = 5)
 
 
 
 ####################################################################################
 ### Step-2: checking candidate genes which are overlapped with TapeWriter insertions
 
-source("~/work/scripts/utils.R")
-work_path = "/net/shendure/vol2/projects/cxqiu/work/tapemouse"
 
-mouse_gene = read.table("/net/gs/vol1/home/cxqiu/work/tome/code/mouse.v37.geneID.txt", header=T, sep="\t")
+mouse_gene = read.table("mouse.v37.geneID.txt", header=T, sep="\t")
 
-insertion_sites = read.table(paste0(work_path, "/transcriptome_analysis/compare_gene_exp/insertion_sites.txt"))
+insertion_sites = read.table(paste0(work_path, "/insertion_sites.txt"))
 ins = insertion_sites %>%
   separate(V1, into = c("chr", "start", "end"), sep = "[:-]", convert = TRUE, remove = FALSE) %>%
   mutate(center = (start + end) %/% 2)
@@ -327,7 +289,7 @@ hits = mouse_gene %>%
 gene_list = unique(hits$gene_ID)
 ### n = 91 genes
 
-pd = read.csv(paste0(work_path, "/transcriptome_analysis/compare_gene_exp/pd_E13.5_500_cells_per_celltype.csv"))
+pd = read.csv(paste0(work_path, "/pd_E13.5_500_cells_per_celltype.csv"))
 common_celltype = unique(pd$celltype)
 
 experiment_list = c("experiment1_20260618_seq4_AD", 
@@ -347,7 +309,7 @@ for(experiment_id in experiment_list){
   gene_count = cbind(gene_count, gene_count_i)
 }
 
-gene_count_i = readRDS("/net/shendure/vol2/projects/cxqiu/JAX_rna_mm39/gene_count/gene_count_E13.5.rds")
+gene_count_i = readRDS(paste0(work_path, "/gene_count_E13.5.rds"))
 gene_count_i = gene_count_i[,colnames(gene_count_i) %in% pd$cell_id]
 
 gene_count = cbind(gene_count, gene_count_i)
@@ -359,7 +321,7 @@ obj = CreateSeuratObject(gene_count, meta.data = pd)
 obj = NormalizeData(obj, normalization.method = "LogNormalize", scale.factor = 10000)
 Idents(obj) = obj$dataset
 
-saveRDS(obj, paste0(work_path, "/transcriptome_analysis/compare_gene_exp/obj_full.rds"))
+saveRDS(obj, paste0(work_path, "/obj_full.rds"))
 
 
 res_list = list()
@@ -377,7 +339,7 @@ rownames(res) = NULL
 
 res = res %>% left_join(mouse_gene[,c("gene_ID", "gene_short_name")], by = "gene_ID")
 res$up_down = if_else(res$avg_log2FC > 0, "jax", "tapemouse")
-saveRDS(res, paste0(work_path, "/transcriptome_analysis/compare_gene_exp/DEG_genes_overlap_insertions.rds"))
+saveRDS(res, paste0(work_path, "/DEG_genes_overlap_insertions.rds"))
 
 res_sig = res %>% filter(fdr < 0.05) %>% 
     group_by(gene_short_name, up_down) %>% tally() %>% arrange(-n)
@@ -393,28 +355,6 @@ p = res_sig %>%
   theme_classic() +
   theme(legend.position="none") +
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))
-ggsave("~/share/DEG_genes_overlap_insertions.pdf", p, width = 6, height = 5)
-
-  gene_short_name    up_down       n gene_short_name_x
-  <chr>              <chr>     <int> <fct>
-1 Chd3               jax          20 jax_Chd3
-2 Zfc3h1             jax           9 jax_Zfc3h1
-3 Nr3c1              tapemouse     5 tapemouse_Nr3c1
-4 ENSMUSG00000130286 jax           2 jax_ENSMUSG00000130286
-5 Ppp2r2b            jax           2 jax_Ppp2r2b
-6 Ppp2r2b            tapemouse     2 tapemouse_Ppp2r2b
-7 Adgra2             jax           1 jax_Adgra2
-8 ENSMUSG00000123794 tapemouse     1 tapemouse_ENSMUSG00000123794
-9 Trappc1            jax           1 jax_Trappc1
-
-res_Chd3 = res %>% filter(fdr < 0.05, gene_short_name == "Chd3")
-summary(res_Chd3$avg_log2FC)
-
-> summary(res_Chd3$avg_log2FC)
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
- 0.4185  0.7269  0.9504  0.9822  1.1720  1.9767
-
-
-median log2FC = 0.95, 1.9-fold; range 0.42-1.98, 1.3- to 3.9-fold;
+ggsave("DEG_genes_overlap_insertions.pdf", p, width = 6, height = 5)
 
 

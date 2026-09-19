@@ -3,7 +3,6 @@
 ### main cell cluster ###
 #########################
 
-
 mouse_gene = read.table("mouse.v37.geneID.txt", header=T, sep="\t", as.is=T)
 
 experiment_id = "experiment1_20260618_seq4_AD"
@@ -63,7 +62,6 @@ print(nrow(pd))
 print(median(pd$UMI_count))
 print(median(pd$gene_count))
 
-
 count = NULL
 for(i in 1:batch_num){
     print(paste0("processing:",i,"/",batch_num))
@@ -86,8 +84,6 @@ write.table(colnames(count), paste0(work_path, "/data_analysis/", experiment_id,
 rm doublet_cluster_2/obj_all.rds
 rm doublet_cluster_2/cluster_*_pd.rds
 
-
-
 #############################
 ### using Python to save h5ad
 
@@ -106,7 +102,8 @@ adata.var.index = pd.read_csv(f"{work_path}/data_analysis/{experiment_id}/h5ad/d
 adata.write(f"{work_path}/data_analysis/{experiment_id}/adata.h5ad", compression="gzip")
 
 
-
+#!----- The final datasets, after removing doublets and quality control, are available at:
+# https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM9914166
 
 
 

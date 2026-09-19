@@ -29,18 +29,20 @@ suppressMessages(library(ggrepel))
 #################################################################
 ### Section-1: Are editing rates heterogeneous across cell types?
 
-### data can be found at Github: https://github.com/seidels/mouse_sprint/tree/v6-e3v5v6-merged/tape_pipeline/tables/v8
-work_path = "/net/shendure/vol2/projects/cxqiu/work/tapemouse"
+### Supporting data can be found at Github: https://github.com/shendurelab/dtt-mouse/tree/main/support_data
+
+### and:
+### https://shendure-web.gs.washington.edu/content/members/cxqiu/public/backup/jax/mm39_version/df_gene.rds
 
 ### cell-meta table
-cell_meta = read.table(paste0(work_path, "/tree_analysis/cell_metadata.v8.txt"), header=T, sep="\t")
+cell_meta = read.table(paste0(work_path, "/cell_metadata.v8.txt"), header=T, sep="\t")
 
 ### pre-fix edits
-prefix_edits = read.table(paste0(work_path, "/tree_analysis/edit_rate/e3.blastomere_defining_prefixes.tsv"), header=T)
+prefix_edits = read.table(paste0(work_path, "/e3.blastomere_defining_prefixes.tsv"), header=T)
 
 ### subset cells with blastomere A and B
-dat_A = read.table(paste0(work_path, "/tree_analysis/e3v8.B1_tape_consensus.tsv.gz"), header = TRUE)
-dat_B = read.table(paste0(work_path, "/tree_analysis/e3v8.B2_tape_consensus.tsv.gz"), header = TRUE)
+dat_A = read.table(paste0(work_path, "/e3v8.B1_tape_consensus.tsv.gz"), header = TRUE)
+dat_B = read.table(paste0(work_path, "/e3v8.B2_tape_consensus.tsv.gz"), header = TRUE)
 
 celltype_A = cell_meta %>% filter(cell_id %in% dat_A$cell_id) %>%
     group_by(celltype) %>% tally() %>% mutate(frac = 100*n/nrow(dat_A)) %>% filter(frac >= 0.01)
@@ -56,9 +58,9 @@ per_celltype = list()
 for(blastomere in c("A", "B")){
   print(blastomere)
   if (blastomere == "A"){
-    dat = read.table(paste0(work_path, "/tree_analysis/e3v8.B1_tape_consensus.tsv.gz"), header=T, sep="\t") ### n = 889,849 cells
+    dat = read.table(paste0(work_path, "/e3v8.B1_tape_consensus.tsv.gz"), header=T, sep="\t") ### n = 889,849 cells
   } else {
-    dat = read.table(paste0(work_path, "/tree_analysis/e3v8.B2_tape_consensus.tsv.gz"), header=T, sep="\t") ### n = 653,335 cells
+    dat = read.table(paste0(work_path, "/e3v8.B2_tape_consensus.tsv.gz"), header=T, sep="\t") ### n = 653,335 cells
   }
     
   long = dat[,c(1:12)] %>%
@@ -88,7 +90,7 @@ df = per_celltype[["A"]] %>% select(celltype, A_edits = mean_per_celltype) %>%
   inner_join(per_celltype[["B"]] %>% select(celltype, B_edits = mean_per_celltype), by = "celltype") %>%
   filter(celltype %in% common_celltype)
 
-major_trajectory_celltype = read.table(paste0(work_path, "/tree_analysis/major_trajectory_celltype_table.txt"), header=T, sep="\t")
+major_trajectory_celltype = read.table(paste0(work_path, "/major_trajectory_celltype_table.txt"), header=T, sep="\t")
 df = df %>% left_join(major_trajectory_celltype, by = "celltype")
 
 df$category = rep("Other", nrow(df))
@@ -115,69 +117,26 @@ p = ggplot() +
   labs(x = "Post-prefix editing rate (blastomere A)",
        y = "Post-prefix editing rate (blastomere B)")
 
-ggsave(paste0(work_path, "/tree_analysis/edit_rate/FigS4_post_prefix_edit_rate.pdf"), p, height = 5, width = 5)
+ggsave(paste0(work_path, "/FigS4_post_prefix_edit_rate.pdf"), p, height = 5, width = 5)
 
-
-fit = cor.test(df$A_edits, df$B_edits, method = "spearman")
-print(fit$estimate) ### 0.92
-
-n <- sum(complete.cases(df$A_edits, df$B_edits))
-rho <- fit$estimate
-t_stat <- rho * sqrt((n - 2) / (1 - rho^2))
-p_exact <- 2 * pt(-abs(t_stat), df = n - 2)
-p_exact
-### < 1e-42
-
-saveRDS(df, paste0(work_path, "/tree_analysis/edit_rate/post_prefix_edit_rate.rds"))
+saveRDS(df, paste0(work_path, "/post_prefix_edit_rate.rds"))
 
 ### n = 102 abundant cell types (>0.01%) overlapped between A and B
 
-print(max(df$A_edits)/min(df$A_edits)) ### 1.607212
-print(max(df$B_edits)/min(df$B_edits)) ### 2.060734
 
 
 
 #################################################################
 ### Section-2: Does PEmax expression correlated to editing rates?
 
-experiment_list = c("experiment1_20260618_seq4_AD", 
-                    "experiment1_20260618_seq4_EH",
-                    "experiment1_20260618_seq5_IL",
-                    "experiment1_20260618_seq5_MP",
-                    "experiment1_20260618_seq6_QT",
-                    "experiment1_20260618_seq6_UW",
-                    "experiment2_20260713_seq2_XY")
+PEmax_count = readRDS(paste0(work_path, "/PEmax_count.rds"))
+df = readRDS(paste0(work_path, "/post_prefix_edit_rate.rds"))
 
-batch_num = 8
-
-### cell-meta table
-cell_meta = read.table(paste0(work_path, "/tree_analysis/cell_metadata.v8.txt"), header=T, sep="\t")
-
-PEmax_count = NULL
-for(experiment_id in experiment_list){
-  print(experiment_id)
-    for(batch_id in 1:batch_num){
-    x = read.csv(paste0(work_path, "/data_processing/", experiment_id, "/nobackup/output_", batch_id, "/PEmax_count.txt"))
-    if (experiment_id == "experiment2_20260713_seq2_XY"){
-      x$cell_id = paste0("exp2_", x$cell_id)
-    } else {
-      x$cell_id = paste0("exp1_", x$cell_id)
-    }
-    x = x[x$cell_id %in% cell_meta$cell_id,]
-    x$fpkm_dtomato = x$n_dtomato / 8.005 / (x$n_total / 1e6)
-    PEmax_count = rbind(PEmax_count, x)
-  }
-}
-
-saveRDS(PEmax_count, paste0(work_path, "/tree_analysis/edit_rate/PEmax_count.rds"))
-
-df = readRDS(paste0(work_path, "/tree_analysis/edit_rate/post_prefix_edit_rate.rds"))
-
-dat = read.table(paste0(work_path, "/tree_analysis/e3v8.B1_tape_consensus.tsv.gz"), header=T, sep="\t")
+dat = read.table(paste0(work_path, "/e3v8.B1_tape_consensus.tsv.gz"), header=T, sep="\t")
 cell_meta_A = cell_meta %>% filter(cell_id %in% dat$cell_id, celltype %in% df$celltype) %>% left_join(PEmax_count[,c("cell_id", "fpkm_dtomato")], by = "cell_id")
 PEmax_A = cell_meta_A %>% group_by(celltype) %>% summarize(A_PEmax = mean(log2(fpkm_dtomato + 1)))
 
-dat = read.table(paste0(work_path, "/tree_analysis/e3v8.B2_tape_consensus.tsv.gz"), header=T, sep="\t")
+dat = read.table(paste0(work_path, "/e3v8.B2_tape_consensus.tsv.gz"), header=T, sep="\t")
 cell_meta_B = cell_meta %>% filter(cell_id %in% dat$cell_id, celltype %in% df$celltype) %>% left_join(PEmax_count[,c("cell_id", "fpkm_dtomato")], by = "cell_id")
 PEmax_B = cell_meta_B %>% group_by(celltype) %>% summarize(B_PEmax = mean(log2(fpkm_dtomato + 1)))
 
@@ -203,7 +162,7 @@ p1 = ggplot(data = df, aes(x = factor(category), y = A_PEmax, fill = category)) 
 
 
 print(wilcox.test(df$B_PEmax[df$category == "Blood"], df$B_PEmax[df$category != "Blood"]))
-### p-value = 1.312e-06
+
 
 p2 = ggplot(data = df, aes(x = factor(category), y = B_PEmax, fill = category)) +
     geom_boxplot(outlier.shape = NA) + 
@@ -214,7 +173,7 @@ p2 = ggplot(data = df, aes(x = factor(category), y = B_PEmax, fill = category)) 
     scale_fill_manual(values=c("Blood" = "red", "other" = "grey60")) +
     labs(x = "", y = "Mean Log2(PEmax expression FPKM), blastomere B")
 
-ggsave(paste0(work_path, "/tree_analysis/edit_rate/FigS4_PEmax_exp.pdf"), p1 + p2, height = 5, width = 10)
+ggsave(paste0(work_path, "/FigS4_PEmax_exp.pdf"), p1 + p2, height = 5, width = 10)
 
 
 
@@ -225,13 +184,8 @@ df_long <- df %>%
                names_sep = "_")
 
 fit = cor.test(df_long$edits[df_long$category == "Blood"], df_long$PEmax[df_long$category == "Blood"], method = "spearman")
-print(fit$estimate) ### -0.05035577
-print(fit$p.value)  ### 0.7988483
 
 fit = cor.test(df_long$edits[df_long$category != "Blood"], df_long$PEmax[df_long$category != "Blood"], method = "spearman")
-print(fit$estimate) ### -0.2521572
-print(fit$p.value)  ### 0.000761667
-
 
 p1 = ggplot() +
   geom_point(data = df_long %>% filter(category == "Blood"),
@@ -255,7 +209,7 @@ p2 = ggplot() +
   labs(x = "Edits",
        y = "PEmax")
 
-ggsave(paste0(work_path, "/tree_analysis/edit_rate/FigS4_PEmax_exp_split_blood.pdf"), p1 + p2, height = 5, width = 10)
+ggsave(paste0(work_path, "/FigS4_PEmax_exp_split_blood.pdf"), p1 + p2, height = 5, width = 10)
 
 
 #######################################################################################
@@ -288,18 +242,18 @@ for(experiment_id in experiment_list){
   gene_count_all = cbind(gene_count_all, gene_count)
 }
 
-saveRDS(gene_count_all, paste0(work_path, "/tree_analysis/edit_rate/selected_gene_exp.rds"))
+saveRDS(gene_count_all, paste0(work_path, "/selected_gene_exp.rds"))
 
 
 ### cell-meta table
-cell_meta = read.table(paste0(work_path, "/tree_analysis/cell_metadata.v8.txt"), header=T, sep="\t")
+cell_meta = read.table(paste0(work_path, "/cell_metadata.v8.txt"), header=T, sep="\t")
 
-df = readRDS(paste0(work_path, "/tree_analysis/edit_rate/post_prefix_edit_rate.rds"))
+df = readRDS(paste0(work_path, "/post_prefix_edit_rate.rds"))
 
-dat = read.table(paste0(work_path, "/tree_analysis/e3v8.B1_tape_consensus.tsv.gz"), header=T, sep="\t")
+dat = read.table(paste0(work_path, "/e3v8.B1_tape_consensus.tsv.gz"), header=T, sep="\t")
 cell_meta_A = cell_meta %>% filter(cell_id %in% dat$cell_id, celltype %in% df$celltype)
 
-dat = read.table(paste0(work_path, "/tree_analysis/e3v8.B2_tape_consensus.tsv.gz"), header=T, sep="\t")
+dat = read.table(paste0(work_path, "/e3v8.B2_tape_consensus.tsv.gz"), header=T, sep="\t")
 cell_meta_B = cell_meta %>% filter(cell_id %in% dat$cell_id, celltype %in% df$celltype)
 
 i = 2
@@ -315,7 +269,6 @@ i = 2
   df_x_1 = df_x
   
   print(wilcox.test(df_x$mean_exp[df$category == "Blood"], df_x$mean_exp[df$category != "Blood"]))
-  ### p-value = 0.000379
 
   p1 = ggplot(data = df_x, aes(x = factor(category), y = mean_exp, fill = category)) +
     geom_boxplot(outlier.shape = NA) + 
@@ -338,7 +291,6 @@ i = 2
   df_x_2 = df_x
   
   print(wilcox.test(df_x$mean_exp[df$category == "Blood"], df_x$mean_exp[df$category != "Blood"]))
-  ### p-value = 0.0003519
 
   p2 = ggplot(data = df_x, aes(x = factor(category), y = mean_exp, fill = category)) +
     geom_boxplot(outlier.shape = NA) + 
@@ -349,7 +301,7 @@ i = 2
     scale_fill_manual(values=c("Blood" = "red", "other" = "grey60")) +
     labs(x = "", y = "Mean normalized Samhd1 expression, blastomere B")
 
-ggsave(paste0(work_path, "/tree_analysis/edit_rate/FigS4_Samhd1_exp.pdf"), p1 + p2, height = 5, width = 10)
+ggsave(paste0(work_path, "/FigS4_Samhd1_exp.pdf"), p1 + p2, height = 5, width = 10)
 
 
 
@@ -358,12 +310,8 @@ ggsave(paste0(work_path, "/tree_analysis/edit_rate/FigS4_Samhd1_exp.pdf"), p1 + 
 df_long <- rbind(df_x_1, df_x_2)
 
 fit = cor.test(df_long$edits[df_long$category == "Blood"], df_long$mean_exp[df_long$category == "Blood"], method = "spearman")
-print(fit$estimate) ### -0.07881773
-print(fit$p.value)  ### 0.6892061
 
 fit = cor.test(df_long$edits[df_long$category != "Blood"], df_long$mean_exp[df_long$category != "Blood"], method = "spearman")
-print(fit$estimate) ### 0.2100242
-print(fit$p.value)  ### 0.005222277
 
 
 p1 = ggplot() +
@@ -388,7 +336,7 @@ p2 = ggplot() +
   labs(x = "Edits",
        y = "Samhd1")
 
-ggsave(paste0(work_path, "/tree_analysis/edit_rate/FigS4_Samhd1_exp_split_blood.pdf"), p1 + p2, height = 5, width = 10)
+ggsave(paste0(work_path, "/FigS4_Samhd1_exp_split_blood.pdf"), p1 + p2, height = 5, width = 10)
 
 
 

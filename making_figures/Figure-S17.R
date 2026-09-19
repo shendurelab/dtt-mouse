@@ -6,7 +6,19 @@
 
 
 ################################################################################################
-### Fig. 17C: Co-occurrence enrichment at recent vs. ancient clade scales is highly reproducible
+### Fig. S17A: Timed fate couplings between cell types are reproducible between A and B subtrees at K=15
+
+### tree_analysis/step3_clade_coincidence.R
+
+
+################################################################################################
+### Fig. S17B: Timed fate couplings between cell types are reproducible between A and B subtrees at K=200
+
+### tree_analysis/step3_clade_coincidence.R
+
+
+################################################################################################
+### Fig. S17C: Co-occurrence enrichment at recent vs. ancient clade scales is highly reproducible
 
 library(ggplot2)
 library(tidyr)

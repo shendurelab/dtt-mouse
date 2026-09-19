@@ -1,7 +1,14 @@
 
 #########################################################################
-### Processing the TapeMouse experiment1_20260618_seq4_AD (as an example)
-### Please contact: CX Qiu (Chengxiang.Qiu@dartmouth.edu)
+### This script uses one experimental run, experiment1_20260618_seq4_AD, 
+### as an example to demonstrate how we process single-cell sequencing data, 
+### applying the sci-RNA-seq3 pipeline for doublet removal and subsequent quality control.
+
+### sci-RNA-seq3 data processing pipeline:
+### https://github.com/bethmartin/sci-RNA-seq3_pipeline/tree/MEGAsci
+
+### mouse.v37.geneID.txt can be found at
+### https://github.com/shendurelab/dtt-mouse/tree/main/support_data/mouse.v37.geneID.txt
 
 ##########################################################################################
 ### Step-1: read the raw data from processing pipeline, roughly filtering UMI < 100 nuclei
@@ -29,7 +36,6 @@ for(cnt in 1:batch_num){
 }
 print(sum(read_num_fastq$V1))
 
-
 ### summary the duplication rate
 read_num = NULL
 for(cnt in 1:batch_num){
@@ -41,7 +47,6 @@ for(cnt in 1:batch_num){
 print(summary(1 - read_num$V2/read_num$V1))
 print(sum(read_num$V1))
 print(sum(read_num$V2))
-
 
 df_cell_merge = NULL
 

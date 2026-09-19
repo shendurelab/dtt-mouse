@@ -5,7 +5,7 @@
 ##################################################################
 ### Infer the transcriptional states for individiul internal nodes
 
-source("~/work/scripts/utils.R")
+
 library(dplyr)
 library(tidyr)
 library(ape)
@@ -13,7 +13,25 @@ library(ggplot2)
 library(ggrepel)
 library(phangorn)
 
-work_path <- "/net/shendure/vol2/projects/cxqiu/work/tapemouse"
+### Datasets
+
+### 1) Transcriptome data of emrbyo #3 in this study:
+### https://shendure-web.gs.washington.edu/content/members/cxqiu/public/backup/tapemouse/adata.{experiment_id}.h5a
+### https://shendure-web.gs.washington.edu/content/members/cxqiu/public/backup/tapemouse/adata_integration_early.pca.csv
+### https://shendure-web.gs.washington.edu/content/members/cxqiu/public/backup/tapemouse/adata_integration.obs.csv
+### https://shendure-web.gs.washington.edu/content/members/cxqiu/public/backup/tapemouse/adata_integration_early.obs.csv
+
+### 2) Transcriptome data of single-cell atlas of mouse development:
+### https://shendure-web.gs.washington.edu/content/members/cxqiu/public/backup/jax/mm39_version/adata.{day_id}.h5ad
+### https://shendure-web.gs.washington.edu/content/members/cxqiu/public/backup/jax/mm39_version/pd.rds
+### https://shendure-web.gs.washington.edu/content/members/cxqiu/public/backup/jax/mm39_version/df_gene.rds
+
+### 3) Other support data:
+### https://github.com/shendurelab/dtt-mouse/tree/main/support_data
+### mouse.v37.geneID.txt
+### cell_metadata.v8.txt
+### insertion_sites.txt
+### merged_full_placed.nwk
 
 
 ###################################################################################
@@ -21,11 +39,11 @@ work_path <- "/net/shendure/vol2/projects/cxqiu/work/tapemouse"
 ### In the integration, assiging day and cell types to each JAX and TapeMouse cells
 ### pd has the same cell order in the pca coor
 
-pd <- read.csv(paste0(work_path, "/transcriptome_analysis/adata_integration_early.obs.csv"), row.names=1)
+pd <- read.csv(paste0(work_path, "/adata_integration_early.obs.csv"), row.names=1)
 pd$cell_id <- rownames(pd)
 
 pd_1 = pd[pd$dataset == "jax",]
-pd_jax <- readRDS("/net/shendure/vol2/projects/cxqiu/JAX_rna_mm39/pd.rds")
+pd_jax <- readRDS(paste0(work_path, "/pd.rds"))
 pd_1_x = pd_1 %>% left_join(pd_jax, by = "cell_id")
 pd_1$day = pd_1_x$day
 pd_1$major_trajectory = pd_1_x$major_trajectory
@@ -33,7 +51,7 @@ pd_1$celltype = pd_1_x$celltype
 
 
 pd_2 = pd[pd$dataset == "tapemouse",]
-cell_meta <- read.table(paste0(work_path, "/tree_analysis/cell_metadata.v8.txt"),
+cell_meta <- read.table(paste0(work_path, "/cell_metadata.v8.txt"),
                         header = TRUE, sep = "\t")
 pd_2_x = pd_2 %>% left_join(cell_meta, by = "cell_id")
 pd_2$day = "E13.5"
@@ -43,13 +61,13 @@ pd_2$celltype = pd_2_x$celltype
 pd_x = rbind(pd_2, pd_1)
 sum(pd$cell_id == pd_x$cell_id)
 
-write.table(pd_x[,c("cell_id", "dataset", "day", "major_trajectory", "celltype")], paste0(work_path, "/tree_analysis/impute_nodes/pd.txt"), row.names=T, col.names=T, sep="\t", quote=F)
+write.table(pd_x[,c("cell_id", "dataset", "day", "major_trajectory", "celltype")], paste0(work_path, "/pd.txt"), row.names=T, col.names=T, sep="\t", quote=F)
 
 
 ##########################
 # ---- Load tree data ----
 
-tree <- read.tree(paste0(work_path, "/tree_analysis/merged_full_placed.nwk"))
+tree <- read.tree(paste0(work_path, "/merged_full_placed.nwk"))
 
 depths <- node.depth.edgelength(tree)
 
@@ -76,16 +94,16 @@ internal$day <- paste0("E", ifelse(internal$bin == floor(internal$bin),
                                    sprintf("%.1f", internal$bin),
                                    as.character(internal$bin)))
 
-write.table(internal[,c("node", "day")], paste0(work_path, "/tree_analysis/impute_nodes/internal.tsv"),
+write.table(internal[,c("node", "day")], paste0(work_path, "/internal.tsv"),
             sep = "\t", quote = FALSE, row.names = FALSE)
 
-write.table(edge, paste0(work_path, "/tree_analysis/impute_nodes/edge.tsv"),
+write.table(edge, paste0(work_path, "/edge.tsv"),
             sep = "\t", quote = FALSE, row.names = FALSE,
             col.names = c("parent", "child"))
 
 
 # ---- Impute internal nodes' transcriptome
-pd = read.table(paste0(work_path, "/tree_analysis/impute_nodes/pd.txt"), header=T, sep="\t", row.names=1)
+pd = read.table(paste0(work_path, "/pd.txt"), header=T, sep="\t", row.names=1)
 pd_E13.5 = pd[pd$cell_id %in% tree$tip.label,]
 
 tips_df <- data.frame(
@@ -96,7 +114,7 @@ tips_df <- data.frame(
 
 pd_E13.5 = pd_E13.5 %>% left_join(tips_df, by = "cell_id") %>% as.data.frame()
 
-write.table(pd_E13.5, paste0(work_path, "/tree_analysis/impute_nodes/pd_E13.5.tsv"),
+write.table(pd_E13.5, paste0(work_path, "/pd_E13.5.tsv"),
             sep = "\t", quote = FALSE, row.names = TRUE, col.names = NA)
 
 
@@ -112,20 +130,19 @@ import numpy as np
 import pandas as pd
 from collections import defaultdict, deque
 
-work_path = "/net/shendure/vol2/projects/cxqiu/work/tapemouse"
 
-pca_coor = pd.read_csv(f"{work_path}/transcriptome_analysis/adata_integration_early.pca.csv", index_col = 0)
-pd_meta = pd.read_csv(f"{work_path}/tree_analysis/impute_nodes/pd.txt", sep = "\t", index_col = 0)
+pca_coor = pd.read_csv(f"{work_path}/adata_integration_early.pca.csv", index_col = 0)
+pd_meta = pd.read_csv(f"{work_path}/pd.txt", sep = "\t", index_col = 0)
 pca_coor.index   = pd_meta.index
 pca_coor.columns = [f"PC_{i}" for i in range(1, pca_coor.shape[1] + 1)]
 
-pd_E135 = pd.read_csv(f"{work_path}/tree_analysis/impute_nodes/pd_E13.5.tsv", sep = "\t", index_col = 0)
+pd_E135 = pd.read_csv(f"{work_path}/pd_E13.5.tsv", sep = "\t", index_col = 0)
 pca_impute = pca_coor.loc[pd_E135['cell_id']]
 pca_impute.index = pd_E135['node_id'].values
 ### pca_impute is pca coor of E13.5 cells and row ids are node_id
 
-internal = pd.read_csv(f"{work_path}/tree_analysis/impute_nodes/internal.tsv", sep="\t")
-edge             = pd.read_csv(f"{work_path}/tree_analysis/impute_nodes/edge.tsv", sep="\t")
+internal = pd.read_csv(f"{work_path}/internal.tsv", sep="\t")
+edge             = pd.read_csv(f"{work_path}/edge.tsv", sep="\t")
 children_map = edge.groupby("parent")["child"].apply(list).to_dict()
 
 n_pc         = pca_impute.shape[1]
@@ -189,7 +206,7 @@ for cnt, nd in enumerate(internal_ids, 1):
 print(np.isnan(all_pcs).any(axis=1).sum(), "rows still contain NaN")
 
 pca_impute_full = pd.DataFrame(all_pcs, index=all_ids, columns=pca_impute.columns)
-pca_impute_full.to_csv(f"{work_path}/tree_analysis/impute_nodes/pca_impute_full.tsv", sep="\t")
+pca_impute_full.to_csv(f"{work_path}/pca_impute_full.tsv", sep="\t")
 ### It has pca coors for all the internal nodes and tips
 
 
@@ -201,17 +218,16 @@ import numpy as np
 import pandas as pd
 import sys
 
-work_path = "/net/shendure/vol2/projects/cxqiu/work/tapemouse"
 
-pca_coor = pd.read_csv(f"{work_path}/transcriptome_analysis/adata_integration_early.pca.csv", index_col = 0)
-pd_meta = pd.read_csv(f"{work_path}/tree_analysis/impute_nodes/pd.txt", sep = "\t", index_col = 0)
+pca_coor = pd.read_csv(f"{work_path}/adata_integration_early.pca.csv", index_col = 0)
+pd_meta = pd.read_csv(f"{work_path}/pd.txt", sep = "\t", index_col = 0)
 
 pca_coor.index   = pd_meta.index
 pca_coor.columns = [f"PC_{i}" for i in range(1, pca_coor.shape[1] + 1)]
 
-internal = pd.read_csv(f"{work_path}/tree_analysis/impute_nodes/internal.tsv", sep="\t")
+internal = pd.read_csv(f"{work_path}/internal.tsv", sep="\t")
 internal.index = internal["node"]
-pca_impute = pd.read_csv(f"{work_path}/tree_analysis/impute_nodes/pca_impute_full.tsv", sep="\t", index_col=0)
+pca_impute = pd.read_csv(f"{work_path}/pca_impute_full.tsv", sep="\t", index_col=0)
 
 day_list = ["E13.25","E13.0","E12.75","E12.5","E12.25","E12.0","E11.75","E11.5","E11.25","E11.0","E10.75","E10.5","E10.25","E10.0","E9.75","E9.5","E9.25","E9.0","E8.75","E8.5"]
 
@@ -285,7 +301,7 @@ for k in k_list:
     print("unique cells:", hits_df["cell_id"].nunique())
     print("unique nodes:", hits_df["node_id"].nunique())
 
-    hits_df.to_csv(f"{work_path}/tree_analysis/impute_nodes/assign/hits_df_{day}_{k}.txt", sep="\t", index=False)
+    hits_df.to_csv(f"{work_path}/assign/hits_df_{day}_{k}.txt", sep="\t", index=False)
 
 
 
@@ -295,7 +311,6 @@ for k in k_list:
 ### Step-4: Assign cel type labels for internal nodes based on its neighbors
 
 
-source("~/work/scripts/utils.R")
 library(dplyr)
 library(tidyr)
 library(ape)
@@ -303,25 +318,24 @@ library(ggplot2)
 library(ggrepel)
 library(phangorn)
 
-work_path <- "/net/shendure/vol2/projects/cxqiu/work/tapemouse"
 
-internal = read.table(paste0(work_path, "/tree_analysis/impute_nodes/internal.tsv"), header=T, sep="\t")
+internal = read.table(paste0(work_path, "/internal.tsv"), header=T, sep="\t")
 
-pd = read.table(paste0(work_path, "/tree_analysis/impute_nodes/pd.txt"), header=T, row.names=1, sep="\t")
+pd = read.table(paste0(work_path, "/pd.txt"), header=T, row.names=1, sep="\t")
 
-pd_E13.5 = read.table(paste0(work_path, "/tree_analysis/impute_nodes/pd_E13.5.tsv"), header=T, row.names=1, sep="\t")
+pd_E13.5 = read.table(paste0(work_path, "/pd_E13.5.tsv"), header=T, row.names=1, sep="\t")
 
 day_list = c("E13.25","E13.0","E12.75","E12.5","E12.25","E12.0","E11.75","E11.5","E11.25","E11.0","E10.75","E10.5","E10.25","E10.0","E9.75","E9.5","E9.25","E9.0","E8.75","E8.5")
 
 for(k in c(200)){
     pd_internal_list = list()
     for(day in day_list){
-        pd_internal_list[[day]] = read.table(paste0(work_path, "/tree_analysis/impute_nodes/assign/hits_df_", day, "_", k, ".txt"), header=T, sep='\t')
+        pd_internal_list[[day]] = read.table(paste0(work_path, "/assign/hits_df_", day, "_", k, ".txt"), header=T, sep='\t')
     }
     pd_internal = do.call(rbind, pd_internal_list)
     
     pd_internal_x = pd_internal %>% left_join(pd[,c("cell_id", "celltype")], by = "cell_id")
-    write.table(pd_internal_x, paste0(work_path, "/tree_analysis/impute_nodes/internal_assign_cells_", k, ".txt"), row.names=F, col.names=F, sep="\t", quote=F)
+    write.table(pd_internal_x, paste0(work_path, "/internal_assign_cells_", k, ".txt"), row.names=F, col.names=F, sep="\t", quote=F)
     
     node_cell_num = pd_internal_x %>% group_by(node_id) %>% tally()
     print(paste0('K = ', k, ', ', 100*round(nrow(node_cell_num)/nrow(internal),2), "% of nodes assigned MNNs, ", round(mean(node_cell_num$n), 2), " cells per node"))
@@ -332,11 +346,8 @@ for(k in c(200)){
     internal_x$celltype[is.na(internal_x$celltype)] = "missing"
     internal_x$cell_id = "internal_node"
     pd_out = rbind(internal_x, pd_E13.5[,c("node_id", "day", "celltype", "cell_id")])
-    write.table(pd_out, paste0(work_path, "/tree_analysis/impute_nodes/pd_nodes_infer_", k, ".txt"), row.names=F, sep="\t", quote=F)
+    write.table(pd_out, paste0(work_path, "/pd_nodes_infer_", k, ".txt"), row.names=F, sep="\t", quote=F)
 }
-
-
-[1] "K = 200, 84% of nodes assigned MNNs, 66.6 cells per node"
 
 df = pd_internal_x %>% group_by(node_id) %>% tally()
 
@@ -344,7 +355,7 @@ p = ggplot(df, aes(x = n)) +
     geom_histogram(bins = 30, fill = "#8d99ae", color = "white") +
     labs(x = "n", y = "count") +
     theme_classic()
-ggsave("~/share/hist_assignment.pdf", p, width = 3.5, height=5)
+ggsave("hist_assignment.pdf", p, width = 3.5, height=5)
 
 
 x = pd_out %>% filter(cell_id == "internal_node", celltype != "missing") %>%
@@ -353,38 +364,6 @@ x = pd_out %>% filter(cell_id == "internal_node", celltype != "missing") %>%
     group_by(day) %>% tally() %>% rename(total_n = n), by = "day") %>%
     mutate(frac = 100*n/total_n) %>% arrange(frac)
 
-print(sum(x$n)/sum(x$total_n))
-#87.9%; 926852/1054879
-
-day         n total_n  frac
-E8.5     6905   14930  46.2
-E8.75    7692   16753  45.9
-E9.0     9503   18647  51.0
-E9.25   12560   20927  60.0
-E9.5    16778   23731  70.7
-E9.75   19826   25548  77.6
-E10.0   22851   29781  76.7
-E10.25  26607   30871  86.2
-E10.5   28046   33525  83.7
-E10.75  34294   37133  92.4
-E11.0   37344   40018  93.3
-E11.25  38885   41192  94.4
-E11.5   43363   45318  95.7
-E11.75  47803   49578  96.4
-E12.0   47551   49040  97.0
-E12.25  50363   51505  97.8
-E12.5   67436   70198  96.1
-E12.75  59633   61838  96.4
-E13.0   49526   50988  97.1
-E13.25 299886  343358  87.3
-
-E11.5   95.7
-E11.75  96.4
-E12.0   97.0
-E12.25  97.8
-E12.5   96.1
-E12.75  96.4
-E13.0   97.1
 
 ###############################################################################
 ### Step-5: Identifying the trajectories giving rise to each cell type at E13.5
@@ -394,10 +373,8 @@ import numpy as np
 import pandas as pd
 from tqdm import tqdm
 
-work_path = "/net/shendure/vol2/projects/cxqiu/work/tapemouse"
-
 k = 200
-pd_node = pd.read_csv(f"{work_path}/tree_analysis/impute_nodes/pd_nodes_infer_{k}.txt", sep="\t")
+pd_node = pd.read_csv(f"{work_path}/pd_nodes_infer_{k}.txt", sep="\t")
 
 day_list = ["E13.5","E13.25","E13.0","E12.75","E12.5","E12.25","E12.0",
             "E11.75","E11.5","E11.25","E11.0","E10.75","E10.5",
@@ -405,7 +382,7 @@ day_list = ["E13.5","E13.25","E13.0","E12.75","E12.5","E12.25","E12.0",
             "E8.75","E8.5"]
 day_set = set(day_list)
 
-edge = pd.read_csv(f"{work_path}/tree_analysis/impute_nodes/edge.tsv", sep="\t")
+edge = pd.read_csv(f"{work_path}/edge.tsv", sep="\t")
 parent_map = dict(zip(edge['child'], edge['parent']))
 day_map = dict(zip(pd_node['node_id'], pd_node['day']))
 celltype_map = dict(zip(pd_node['node_id'], pd_node['celltype']))
@@ -454,7 +431,7 @@ top = (result[result['E13.5'] != result['trajectory']]
        .head(top_n)
        .reset_index(drop=True))
 
-top.to_csv(f"{work_path}/tree_analysis/impute_nodes/top_trajectories_{k}.csv",
+top.to_csv(f"{work_path}/top_trajectories_{k}.csv",
            index=False)
 
 
@@ -466,23 +443,21 @@ import pandas as pd
 import umap
 import pickle
 
-work_path = "/net/shendure/vol2/projects/cxqiu/work/tapemouse"
-
-pca_original = pd.read_csv(f"{work_path}/transcriptome_analysis/adata_integration_early.pca.csv", index_col=0)
-pd_original = pd.read_csv(f"{work_path}/transcriptome_analysis/adata_integration_early.obs.csv", index_col=0)
-pd_original_add_more = pd.read_csv(f"{work_path}/tree_analysis/impute_nodes/pd.txt", sep="\t", index_col=0)
+pca_original = pd.read_csv(f"{work_path}/adata_integration_early.pca.csv", index_col=0)
+pd_original = pd.read_csv(f"{work_path}/adata_integration_early.obs.csv", index_col=0)
+pd_original_add_more = pd.read_csv(f"{work_path}/pd.txt", sep="\t", index_col=0)
 pd_original.index.equals(pd_original_add_more.index)
 pd_original['day'] = pd_original_add_more['day']
 pca_original.index = pd_original.index
 
-node_assign = pd.read_csv(f"{work_path}/tree_analysis/impute_nodes/internal_assign_cells_200.txt", sep = "\t")
+node_assign = pd.read_csv(f"{work_path}/internal_assign_cells_200.txt", sep = "\t")
 node_assign.columns = ['cell_id', 'node', 'day', 'celltype']
 merged = node_assign.merge(pca_original, left_on='cell_id', right_index=True, how='inner')
 pc_cols = pca_original.columns.tolist()
 node_pca = merged.groupby('node')[pc_cols].mean()
 ### n = 926852 internal nodes
 
-node_pca.to_csv(f"{work_path}/tree_analysis/impute_nodes/node_pca.csv",
+node_pca.to_csv(f"{work_path}/node_pca.csv",
            index=True)
 
 # --- Filter to jax cells ---
@@ -522,10 +497,10 @@ umap_df = pd_sub[['cell_id', 'day']].copy()
 umap_df['UMAP_1'] = embedding[:, 0]
 umap_df['UMAP_2'] = embedding[:, 1]
 
-umap_df.to_csv(f"{work_path}/tree_analysis/impute_nodes/umap/UMAP_backbone.csv",
+umap_df.to_csv(f"{work_path}/umap/UMAP_backbone.csv",
            index=True)
 
-with open(f"{work_path}/tree_analysis/impute_nodes/umap/umap_model.pkl", "wb") as f:
+with open(f"{work_path}/umap/umap_model.pkl", "wb") as f:
     pickle.dump(reducer, f)
 
 new_embedding = reducer.transform(node_pca.values)
@@ -536,19 +511,16 @@ new_embedding_df = pd.DataFrame(
     columns=['UMAP_1', 'UMAP_2']
 )
 
-new_embedding_df.to_csv(f"{work_path}/tree_analysis/impute_nodes/umap/UMAP_new.csv",
+new_embedding_df.to_csv(f"{work_path}/umap/UMAP_new.csv",
            index=True)
 
 
 
 ### PLOT
 
-source("~/work/scripts/utils.R")
-work_path <- "/net/shendure/vol2/projects/cxqiu/work/tapemouse"
+df = read.table(paste0(work_path, "/pd_nodes_infer_200.txt"), sep="\t", header=T)
 
-df = read.table(paste0(work_path, "/tree_analysis/impute_nodes/pd_nodes_infer_200.txt"), sep="\t", header=T)
-
-umap_coor = read.csv(paste0(work_path, "/tree_analysis/impute_nodes/umap/UMAP_new.csv"))
+umap_coor = read.csv(paste0(work_path, "/umap/UMAP_new.csv"))
 colnames(umap_coor) = c("node_id", "UMAP_1", "UMAP_2")
 
 df = df %>% left_join(umap_coor, by = "node_id") %>% filter(!is.na(UMAP_1))
@@ -557,12 +529,12 @@ df = df %>% left_join(umap_coor, by = "node_id") %>% filter(!is.na(UMAP_1))
 df$day = factor(df$day, level = names(day_color_plate))
 table(df$day)
 
-major_trajectory_table = read.table(paste0(work_path, "/tree_analysis/major_trajectory_celltype_table.txt"), sep="\t", header=T)
+major_trajectory_table = read.table(paste0(work_path, "/major_trajectory_celltype_table.txt"), sep="\t", header=T)
 df = df %>% left_join(major_trajectory_table, by = "celltype")
 ### 926852 cells
 
-pd_jax = readRDS("/net/shendure/vol2/projects/cxqiu/JAX_rna_mm39/pd.rds")
-umap_coor = read.csv(paste0(work_path, "/tree_analysis/impute_nodes/umap/UMAP_backbone.csv"))
+pd_jax = readRDS("/pd.rds")
+umap_coor = read.csv(paste0(work_path, "/umap/UMAP_backbone.csv"))
 df_backbone = umap_coor %>% left_join(pd_jax[,c("celltype", "major_trajectory", "cell_id")], by = "cell_id")
 ### n = 1046253 cells
 
@@ -576,7 +548,7 @@ p = ggplot() +
     theme(legend.position="none") +
     theme(plot.title = element_text(hjust = 0.5)) +
     scale_color_manual(values=major_trajectory_color_plate)
-ggsave("~/share/Fig7_umap_major_trajectory_new.png", p, dpi = 300, height = 5, width = 5)
+ggsave("Fig7_umap_major_trajectory_new.png", p, dpi = 300, height = 5, width = 5)
 
 p = ggplot() +
     geom_point(data = df, aes(x = UMAP_1, y = UMAP_2), size=0.1, color = "grey80") +
@@ -585,7 +557,7 @@ p = ggplot() +
     theme(legend.position="none") +
     theme(plot.title = element_text(hjust = 0.5)) +
     scale_color_manual(values=major_trajectory_color_plate)
-ggsave("~/share/Fig7_umap_major_trajectory_jax.png", p, dpi = 300, height = 5, width = 5)
+ggsave("Fig7_umap_major_trajectory_jax.png", p, dpi = 300, height = 5, width = 5)
 
 
 
@@ -597,7 +569,7 @@ p = ggplot() +
     theme(legend.position="none") +
     theme(plot.title = element_text(hjust = 0.5)) +
     scale_color_manual(values=day_color_plate)
-ggsave("~/share/Fig7_umap_day_new.png", p, dpi = 300, height = 5, width = 5)
+ggsave("Fig7_umap_day_new.png", p, dpi = 300, height = 5, width = 5)
 
 p = ggplot() +
     geom_point(data = df, aes(x = UMAP_1, y = UMAP_2), size=0.1, color = "grey80") +
@@ -606,7 +578,7 @@ p = ggplot() +
     theme(legend.position="none") +
     theme(plot.title = element_text(hjust = 0.5)) +
     scale_color_manual(values=day_color_plate)
-ggsave("~/share/Fig7_umap_day_jax.png", p, dpi = 300, height = 5, width = 5)
+ggsave("Fig7_umap_day_jax.png", p, dpi = 300, height = 5, width = 5)
 
 
 ### Three important profiles:

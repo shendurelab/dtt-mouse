@@ -3,8 +3,20 @@
 ### Figure S15. Tree siblings share annotations far in excess of chance, and reproducibly so
 
 
+######################################################################
+### Fig. S15A: Sibling enrichment for each of the 24 major trajectories
+
+### tree_analysis/step2_sibling_cells.R
+
+
+##############################################################
+### Fig. S15B: Sibling enrichment for each of the 99 cell types
+
+### tree_analysis/step2_sibling_cells.R
+
+
 #######################################################################################################
-### Fig. 15D: Fold-enrichment of each progenitor & post-mitotic pairing computed separately for A and B
+### Fig. S15D: Fold-enrichment of each progenitor & post-mitotic pairing computed separately for A and B
 
 library(ggplot2)
 library(tidyr)

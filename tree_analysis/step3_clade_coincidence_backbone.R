@@ -1,6 +1,9 @@
 
 ########################
-### Clade Coincidence
+### Clade Coincidence (backbone tree)
+
+### Supporting data can be found at Github: https://github.com/shendurelab/dtt-mouse/tree/main/support_data
+
 
 source("~/work/scripts/utils.R")
 library(dplyr)
@@ -10,16 +13,15 @@ library(ggplot2)
 library(ggrepel)
 library(phangorn)
 
-work_path <- "/net/shendure/vol2/projects/cxqiu/work/tapemouse"
 
 # ---- Load data ----
-cell_meta <- read.table(paste0(work_path, "/tree_analysis/cell_metadata.v8.txt"),
+cell_meta <- read.table(paste0(work_path, "/cell_metadata.v8.txt"),
                         header = TRUE, sep = "\t")
 
-tree <- read.tree(paste0(work_path, "/tree_analysis/merged_minB2h_lineage_constrained.nwk"))
+tree <- read.tree(paste0(work_path, "/merged_minB2h_lineage_constrained.nwk"))
 
-B1 <- read.table(paste0(work_path, "/tree_analysis/e3v8.B1_tape_consensus.tsv.gz"), header = TRUE)
-B2 <- read.table(paste0(work_path, "/tree_analysis/e3v8.B2_tape_consensus.tsv.gz"), header = TRUE)
+B1 <- read.table(paste0(work_path, "/e3v8.B1_tape_consensus.tsv.gz"), header = TRUE)
+B2 <- read.table(paste0(work_path, "/e3v8.B2_tape_consensus.tsv.gz"), header = TRUE)
 
 tree_tips_B1 <- tree$tip.label[tree$tip.label %in% B1$cell_id]
 tree_tips_B2 <- tree$tip.label[tree$tip.label %in% B2$cell_id]
@@ -166,33 +168,33 @@ run_clade_analysis <- function(tree, cell_meta, clade_tips, blastomere_name, K,
 
 # ---- Run for each blastomere at K = 15 and K = 60 ----
 
-res_B1_K15 = readRDS(paste0(work_path, "/tree_analysis/clade_coincodence/res_B1_K15.rds"))$log2_enr
+res_B1_K15 = readRDS(paste0(work_path, "/res_B1_K15.rds"))$log2_enr
 shared_celltypes = rownames(res_B1_K15)
 
 
 for (K in c(15, 200)) {
   res <- run_clade_analysis(tree, cell_meta, tree_tips_B1, "Blastomere A", K, shared_celltypes)
-  saveRDS(res, paste0(work_path, "/tree_analysis/clade_coincodence/res_B1_K", K, "_backbone.rds"))
+  saveRDS(res, paste0(work_path, "/res_B1_K", K, "_backbone.rds"))
 
   res <- run_clade_analysis(tree, cell_meta, tree_tips_B2, "Blastomere B", K, shared_celltypes)
-  saveRDS(res, paste0(work_path, "/tree_analysis/clade_coincodence/res_B2_K", K, "_backbone.rds"))
+  saveRDS(res, paste0(work_path, "/res_B2_K", K, "_backbone.rds"))
 }
 
 
 
 ### off-diagonal correlation
 
-res_B1_K15 = readRDS(paste0(work_path, "/tree_analysis/clade_coincodence/res_B1_K15.rds"))$log2_enr
-res_B2_K15 = readRDS(paste0(work_path, "/tree_analysis/clade_coincodence/res_B2_K15.rds"))$log2_enr
+res_B1_K15 = readRDS(paste0(work_path, "/res_B1_K15.rds"))$log2_enr
+res_B2_K15 = readRDS(paste0(work_path, "/res_B2_K15.rds"))$log2_enr
 
-res_B1_K200 = readRDS(paste0(work_path, "/tree_analysis/clade_coincodence/res_B1_K200.rds"))$log2_enr
-res_B2_K200 = readRDS(paste0(work_path, "/tree_analysis/clade_coincodence/res_B2_K200.rds"))$log2_enr
+res_B1_K200 = readRDS(paste0(work_path, "/res_B1_K200.rds"))$log2_enr
+res_B2_K200 = readRDS(paste0(work_path, "/res_B2_K200.rds"))$log2_enr
 
-res_B1_backbone_K15 = readRDS(paste0(work_path, "/tree_analysis/clade_coincodence/res_B1_K15_backbone.rds"))$log2_enr
-res_B2_backbone_K15 = readRDS(paste0(work_path, "/tree_analysis/clade_coincodence/res_B2_K15_backbone.rds"))$log2_enr
+res_B1_backbone_K15 = readRDS(paste0(work_path, "/res_B1_K15_backbone.rds"))$log2_enr
+res_B2_backbone_K15 = readRDS(paste0(work_path, "/res_B2_K15_backbone.rds"))$log2_enr
 
-res_B1_backbone_K200 = readRDS(paste0(work_path, "/tree_analysis/clade_coincodence/res_B1_K200_backbone.rds"))$log2_enr
-res_B2_backbone_K200 = readRDS(paste0(work_path, "/tree_analysis/clade_coincodence/res_B2_K200_backbone.rds"))$log2_enr
+res_B1_backbone_K200 = readRDS(paste0(work_path, "/res_B1_K200_backbone.rds"))$log2_enr
+res_B2_backbone_K200 = readRDS(paste0(work_path, "/res_B2_K200_backbone.rds"))$log2_enr
 
 
 

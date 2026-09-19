@@ -84,6 +84,12 @@ p = ggplot(plot_dat, aes(x = postmitotic, y = progenitor, fill = log2_fold)) +
           plot.title = element_text(hjust = 0.5))
 
 
+####################################################
+### Fig. 5B: Heatmap of "maximal clades" analysis
+
+### tree_analysis/step2_sibling_cells.R
+
+
 
 ####################################################
 ### Fig. 5C: Timed fate couplings between cell types

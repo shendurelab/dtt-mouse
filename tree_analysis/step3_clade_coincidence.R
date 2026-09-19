@@ -2,7 +2,8 @@
 ########################
 ### Clade Coincidence
 
-source("~/work/scripts/utils.R")
+### Supporting data can be found at Github: https://github.com/shendurelab/dtt-mouse/tree/main/support_data
+
 library(dplyr)
 library(tidyr)
 library(ape)
@@ -10,16 +11,15 @@ library(ggplot2)
 library(ggrepel)
 library(phangorn)
 
-work_path <- "/net/shendure/vol2/projects/cxqiu/work/tapemouse"
 
 # ---- Load data ----
-cell_meta <- read.table(paste0(work_path, "/tree_analysis/cell_metadata.v8.txt"),
+cell_meta <- read.table(paste0(work_path, "/cell_metadata.v8.txt"),
                         header = TRUE, sep = "\t")
 
-tree <- read.tree(paste0(work_path, "/tree_analysis/merged_full_placed.nwk"))
+tree <- read.tree(paste0(work_path, "/merged_full_placed.nwk"))
 
-B1 <- read.table(paste0(work_path, "/tree_analysis/e3v8.B1_tape_consensus.tsv.gz"), header = TRUE)
-B2 <- read.table(paste0(work_path, "/tree_analysis/e3v8.B2_tape_consensus.tsv.gz"), header = TRUE)
+B1 <- read.table(paste0(work_path, "/e3v8.B1_tape_consensus.tsv.gz"), header = TRUE)
+B2 <- read.table(paste0(work_path, "/e3v8.B2_tape_consensus.tsv.gz"), header = TRUE)
 
 tree_tips_B1 <- tree$tip.label[tree$tip.label %in% B1$cell_id]
 tree_tips_B2 <- tree$tip.label[tree$tip.label %in% B2$cell_id]
@@ -180,13 +180,13 @@ shared_celltypes = intersect(cell_meta_B1$celltype, cell_meta_B2$celltype)
 
 for (K in c(15, 200)) {
   res <- run_clade_analysis(tree, cell_meta, tree_tips_B1, "Blastomere A", K, shared_celltypes)
-  saveRDS(res, paste0(work_path, "/tree_analysis/clade_coincodence/res_B1_K", K, ".rds"))
+  saveRDS(res, paste0(work_path, "/res_B1_K", K, ".rds"))
 
   res <- run_clade_analysis(tree, cell_meta, tree_tips_B2, "Blastomere B", K, shared_celltypes)
-  saveRDS(res, paste0(work_path, "/tree_analysis/clade_coincodence/res_B2_K", K, ".rds"))
+  saveRDS(res, paste0(work_path, "/res_B2_K", K, ".rds"))
 
   res <- run_clade_analysis(tree, cell_meta, c(tree_tips_B1, tree_tips_B2), "All", K, shared_celltypes)
-  saveRDS(res, paste0(work_path, "/tree_analysis/clade_coincodence/res_all_K", K, ".rds"))
+  saveRDS(res, paste0(work_path, "/res_all_K", K, ".rds"))
 }
 
 
@@ -195,28 +195,21 @@ for (K in c(15, 200)) {
 # ---- Report the number of clades and mean/median of internal nodes ----
 
 for (K in c(15, 200)) {
-  res <- readRDS(paste0(work_path, "/tree_analysis/clade_coincodence/res_B1_K", K, ".rds"))
+  res <- readRDS(paste0(work_path, "/res_B1_K", K, ".rds"))
   k_node = unique(res$clade_df[,c("node", "node_depth")])
   print(paste0("B1:K=", K, ", # = ", nrow(k_node), 
     ", ", round(mean(k_node$node_depth),2), " +/- ", round(sd(k_node$node_depth),2), "; median = ", round(median(k_node$node_depth),2) ))
 
-  res <- readRDS(paste0(work_path, "/tree_analysis/clade_coincodence/res_B2_K", K, ".rds"))
+  res <- readRDS(paste0(work_path, "/res_B2_K", K, ".rds"))
   k_node = unique(res$clade_df[,c("node", "node_depth")])
   print(paste0("B2:K=", K, ", # = ", nrow(k_node), 
     ", ", round(mean(k_node$node_depth),2), " +/- ", round(sd(k_node$node_depth),2), "; median = ", round(median(k_node$node_depth),2) ))
 
-  res <- readRDS(paste0(work_path, "/tree_analysis/clade_coincodence/res_all_K", K, ".rds"))
+  res <- readRDS(paste0(work_path, "/res_all_K", K, ".rds"))
   k_node = unique(res$clade_df[,c("node", "node_depth")])
   print(paste0("All:K=", K, ", # = ", nrow(k_node), 
     ", ", round(mean(k_node$node_depth),2), " +/- ", round(sd(k_node$node_depth),2), "; median = ", round(median(k_node$node_depth),2) ))
 }
-
-[1] "B1:K=15, # = 82749, 11.16 +/- 1.58; median = 11.27"
-[1] "B2:K=15, # = 57969, 11.08 +/- 1.67; median = 11.16"
-[1] "All:K=15, # = 140718, 11.13 +/- 1.62; median = 11.23"
-[1] "B1:K=200, # = 10047, 9.2 +/- 1.6; median = 8.85"
-[1] "B2:K=200, # = 6769, 9.11 +/- 1.61; median = 8.79"
-[1] "All:K=200, # = 16816, 9.16 +/- 1.6; median = 8.83"
 
 
 
@@ -229,15 +222,13 @@ library(ggplot2)
 library(patchwork)
 library(RColorBrewer)
 
-work_path <- "/net/shendure/vol2/projects/cxqiu/work/tapemouse"
-
 # ---- Load data ----
-res_B1_K15  <- readRDS(paste0(work_path, "/tree_analysis/clade_coincodence/res_B1_K15.rds"))
-res_B2_K15  <- readRDS(paste0(work_path, "/tree_analysis/clade_coincodence/res_B2_K15.rds"))
-res_all_K15 <- readRDS(paste0(work_path, "/tree_analysis/clade_coincodence/res_all_K15.rds"))
-res_B1_K200 <- readRDS(paste0(work_path, "/tree_analysis/clade_coincodence/res_B1_K200.rds"))
-res_B2_K200 <- readRDS(paste0(work_path, "/tree_analysis/clade_coincodence/res_B2_K200.rds"))
-res_all_K200<- readRDS(paste0(work_path, "/tree_analysis/clade_coincodence/res_all_K200.rds"))
+res_B1_K15  <- readRDS(paste0(work_path, "/res_B1_K15.rds"))
+res_B2_K15  <- readRDS(paste0(work_path, "/res_B2_K15.rds"))
+res_all_K15 <- readRDS(paste0(work_path, "/res_all_K15.rds"))
+res_B1_K200 <- readRDS(paste0(work_path, "/res_B1_K200.rds"))
+res_B2_K200 <- readRDS(paste0(work_path, "/res_B2_K200.rds"))
+res_all_K200<- readRDS(paste0(work_path, "/res_all_K200.rds"))
 
 library(ggplot2)
 library(reshape2)
@@ -253,9 +244,9 @@ hc  <- hclust(dist(x2), method = "ward.D2")
 ord <- rownames(x)[hc$order]
 ord
 
-write.table(ord, paste0(work_path, "/tree_analysis/clade_coincodence/cell_type_categories_old.tsv"), row.names=F, col.names=F, sep="\t", quote=F)
+write.table(ord, paste0(work_path, "/cell_type_categories_old.tsv"), row.names=F, col.names=F, sep="\t", quote=F)
 
-celltype_list <- read.table(paste0(work_path, "/tree_analysis/clade_coincodence/cell_type_categories_new.tsv"),
+celltype_list <- read.table(paste0(work_path, "/cell_type_categories_new.tsv"),
                             header = TRUE, sep = "\t")
 ordered_ct <- celltype_list$cell_type
 n_ct       <- length(ordered_ct)
@@ -332,7 +323,7 @@ combined <- (p_K15 / p_K200) +
   plot_layout(guides = "collect") &
   theme(legend.position = "right")
 
-ggsave("~/share/clade_enrichment_combined_all.pdf", combined, width = 7, height = 15)
+ggsave("clade_enrichment_combined_all.pdf", combined, width = 7, height = 15)
 
 
 p_K15_B1  <- plot_enrichment(res_B1_K15,  ordered_ct, Colors_shared, lims_shared)
@@ -345,7 +336,7 @@ combined <- (p_K15_B1 + p_K200_B1) / (p_K15_B2 + p_K200_B2) +
   plot_layout(guides = "collect") &
   theme(legend.position = "right")
 
-ggsave("~/share/clade_enrichment_combined_blastomere.pdf", combined, width = 15, height = 15)
+ggsave("clade_enrichment_combined_blastomere.pdf", combined, width = 15, height = 15)
 
 
 ### off-diagonal correlation
@@ -357,10 +348,6 @@ x = x[upper.tri(x)]
 y = y[upper.tri(y)]
 
 cor.test(x, y, method = "spearman")
-### 0.7927594
-### < 2.2e-16
-
-
 
 
 

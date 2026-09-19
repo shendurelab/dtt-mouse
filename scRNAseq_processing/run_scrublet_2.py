@@ -9,8 +9,6 @@ import numpy as np
 import scrublet as scr
 import os, sys
 
-WORK_PATH = 'XXX' + str(sys.argv[1])
-
 #######################################
 ### run scanpy for doublet clusters ###
 #######################################

@@ -67,10 +67,8 @@ top_DEG = DEG %>% group_by(cluster) %>%
 saveRDS(top_DEG, paste0(work_path, "/data_analysis/", experiment_id, '/doublet_cluster_2/top_DEG.rds'))
 
 
-
 ########################################################################################
 ### we take the top200 genes of each partition to perform subclustering on each partition
-
 
 args = commandArgs(trailingOnly=TRUE)
 experiment_id = args[2]

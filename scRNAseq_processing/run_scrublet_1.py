@@ -10,9 +10,6 @@ import scrublet as scr
 import os
 import sys
 
-batch_id = str(int(sys.argv[1]))
-
-WORK_PATH = 'XXX' + str(sys.argv[2])
 adata = sc.read_mtx(os.path.join(WORK_PATH, 'gene_count_' + batch_id + '.mtx'))
 
 adata.obs = pd.read_csv(os.path.join(WORK_PATH, 'df_cell_' + batch_id + '.csv'), index_col = 0)

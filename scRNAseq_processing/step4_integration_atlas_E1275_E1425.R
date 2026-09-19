@@ -1,9 +1,28 @@
 
-
 #######################################################################
 ### UMAP co-embedding of 1.58M scRNA-seq profiles from embryo #3 and
 ### 1.65M from 7 timepoints of our high-temporal-resolution single-cell
 ### atlas of mouse development (E12.75 - E14.25 in 6-hr increments)
+
+### Datasets
+
+### 1) Transcriptome data of emrbyo #3 in this study:
+### https://shendure-web.gs.washington.edu/content/members/cxqiu/public/backup/tapemouse/adata.{experiment_id}.h5a
+
+### 2) Transcriptome data of single-cell atlas of mouse development:
+### https://shendure-web.gs.washington.edu/content/members/cxqiu/public/backup/jax/mm39_version/adata.{day_id}.h5ad
+### https://shendure-web.gs.washington.edu/content/members/cxqiu/public/backup/jax/mm39_version/pd.rds
+
+### 3) Other support data:
+### https://github.com/shendurelab/dtt-mouse/tree/main/support_data
+### mouse.v37.geneID.txt
+### major_trajectory_celltype_table.txt
+### e3v8.B1_tape_consensus.tsv.gz
+### e3v8.B2_tape_consensus.tsv.gz
+### cell_metadata.v8.txt
+### merged_minB2h_lineage_constrained.nwk
+### merged_full_placed.nwk
+
 
 import scanpy as sc
 import anndata as ad
@@ -23,7 +42,7 @@ experiment_list = ["experiment1_20260618_seq4_AD",
 adatas = []
 for experiment_id in experiment_list:
     print(experiment_id)
-    a = sc.read_h5ad(f"{work_path}/data_analysis/{experiment_id}/adata.h5ad")
+    a = sc.read_h5ad(f"{work_path}/adata.{experiment_id}.h5ad")   ### https://shendure-web.gs.washington.edu/content/members/cxqiu/public/backup/tapemouse/
     adatas.append(a)
 
 adata = ad.concat(adatas, axis=0)
@@ -39,21 +58,19 @@ exclude_chrom = ['chrX', 'chrY', 'chrM']
 keep_type = ['lncRNA', 'protein_coding']
 adata = adata[:, ~adata.var['chr'].isin(exclude_chrom) & adata.var['gene_type'].isin(keep_type)].copy()
 
-
 # Load jax data and align genes
 day_list = ["E12.75","E13.0","E13.25","E13.5","E13.75","E14.0","E14.25"]
 
 adatas = []
 for day_id in day_list:
     print(day_id)
-    a = sc.read_h5ad(f"adata.{day_id}.h5ad")
+    a = sc.read_h5ad(f"{work_path}/adata.{day_id}.h5ad")   ### https://shendure-web.gs.washington.edu/content/members/cxqiu/public/backup/jax/mm39_version/
     adatas.append(a)
 
 adata_jax = ad.concat(adatas, axis=0)
 
 del adatas
 gc.collect()
-
 
 # Merge two datasets by common genes
 common = adata.var_names.intersection(adata_jax.var_names)
@@ -101,10 +118,10 @@ adata.obs['UMAP_2d_1'] = list(adata.obsm['X_umap'][:,0])
 adata.obs['UMAP_2d_2'] = list(adata.obsm['X_umap'][:,1])
 print("Done UMAP ...")
 
-adata.write(f"{work_path}/transcriptome_analysis/adata_integration.h5ad", compression="gzip")
+adata.write(f"{work_path}/adata_integration.h5ad", compression="gzip")
 
-adata.obs.to_csv(f"{work_path}/transcriptome_analysis/adata_integration.obs.csv")
-pd.DataFrame(adata.obsm['X_pca']).to_csv(f"{work_path}/transcriptome_analysis/adata_integration.pca.csv")
+adata.obs.to_csv(f"{work_path}/adata_integration.obs.csv")
+pd.DataFrame(adata.obsm['X_pca']).to_csv(f"{work_path}/adata_integration.pca.csv")
 
 
 #########################################
@@ -114,8 +131,8 @@ import pandas as pd
 import numpy as np
 from annoy import AnnoyIndex
 
-OBS_PATH = f"{work_path}/transcriptome_analysis/adata_integration.obs.csv"
-PCA_PATH = f"{work_path}/transcriptome_analysis/adata_integration.pca.csv"
+OBS_PATH = f"{work_path}/adata_integration.obs.csv"
+PCA_PATH = f"{work_path}/adata_integration.pca.csv"
 N_NEIGHBORS = 20
 N_TREES = 150
 METRIC = "euclidean"
@@ -147,17 +164,19 @@ for ti, vec in enumerate(tapemouse_pca):
 
 df = pd.DataFrame(neighbor_idx, columns=[f"neighbor_{i+1}" for i in range(N_NEIGHBORS)])
 df.insert(0, "tapemouse_id", tapemouse_ids)
-df.to_csv(f"{work_path}/transcriptome_analysis/adata_integration.knn.csv", index=False)
+df.to_csv(f"{work_path}/adata_integration.knn.csv", index=False)
  
-pd.Series(jax_ids).to_csv(f"{work_path}/transcriptome_analysis/adata_integration.knn_index.csv", index=True, header=["jax_id"])
+pd.Series(jax_ids).to_csv(f"{work_path}/adata_integration.knn_index.csv", index=True, header=["jax_id"])
 
 
 
-########################
-### Plotting the 3D UMAP
 
 
-pd = read.csv(paste0(work_path, "/transcriptome_analysis/adata_integration.obs.csv"), row.names=1)
+
+
+#!----------- in R ------------
+
+pd = read.csv(paste0(work_path, "/adata_integration.obs.csv"), row.names=1)
 pd$cell_id = rownames(pd)
 pd_1 = pd[pd$dataset == 'jax',]
 pd_2 = pd[pd$dataset == 'tapemouse',]
@@ -166,9 +185,9 @@ pd_jax = readRDS("pd.rds")
 pd_1_x = pd_1 %>% left_join(pd_jax, by = "cell_id") %>% as.data.frame()
 rownames(pd_1_x) = pd_1_x$cell_id
 
-knn = read.csv(paste0(work_path, "/transcriptome_analysis/adata_integration.knn.csv"), row.names=1)
+knn = read.csv(paste0(work_path, "/adata_integration.knn.csv"), row.names=1)
 knn = knn + 1
-knn_id = read.csv(paste0(work_path, "/transcriptome_analysis/adata_integration.knn_index.csv"), row.names=1)
+knn_id = read.csv(paste0(work_path, "/adata_integration.knn_index.csv"), row.names=1)
 pd_1_x = pd_1_x[as.vector(knn_id$jax_id),]
 
 tmp = NULL
@@ -198,32 +217,21 @@ pd_2$SampleName = pd_2_x$SampleName
 pd_2$day = "E13.5"
 
 pd = rbind(pd_1, pd_2)
-saveRDS(pd, paste0(work_path, "/transcriptome_analysis/adata_integration.obs.rds"))
-
-set.seed(2016)
-pd_sub = pd %>% group_by(dataset) %>% slice_sample(n = 150000)
-
-fig = plot_ly(pd_sub, x=~UMAP_1, y=~UMAP_2, z=~UMAP_3, size = I(30), color = ~dataset)
-saveWidget(fig, paste0(save_path, "/integration_dataset.html"), selfcontained = FALSE, libdir = "tmp")
-
-fig = plot_ly(pd_sub[pd_sub$dataset == "tapemouse",], x=~UMAP_1, y=~UMAP_2, z=~UMAP_3, size = I(30), color = ~celltype)
-saveWidget(fig, paste0(save_path, "/tapemouse_celltype.html"), selfcontained = FALSE, libdir = "tmp")
-
-fig = plot_ly(pd_sub[pd_sub$dataset == "tapemouse",], x=~UMAP_1, y=~UMAP_2, z=~UMAP_3, size = I(30), color = ~major_trajectory, colors = major_trajectory_color_plate)
-saveWidget(fig, paste0(save_path, "/tapemouse_major_trajectory.html"), selfcontained = FALSE, libdir = "tmp")
+saveRDS(pd, paste0(work_path, "/adata_integration.obs.rds"))
 
 pd_out = pd[pd$dataset == "tapemouse", c("cell_id", "major_trajectory", "celltype", "UMAP_1", "UMAP_2", "UMAP_3", "UMAP_2d_1", "UMAP_2d_2")]
 
-write.table(pd_out, paste0(save_path, "/cell_metadata.v8.txt"), row.names=F, quote=F, sep='\t')
+write.table(pd_out, paste0(work_path, "/cell_metadata.v8.txt"), row.names=F, quote=F, sep='\t')
+
+### cell_metadata.v8.txt is available at:
+### https://github.com/shendurelab/dtt-mouse/tree/main/support_data
 
 
 
 
 
-########################
-### Plotting the 2D UMAP
 
-pd = readRDS(paste0(work_path, "/transcriptome_analysis/adata_integration.obs.rds"))
+pd = readRDS(paste0(work_path, "/adata_integration.obs.rds"))
 
 p = ggplot() +
     geom_point(data = pd, aes(x = UMAP_2d_1, y = UMAP_2d_2), size=0.15, color = "black") +
@@ -232,7 +240,7 @@ p = ggplot() +
     theme(legend.position="none") +
     theme(plot.title = element_text(hjust = 0.5)) +
     scale_color_manual(values=major_trajectory_color_plate)
-ggsave("~/share/Fig2_umap_major_trajectory.png", p, dpi = 300, height = 5, width = 5)
+ggsave("Fig2_umap_major_trajectory.png", p, dpi = 300, height = 5, width = 5)
 
 p = ggplot() +
     geom_point(data = pd %>% filter(dataset == "jax"), aes(x = UMAP_2d_1, y = UMAP_2d_2), size=0.15, color = "grey80") +
@@ -240,7 +248,7 @@ p = ggplot() +
     theme_void() +
     theme(legend.position="none") +
     theme(plot.title = element_text(hjust = 0.5))
-ggsave("~/share/Fig2_umap_tapemouse.png", p, dpi = 300, height = 5, width = 5)
+ggsave("Fig2_umap_tapemouse.png", p, dpi = 300, height = 5, width = 5)
 
 p = ggplot() +
     geom_point(data = pd %>% filter(dataset == "tapemouse"), aes(x = UMAP_2d_1, y = UMAP_2d_2), size=0.15, color = "grey80") +
@@ -248,7 +256,7 @@ p = ggplot() +
     theme_void() +
     theme(legend.position="none") +
     theme(plot.title = element_text(hjust = 0.5))
-ggsave("~/share/Fig2_umap_jax.png", p, dpi = 300, height = 5, width = 5)
+ggsave("Fig2_umap_jax.png", p, dpi = 300, height = 5, width = 5)
 
 
 
@@ -256,7 +264,7 @@ ggsave("~/share/Fig2_umap_jax.png", p, dpi = 300, height = 5, width = 5)
 #################################################################
 ### Compare cell type compositions between new data and JAX E13.5
 
-pd = readRDS(paste0(work_path, "/transcriptome_analysis/adata_integration.obs.rds"))
+pd = readRDS(paste0(work_path, "/adata_integration.obs.rds"))
 
 major_trajectory_celltype = pd %>% filter(dataset == "jax") %>% group_by(major_trajectory, celltype) %>% tally() %>% select(-n)
 
@@ -305,7 +313,7 @@ p = ggplot(df %>% filter(day == "E13.5"), aes(x = new_log2_frac, y = old_log2_fr
   labs(x = "Log2[Fraction (%) + 1] in this study", y = "Log2[Fraction (%) + 1] in JAX E13.5") +
   scale_color_manual(values=major_trajectory_color_plate)
 
-ggsave("~/share/Fig2_celltype_frac.pdf", p, height = 5, width = 5)
+ggsave("Fig2_celltype_frac.pdf", p, height = 5, width = 5)
 
 
 library(ggrepel)
@@ -320,7 +328,7 @@ p <- ggplot(cor_res, aes(x = day, y = corr)) +
   labs(y = "Spearman correlation coefficient") +
   scale_color_viridis(discrete=TRUE)
 
-ggsave("~/share/Fig2_celltype_frac_2.pdf", p, height = 5, width = 4)
+ggsave("Fig2_celltype_frac_2.pdf", p, height = 5, width = 4)
 
 
 
@@ -329,21 +337,21 @@ ggsave("~/share/Fig2_celltype_frac_2.pdf", p, height = 5, width = 4)
 ### Comparing cell-type-compositions between backbone tree vs. placed cells vs. E13.5 atlas
 
 
-pd = readRDS(paste0(work_path, "/transcriptome_analysis/adata_integration.obs.rds"))
+pd = readRDS(paste0(work_path, "adata_integration.obs.rds"))
 all_celltypes = unique(pd$celltype)
 
-major_trajectory_celltype_table = read.table(paste0(work_path, "/tree_analysis/major_trajectory_celltype_table.txt"), sep="\t", header=T)
+major_trajectory_celltype_table = read.table(paste0(work_path, "/major_trajectory_celltype_table.txt"), sep="\t", header=T)
 
 
 ### subset cells with blastomere A and B
-dat_A = read.table(paste0(work_path, "/tree_analysis/e3v8.B1_tape_consensus.tsv.gz"), header = TRUE)
-dat_B = read.table(paste0(work_path, "/tree_analysis/e3v8.B2_tape_consensus.tsv.gz"), header = TRUE)
+dat_A = read.table(paste0(work_path, "/e3v8.B1_tape_consensus.tsv.gz"), header = TRUE)
+dat_B = read.table(paste0(work_path, "/e3v8.B2_tape_consensus.tsv.gz"), header = TRUE)
 
 ### E13.5 atlas
 pd_E135 = pd %>% filter(day == "E13.5", dataset == "jax")
 
 ### backbone
-tree_backbone = read.tree(paste0(work_path, "/tree_analysis/merged_minB2h_lineage_constrained.nwk"))
+tree_backbone = read.tree(paste0(work_path, "/merged_minB2h_lineage_constrained.nwk"))
 
 pd_backbone_A = pd %>% filter(dataset == "tapemouse", 
     cell_id %in% tree_backbone$tip.label, cell_id %in% dat_A$cell_id)
@@ -352,7 +360,7 @@ pd_backbone_B = pd %>% filter(dataset == "tapemouse",
     cell_id %in% tree_backbone$tip.label, cell_id %in% dat_B$cell_id)
 
 ### full-tree
-tree_full = read.tree(paste0(work_path, "/tree_analysis/merged_full_placed.nwk"))
+tree_full = read.tree(paste0(work_path, "/merged_full_placed.nwk"))
 
 pd_placed_A = pd %>% filter(dataset == "tapemouse", 
     cell_id %in% tree_full$tip.label, cell_id %in% dat_A$cell_id, !cell_id %in% tree_backbone$tip.label)
