@@ -409,3 +409,346 @@ g_long <- data.frame(
   blast     = rep(ft_founder_blast[founder_ord], times = ncol(M_all))
 )
 write.csv(g_long, "figures_data/fig4_panel_E_prevalent_founders_heatmap.csv", row.names = FALSE)
+
+#-------------------------------------------------------------------------#
+# Sensitivity for Blastomeres A, B, later to be found in Fig S13 D-F.
+
+#-------------------------------------------------------------------------#
+# Panel D: rank-abundance of founder clone sizes, one blastomere per facet
+# (full tree). Also derives the top-k cutoff that panel E's null is compared
+# against (founders for FRAC_B of THIS blastomere's own cells).
+ft_blast_stats <- lapply(blast_labels, function(b) {
+  sizes_b  <- ft_clone_size[ft_founder_blast == b]
+  N0_b     <- length(sizes_b)
+  total_b  <- sum(sizes_b)
+  sorted_b <- sort(sizes_b, decreasing = TRUE)
+  k_obs_b  <- k_for_frac(sorted_b, FRAC_B)
+
+  lambda_b <- log(total_b / N0_b) / ft_dT
+  p_null_b <- exp(-lambda_b * ft_dT)
+  set.seed(1)
+  R_b <- 10000
+  k_null_b <- vapply(seq_len(R_b), function(i) k_for_frac(1 + rgeom(N0_b, p_null_b), FRAC_B), integer(1))
+  p_val_b  <- mean(k_null_b <= k_obs_b)   # one-sided: P(null needs as few or fewer founders than observed)
+
+  list(blastomere = b, N0 = N0_b, total_tips = total_b, sorted_sizes = sorted_b,
+       k_obs = k_obs_b, k_null = k_null_b, p_val = p_val_b)
+})
+names(ft_blast_stats) <- blast_labels
+
+ft_blast_rank_df <- do.call(rbind, lapply(ft_blast_stats, function(x)
+  data.frame(blastomere = x$blastomere, rank = seq_along(x$sorted_sizes), size = x$sorted_sizes)))
+ft_blast_rank_df$blast <- to_disp(ft_blast_rank_df$blastomere)
+
+ft_blast_cutoff_df <- do.call(rbind, lapply(ft_blast_stats, function(x)
+  data.frame(blastomere = x$blastomere, k = x$k_obs, N0 = x$N0, total_tips = x$total_tips)))
+ft_blast_cutoff_df$blast <- to_disp(ft_blast_cutoff_df$blastomere)
+
+write.csv(ft_blast_rank_df, file.path(out_dir, "fig_s13_panel_D_rank_abundance.csv"), row.names = FALSE)
+write.csv(ft_blast_cutoff_df, file.path(out_dir, "fig_s13_panel_D_rank_abundance_cutoff.csv"), row.names = FALSE)
+
+#-------------------------------------------------------------------------#
+# Panel E: founders needed for FRAC_B of each blastomere's own E13.5 cells,
+# against its own Yule-null Monte Carlo distribution (full tree). Reuses
+# ft_blast_stats computed for panel D above.
+ft_blast_null_long <- do.call(rbind, lapply(ft_blast_stats, function(x)
+  data.frame(blastomere = x$blastomere, k_null = x$k_null)))
+ft_blast_null_long$blast <- to_disp(ft_blast_null_long$blastomere)
+
+ft_blast_obs_df <- do.call(rbind, lapply(ft_blast_stats, function(x)
+  data.frame(blastomere = x$blastomere, k_obs = x$k_obs, p_val = x$p_val, N0 = x$N0, total_tips = x$total_tips)))
+ft_blast_obs_df$blast <- to_disp(ft_blast_obs_df$blastomere)
+
+write.csv(ft_blast_null_long, file.path(out_dir, "fig_s13_panel_E_founders_for_half_null.csv"), row.names = FALSE)
+write.csv(ft_blast_obs_df, file.path(out_dir, "fig_s13_panel_E_founders_for_half_obs.csv"), row.names = FALSE)
+
+#-------------------------------------------------------------------------#
+# Panel F: Gini of founder clone sizes vs its Monte-Carlo Yule null, one
+# blastomere per facet (backbone tree).
+
+# tabulate(), not bt_clone_size -- that comes from a separate
+# split_tree_at_height() call (bt_split) and isn't guaranteed to align by
+# index with founder_blast, which comes from split_bt/tip_founder.
+bt_founder_clone_size <- tabulate(tip_founder, nbins = bt_N0)
+
+bt_blast_stats <- lapply(blast_labels, function(b) {
+  sizes_b    <- bt_founder_clone_size[founder_blast == b]
+  N0_b       <- length(sizes_b)
+  total_b    <- sum(sizes_b)
+  lambda_b   <- log(total_b / N0_b) / bt_dT
+  p_null_b   <- exp(-lambda_b * bt_dT)
+
+  gini_obs_b <- ineq::Gini(sizes_b)
+  set.seed(1)
+  R <- 10000
+  null_ginis_b <- vapply(seq_len(R), function(i) ineq::Gini(1 + rgeom(N0_b, p_null_b)), numeric(1))
+
+  list(blastomere = b, N0 = N0_b, total_tips = total_b, gini_obs = gini_obs_b, null_ginis = null_ginis_b)
+})
+names(bt_blast_stats) <- blast_labels
+
+bt_blast_null_long <- do.call(rbind, lapply(bt_blast_stats, function(x)
+  data.frame(blastomere = x$blastomere, gini = x$null_ginis)))
+bt_blast_null_long$blast <- to_disp(bt_blast_null_long$blastomere)
+
+# z-score is comparable across blastomeres despite their different N; raw
+# Gini or the Monte-Carlo p (which saturates at 1/R) is not.
+bt_blast_obs_df <- do.call(rbind, lapply(bt_blast_stats, function(x)
+  data.frame(blastomere = x$blastomere, N0 = x$N0, total_tips = x$total_tips,
+             gini_obs = x$gini_obs, gini_z = (x$gini_obs - mean(x$null_ginis)) / sd(x$null_ginis),
+             p_gini = mean(x$null_ginis >= x$gini_obs))))
+bt_blast_obs_df$blast <- to_disp(bt_blast_obs_df$blastomere)
+
+write.csv(bt_blast_null_long, file.path(out_dir_backbone, "fig_s13_panel_F_gini_vs_null_null.csv"), row.names = FALSE)
+write.csv(bt_blast_obs_df, file.path(out_dir_backbone, "fig_s13_panel_F_gini_vs_null_obs.csv"), row.names = FALSE)
+
+#-------------------------------------------------------------------------#
+# Fig S14 panels A-F.
+#
+# A/B: blastomere-split Gini(T) across three differently-dated trees (main +
+# two root-split-ratio sensitivity trees). C/D: sweep T0 itself on the
+# (undivided) backbone tree. E: founder x cell-type heatmap, backbone tree.
+# F: per-cell-type Gini consistency between the full placement tree and the
+# backbone tree. Shared time grid (T_max_sens/n_grid) for A-D so all four
+# panels share one x-axis.
+SENS_TREE_63_37 <- "tree_building/results/3-dated-tree-sensitivity/merged_minB2h_lineage_constrained_sidefrac63-37.nwk"
+SENS_TREE_58_42 <- "tree_building/results/3-dated-tree-sensitivity/merged_minB2h_lineage_constrained_sidefrac58-42.nwk"
+
+T_max_sens <- max(bt_tip_depths) - 0.01
+R_gini_time_sens <- 1000   # coarser than R_gini_time (10000) above -- matches source
+
+# root-split blastomere assignment for an arbitrary tree/T0 -- founder_blast/
+# split_bt above are bt-specific, this generalizes it to the sensitivity trees.
+assign_blast_founders <- function(tree, T0) {
+  root <- length(tree$tip.label) + 1L
+  kids <- tree$edge[tree$edge[, 1] == root, 2]
+  stopifnot(length(kids) == 2)
+  tips_under <- function(node) {
+    if (node <= length(tree$tip.label)) return(tree$tip.label[node])
+    castor::get_subtree_at_node(tree, node - length(tree$tip.label))$subtree$tip.label
+  }
+  kid_tips    <- lapply(kids, tips_under)
+  larger_tips <- kid_tips[[which.max(vapply(kid_tips, length, integer(1)))]]
+
+  split <- castor::split_tree_at_height(tree, height = T0)
+  blast <- vapply(split$subtrees, function(s)
+    if (s$tree$tip.label[1] %in% larger_tips) blastomere_larger_label else blastomere_smaller_label,
+    character(1))
+  list(split = split, blast = blast)
+}
+
+# Gini(T) per blastomere for one tree, over a shared time grid.
+gini_over_time_by_blast <- function(tree, blast_founders, T_seq) {
+  N0 <- length(blast_founders$blast)
+  tip_founder_i <- integer(length(tree$tip.label))
+  names(tip_founder_i) <- tree$tip.label
+  for (i in seq_along(blast_founders$split$subtrees)) {
+    tip_founder_i[blast_founders$split$subtrees[[i]]$tree$tip.label] <- i
+  }
+
+  do.call(rbind, lapply(T_seq, function(T) {
+    split_T   <- castor::split_tree_at_height(tree, height = T)
+    first_tip <- vapply(split_T$subtrees, function(s) s$tree$tip.label[1], character(1))
+    counts    <- tabulate(tip_founder_i[first_tip], nbins = N0)
+    stopifnot(all(counts >= 1))
+    do.call(rbind, lapply(blast_labels, function(b) {
+      idx <- which(blast_founders$blast == b)
+      data.frame(T = T, blastomere = b, gini = ineq::Gini(counts[idx]))
+    }))
+  }))
+}
+
+T_seq_sens <- seq(T0, T_max_sens, length.out = n_grid)
+
+# "main" tree series -- computed here (needed by both A and B below) but its
+# own CSV isn't written until the panel B section, to keep write.csv() calls
+# in A/B/C/D/E/F order.
+gini_blast_main <- gini_over_time_by_blast(bt, list(split = split_bt, blast = founder_blast), T_seq_sens)
+gini_blast_main$tree  <- "main"
+gini_blast_main$blast <- to_disp(gini_blast_main$blastomere)
+
+#-------------------------------------------------------------------------#
+# Panel A: main + two sensitivity trees, combined.
+sens_tree_6337   <- ape::read.tree(SENS_TREE_63_37)
+assign_6337      <- assign_blast_founders(sens_tree_6337, T0)
+gini_blast_6337  <- gini_over_time_by_blast(sens_tree_6337, assign_6337, T_seq_sens)
+gini_blast_6337$tree <- "sensitivity_63-37"
+
+sens_tree_5842   <- ape::read.tree(SENS_TREE_58_42)
+assign_5842      <- assign_blast_founders(sens_tree_5842, T0)
+gini_blast_5842  <- gini_over_time_by_blast(sens_tree_5842, assign_5842, T_seq_sens)
+gini_blast_5842$tree <- "sensitivity_58-42"
+
+gini_blast_sens_df <- rbind(gini_blast_main[, 1:4], gini_blast_6337, gini_blast_5842)
+gini_blast_sens_df$blast <- to_disp(gini_blast_sens_df$blastomere)
+write.csv(gini_blast_sens_df, file.path(out_dir, "fig_s14_panel_A_gini_per_blastomere_sensitivity.csv"), row.names = FALSE)
+
+#-------------------------------------------------------------------------#
+# Panel B: "main" tree only -- reuses gini_blast_main computed above instead
+# of re-deriving it.
+write.csv(gini_blast_main, file.path(out_dir, "fig_s14_panel_B_gini_emergence.csv"), row.names = FALSE)
+
+#-------------------------------------------------------------------------#
+# Panels C/D: T0-choice sensitivity, whole backbone tree (no blastomere
+# split). Gini(T) obs + Yule null per candidate T0.
+T0_sweep_values <- c(5.5, 6.0, 6.5, 7.0, 7.5, 8.0, 10)
+
+compute_gini_for_T0 <- function(T0_i, tree, total_tips_val, T_max, n_grid, R) {
+  split_T0 <- castor::split_tree_at_height(tree, height = T0_i)
+  N0 <- length(split_T0$subtrees)
+  tip_founder_i <- integer(length(tree$tip.label))
+  names(tip_founder_i) <- tree$tip.label
+  for (i in seq_along(split_T0$subtrees)) tip_founder_i[split_T0$subtrees[[i]]$tree$tip.label] <- i
+
+  dT_i     <- T_max - T0_i
+  lambda_i <- log(total_tips_val / N0) / dT_i
+  T_seq_i  <- seq(T0_i, T_max, length.out = n_grid)
+
+  obs_df <- do.call(rbind, lapply(T_seq_i, function(T) {
+    split_T   <- castor::split_tree_at_height(tree, height = T)
+    first_tip <- vapply(split_T$subtrees, function(s) s$tree$tip.label[1], character(1))
+    counts    <- tabulate(tip_founder_i[first_tip], nbins = N0)
+    stopifnot(all(counts >= 1))
+    data.frame(T0 = T0_i, T = T, gini = ineq::Gini(counts))
+  }))
+
+  null_df <- do.call(rbind, lapply(T_seq_i, function(T) {
+    p_T <- exp(-lambda_i * (T - T0_i))
+    null_draws <- vapply(seq_len(R), function(i) ineq::Gini(1 + rgeom(N0, p_T)), numeric(1))
+    ci <- quantile(null_draws, c(0.025, 0.975))
+    data.frame(T0 = T0_i, T = T, gini_null_median = median(null_draws), gini_null_lo = ci[[1]], gini_null_hi = ci[[2]])
+  }))
+
+  list(obs = obs_df, null = null_df)
+}
+
+T0_sweep_results <- lapply(T0_sweep_values, compute_gini_for_T0,
+                            tree = bt, total_tips_val = bt_total_tips, T_max = T_max_sens,
+                            n_grid = n_grid, R = R_gini_time_sens)
+
+T0_sweep_obs_df  <- do.call(rbind, lapply(T0_sweep_results, `[[`, "obs"))
+T0_sweep_null_df <- do.call(rbind, lapply(T0_sweep_results, `[[`, "null"))
+
+write.csv(T0_sweep_obs_df,  file.path(out_dir, "fig_s14_panel_C_gini_over_time_T0sweep.csv"), row.names = FALSE)
+write.csv(T0_sweep_null_df, file.path(out_dir, "fig_s14_panel_C_gini_over_time_T0sweep_null.csv"), row.names = FALSE)
+
+# Panel D: excess of observed Gini over the null's 97.5% upper bound, same
+# T0 sweep.
+T0_sweep_diff_df <- data.frame(T0 = T0_sweep_obs_df$T0, T = T0_sweep_obs_df$T,
+                                gini_diff = T0_sweep_obs_df$gini - T0_sweep_null_df$gini_null_hi)
+write.csv(T0_sweep_diff_df, file.path(out_dir, "fig_s14_panel_D_gini_diff_to_null_T0sweep.csv"), row.names = FALSE)
+
+#-------------------------------------------------------------------------#
+# Panel E: same founder x cell-type heatmap as fig4 panel E above, backbone
+# tree instead of full tree -- reuses split_bt/founder_blast/all_types
+# already computed above instead of reloading a tree.
+bt_all_tips   <- unlist(lapply(split_bt$subtrees, function(s) s$tree$tip.label))
+bt_ncells_all <- table(factor(traj_of[bt_all_tips], levels = all_types))
+bt_type_order <- names(sort(bt_ncells_all, decreasing = TRUE))
+
+bt_M_all <- t(vapply(split_bt$subtrees, function(s)
+  as.numeric(table(factor(traj_of[s$tree$tip.label], levels = all_types))), numeric(length(all_types))))
+colnames(bt_M_all) <- all_types
+
+bt_founder_total <- rowSums(bt_M_all)
+bt_type_total    <- colSums(bt_M_all)
+bt_N_grand       <- sum(bt_M_all)
+bt_expected_all  <- outer(bt_founder_total, bt_type_total) / bt_N_grand
+bt_log2fc_raw    <- ifelse(bt_M_all > 0, log2(bt_M_all / bt_expected_all), NA_real_)
+bt_log2fc_all    <- ifelse(bt_M_all >= MIN_CELLS_G, bt_log2fc_raw, NA_real_)
+
+bt_has_enough_visible <- rowSums(!is.na(bt_log2fc_all)) >= MIN_VISIBLE_TYPES_G
+if (!all(bt_has_enough_visible)) {
+  cat(sprintf("panel E (backbone): %d founder(s) placed in a terminal block (< %d visible cell types)\n",
+              sum(!bt_has_enough_visible), MIN_VISIBLE_TYPES_G))
+}
+bt_best_type_idx <- rep(NA_integer_, nrow(bt_M_all))
+bt_best_type_idx[bt_has_enough_visible] <- apply(bt_log2fc_all[bt_has_enough_visible, , drop = FALSE], 1, which.max)
+
+bt_argmax_type <- rep(NA_character_, nrow(bt_M_all))
+bt_argmax_type[bt_has_enough_visible] <- colnames(bt_M_all)[bt_best_type_idx[bt_has_enough_visible]]
+
+bt_maxval <- rep(NA_real_, nrow(bt_M_all))
+bt_maxval[bt_has_enough_visible] <- bt_log2fc_all[cbind(which(bt_has_enough_visible), bt_best_type_idx[bt_has_enough_visible])]
+
+bt_founder_ord <- order(match(bt_argmax_type, bt_type_order), -bt_maxval)
+
+bt_col_ids <- sprintf("f%03d", seq_along(bt_founder_ord))
+bt_g_long <- data.frame(
+  founder   = factor(rep(bt_col_ids, times = ncol(bt_M_all)), levels = bt_col_ids),
+  celltype  = factor(rep(colnames(bt_M_all), each = length(bt_founder_ord)), levels = rev(bt_type_order)),
+  log2fc    = as.vector(bt_log2fc_all[bt_founder_ord, , drop = FALSE]),
+  n_cells   = as.vector(bt_M_all[bt_founder_ord, , drop = FALSE]),
+  type_n    = rep(bt_type_total[colnames(bt_M_all)], each = length(bt_founder_ord)),
+  founder_n = rep(bt_founder_total[bt_founder_ord], times = ncol(bt_M_all)),
+  blast     = to_disp(rep(founder_blast[bt_founder_ord], times = ncol(bt_M_all)))
+)
+write.csv(bt_g_long, file.path(out_dir_backbone, "fig_s14_panel_E_prevalent_founders_heatmap_backbone.csv"), row.names = FALSE)
+
+#-------------------------------------------------------------------------#
+# Panel F: per-cell-type Gini consistency between the full placement tree
+# and the backbone tree, one blastomere per facet. A (blastomere, type) pair
+# needs >= min_cells_per_type cells and a defined Gini (>= 2 founders) in
+# BOTH trees -- below that, Gini is a small-N artifact.
+min_cells_per_type <- 10
+
+ft_blast_type_gini_df <- do.call(rbind, lapply(blast_labels, function(b) {
+  idx <- which(ft_founder_blast == b)
+  M <- t(vapply(ft_split$subtrees[idx], function(s)
+    as.numeric(table(factor(traj_of[s$tree$tip.label], levels = g_all_types))), numeric(length(g_all_types))))
+  colnames(M) <- g_all_types
+  do.call(rbind, lapply(g_all_types, function(ty) {
+    counts  <- sort(M[, ty], decreasing = TRUE)
+    n_cells <- sum(counts)
+    if (n_cells == 0) return(NULL)
+    nz <- counts[counts > 0]
+    data.frame(blastomere = b, major_trajectory = ty, n_cells = n_cells,
+               n_founders = length(nz), gini = if (length(nz) >= 2) ineq::Gini(nz) else NA_real_)
+  }))
+}))
+
+bt_blast_type_gini_df <- do.call(rbind, lapply(blast_labels, function(b) {
+  idx <- which(founder_blast == b)
+  M <- t(vapply(split_bt$subtrees[idx], function(s)
+    as.numeric(table(factor(traj_of[s$tree$tip.label], levels = all_types))), numeric(length(all_types))))
+  colnames(M) <- all_types
+  do.call(rbind, lapply(all_types, function(ty) {
+    counts  <- sort(M[, ty], decreasing = TRUE)
+    n_cells <- sum(counts)
+    if (n_cells == 0) return(NULL)
+    nz <- counts[counts > 0]
+    data.frame(blastomere = b, major_trajectory = ty, n_cells = n_cells,
+               n_founders = length(nz), gini = if (length(nz) >= 2) ineq::Gini(nz) else NA_real_)
+  }))
+}))
+
+type_consistency_all_df <- merge(
+  ft_blast_type_gini_df[, c("blastomere", "major_trajectory", "gini", "n_founders", "n_cells")],
+  bt_blast_type_gini_df[, c("blastomere", "major_trajectory", "gini", "n_founders", "n_cells")],
+  by = c("blastomere", "major_trajectory"), suffixes = c("_full", "_backbone")
+)
+type_consistency_all_df$min_founders <- pmin(type_consistency_all_df$n_founders_full, type_consistency_all_df$n_founders_backbone)
+
+keep_pair <- type_consistency_all_df$n_cells_full >= min_cells_per_type &
+             type_consistency_all_df$n_cells_backbone >= min_cells_per_type &
+             !is.na(type_consistency_all_df$gini_full) & !is.na(type_consistency_all_df$gini_backbone)
+type_consistency_df <- type_consistency_all_df[keep_pair, ]
+
+n_type_pairs_dropped <- length(union(paste(ft_blast_type_gini_df$blastomere, ft_blast_type_gini_df$major_trajectory),
+                                     paste(bt_blast_type_gini_df$blastomere, bt_blast_type_gini_df$major_trajectory))) - nrow(type_consistency_all_df)
+cat(sprintf("fig s14: %d (blastomere x type) pairs kept (>= %d cells + defined Gini in both trees); dropped %d not in both, %d filtered\n",
+            nrow(type_consistency_df), min_cells_per_type, n_type_pairs_dropped, sum(!keep_pair)))
+
+type_consistency_df$blast <- to_disp(type_consistency_df$blastomere)
+write.csv(type_consistency_df, file.path(out_dir, "fig_s14_panel_F_consistency_percelltype.csv"), row.names = FALSE)
+
+# Spearman rho per blastomere between full-tree and backbone-tree Gini,
+# summarizing how well type_consistency_df's points track the diagonal.
+rho_df <- do.call(rbind, lapply(blast_labels, function(b) {
+  sub <- type_consistency_df[type_consistency_df$blastomere == b, ]
+  data.frame(blastomere = b, n = nrow(sub),
+             rho = if (nrow(sub) >= 3) cor(sub$gini_full, sub$gini_backbone, method = "spearman") else NA_real_)
+})) 
+rho_df$blast <- to_disp(rho_df$blastomere)
+write.csv(rho_df, file.path(out_dir, "fig_s14_panel_F_consistency_percelltype_rho.csv"), row.names = FALSE)
+
