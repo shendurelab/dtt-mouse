@@ -105,7 +105,7 @@ library(ggplot2)
 library(tidyr)
 library(dplyr)
 
-dat = read.csv("./figures_data/panel_A_support_histogram.csv")
+dat = read.csv("figures_data/fig_s7_ancestral_panel_A_support_histogram.csv")
 
 dat_frac <- dat %>%
     group_by(blastomere, support) %>%
@@ -128,5 +128,5 @@ p = ggplot(dat_frac, aes(x = support, y = frac, fill = blastomere)) +
     theme_classic() +
     scale_fill_manual(values = c("B1" = "#4783B5", "B2" = "#F78C1E")) +
     theme(legend.position = "none")
-
+p
 
