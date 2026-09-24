@@ -12,7 +12,7 @@ library(tidyr)
 library(dplyr)
 
 dat = read.csv("./figures_data/panel_B_ltt_vs_ceiling.csv")
-
+dat = read.csv("figures_data/fig_s7_dating_panel_B_ltt_vs_ceiling.csv")
 ### regroup
 summary(dat$day[dat$series == "cell ceiling, unused (> E7.5)"])
 summary(dat$day[dat$series == "cell ceiling, used (≤ E7.5)"])
@@ -38,7 +38,7 @@ p = ggplot(dat[dat$log10_count > 1,], aes(x = day, y = log10_count, color = seri
                                   "cell ceiling, unused (> E6.5)" = "#8a8881", "constrained dating" = "#108441")) +
     theme(legend.position = "none")
 
-
+p
 
 ##########################################################################################################
 ### Fig. S7B: Scatter plot of shifts in dating (constrained minus unconstrained) vs. the unconstrained date
@@ -48,8 +48,7 @@ library(tidyr)
 library(dplyr)
 library(ggrastr)
 
-dat = read.csv("./figures_data/panel_C_date_shift.csv")
-
+dat = read.csv("figures_data/fig_s7_dating_panel_C_date_shift.csv")
 p = ggplot(dat, aes(x = old, y = shift, color = blast)) +
     rasterise(geom_point(size = 0.1), dpi = 300) + 
     geom_hline(yintercept = 0, linetype = "dashed", color = "black") +
@@ -62,7 +61,7 @@ p = ggplot(dat, aes(x = old, y = shift, color = blast)) +
     theme(legend.position = "none")
 
 
-
+p
 ###################################################################################
 ### Fig. S7C: Shift in node dates, shown separately for blastomere A and B lineages
 
@@ -71,8 +70,7 @@ library(tidyr)
 library(dplyr)
 library(ggrastr)
 
-dat = read.csv("./figures_data/node_time_shifts.csv")
-
+dat = read.csv("figures_data/fig_s7_dating_node_time_shifts.csv")
 p <- ggplot(dat, aes(x = original_depth, y = depth_diff_hours, color = sensitivity)) +
     geom_hline(yintercept = 0, linetype = "solid", color = "black") +
     geom_hline(yintercept = c(-1, 1), linetype = "dashed", color = "grey70") +
@@ -96,7 +94,7 @@ p <- ggplot(dat, aes(x = original_depth, y = depth_diff_hours, color = sensitivi
           strip.background = element_rect(fill = "white"))
 
 
-
+p
 
 #####################################################################################################################
 ### Fig. S7D: For each internal node, support is quantified as the number of edits accumulated on the incoming branch
