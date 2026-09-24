@@ -1,0 +1,7 @@
+cell_id,barcode,Site1,Site2
+t1,tape1,ATG,ATT
+t2,tape1,ATG,ATT
+t3,tape1,ATG,TCC
+t1,tape2,CTT,0
+t2,tape2,ATT,0
+t3,tape2,GCT,0
