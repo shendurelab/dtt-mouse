@@ -155,7 +155,7 @@ library(ggplot2)
 library(tidyr)
 library(dplyr)
 
-dat = read.csv("./figures_data/panel_D_editing_rate.csv")
+dat = read.csv("./figures_data/fig2_ancestral_panel_D_editing_rate.csv")
 
 p <- ggplot(dat[!is.na(dat$rate),], aes(x = day_mid, y = rate, color = blastomere)) +
     geom_point() +
@@ -166,7 +166,7 @@ p <- ggplot(dat[!is.na(dat$rate),], aes(x = day_mid, y = rate, color = blastomer
     theme_classic() +
     theme(legend.position = "none") +
     labs(x = "Time (days)", y = "Editing rate (edits/day)", fill = NULL)
-
+p
 
 ###################################################################################
 ### Fig. 2K: Internal node support across developmental time for blastomere A and B
@@ -175,7 +175,7 @@ library(ggplot2)
 library(tidyr)
 library(dplyr)
 
-dat = read.csv("./figures_data/panel_E_support_over_time.csv")
+dat = read.csv("figures_data/fig2_ancestral_panel_E_support_over_time.csv")
 
 # Reshape to long format so both pct columns can be plotted as separate lines
 dat_long <- dat %>%
@@ -197,6 +197,6 @@ p <- ggplot(dat_long[!is.na(dat_long$pct),], aes(x = day_mid, y = pct,
     theme(legend.position = "none") +
     labs(x = "Time (days)", y = "% of internal nodes",
          color = "Blastomere", linetype = "Threshold")
-
+p
 
 
