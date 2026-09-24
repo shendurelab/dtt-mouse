@@ -84,5 +84,5 @@ p = ggplot(dat_long, aes(x = type, y = rho)) +
     theme_classic() +
     theme(legend.position = "none") +
     scale_color_manual(values = tapebc_color_plate)
-
+p
 
