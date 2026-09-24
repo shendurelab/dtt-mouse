@@ -24,8 +24,11 @@
 # Usage (env vars; defaults shown are dtt-mouse's e3v8 case):
 #   SIDE=B1 MIN_LOCI=7 Rscript tree_building/1_build_nj_backbone/00_filter_highqual_consensus.R
 #
-# Expected survivor counts (fail-fast checkpoint, step 6): e3v8, MIN_LOCI=7 ->
-# B1 410,925 ; B2 244,776 -- exactly the backbone tree's per-side tip counts.
+# Expected survivor counts (fail-fast checkpoint, step 6), e3v8:
+#   MIN_LOCI=7 (the NJ backbone input) -> B1 410,925 ; B2 244,776
+#   MIN_LOCI=4 (the placement QUERY input -- pass_qc==1 never has n_loci<4, so
+#     this is "no additional floor beyond pass_qc"; B1 750,417 ;
+#     B2 530,861. 
 # =============================================================================
 
 suppressMessages({ library(data.table) })
@@ -39,8 +42,11 @@ QUERY_TSV   <- Sys.getenv("QUERY_TSV",
 FOUNDER_CSV <- Sys.getenv("FOUNDER_CSV",
                  "tree_building/processed_data/e3v8.supp_table1_founder_genotypes.wide.csv")
 OUT         <- Sys.getenv("OUT",
-                 sprintf("tree_building/processed_data/e3v8.%s_tape_consensus.ge%d_founderok.tsv.gz",
-                         SIDE, MIN_LOCI))
+                 if (MIN_LOCI == 4L)
+                   sprintf("tree_building/processed_data/e3v8.%s_tape_consensus.founderok.tsv.gz", SIDE)
+                 else
+                   sprintf("tree_building/processed_data/e3v8.%s_tape_consensus.ge%d_founderok.tsv.gz",
+                           SIDE, MIN_LOCI))
 SIDE_KEY    <- if (SIDE == "B1") "A" else "B"       # founder table uses A/B for B1/B2
 SITE_COLS   <- paste0("Site", 1:6)
 # expected founder-consistent survivor counts, for the fail-fast checkpoint.
@@ -48,7 +54,9 @@ SITE_COLS   <- paste0("Site", 1:6)
 # mouse_sprint's script, which defaults to v6 and needs EXPECT_KEPT_B1/B2
 # overridden for v8); SKIP_EXPECT_KEPT=1 still available for a first
 # exploratory run against different data.
-EXPECT_KEPT <- if (MIN_LOCI == 7L) c(B1 = 410925L, B2 = 244776L) else c(B1 = NA, B2 = NA)
+EXPECT_KEPT <- (if (MIN_LOCI == 7L) c(B1 = 410925L, B2 = 244776L)
+               else if (MIN_LOCI == 4L) c(B1 = 750417L, B2 = 530861L)
+               else c(B1 = NA, B2 = NA))
 if (nzchar(Sys.getenv("EXPECT_KEPT_B1", ""))) EXPECT_KEPT["B1"] <- as.integer(Sys.getenv("EXPECT_KEPT_B1"))
 if (nzchar(Sys.getenv("EXPECT_KEPT_B2", ""))) EXPECT_KEPT["B2"] <- as.integer(Sys.getenv("EXPECT_KEPT_B2"))
 if (Sys.getenv("SKIP_EXPECT_KEPT", "0") == "1") EXPECT_KEPT[] <- NA

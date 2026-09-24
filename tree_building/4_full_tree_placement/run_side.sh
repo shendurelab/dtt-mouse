@@ -13,41 +13,50 @@
 # Run BOTH sides, then merge with 3_date_tree/merge_dated_subtrees.R (same script
 # already used to merge the dated backbone -- dated_placed_{SIDE}.nwk is a dated tree
 # just like that step's output):
-#   LEFT_NWK=results/4-full-tree-placement/B1/dated_placed_B1.nwk \
-#   RIGHT_NWK=results/4-full-tree-placement/B2/dated_placed_B2.nwk \
-#   OUT_NWK=results/4-full-tree-placement/merged/merged_placed.nwk \
+#   LEFT_NWK=results/4-full-tree/B1/dated_placed_B1.nwk \
+#   RIGHT_NWK=results/4-full-tree/B2/dated_placed_B2.nwk \
+#   OUT_NWK=results/4-full-tree/merged_placed_check.nwk \
 #     Rscript 3_date_tree/merge_dated_subtrees.R
 set -euo pipefail
 cd "$(dirname "$0")"
-REPO="$(cd .. && pwd)"
+TB="$(cd .. && pwd)"          # tree_building/
+REPO="$(cd ../.. && pwd)"     # repo root (support_data/ lives here)
 
 SIDE="${1:?usage: run_side.sh B1|B2}"
 export SIDE
 export ALLCELLS="${ALLCELLS:-0}"        # 0 = pass_qc cells only (queries = pass_qc, <7 loci etc.)
 export N_SITES="${N_SITES:-6}"
 
-# ---- the dated backbone (3_date_tree's constrained-dating output) -------------
-VARIANT="${VARIANT:-attempt1_minage_sourced_minB2h_l0.01}"
-VDIR="$REPO/results/3-dated-tree/$SIDE/lsd2/nj99478/$VARIANT"
-export BACKBONE_NWK="${BACKBONE_NWK:-$VDIR/time_tree.nwk}"
+# ---- the dated backbone (3_date_tree's constrained, lineage-constrained min-age
+# dating output for e3v8/ge7_founderok -- see tree_building/results/3-dated-tree) ---
+VARIANT="${VARIANT:-minB2h_lineage_constrained}"
+export BACKBONE_NWK="${BACKBONE_NWK:-$TB/results/3-dated-tree/perside_${SIDE}_${VARIANT}.nwk}"
 [ -f "$BACKBONE_NWK" ] || { echo "backbone not found: $BACKBONE_NWK" >&2; exit 1; }
 
-# ---- clock rate: LSD2's own fitted rate for this side's dating run (see 3_date_tree,
-# results/3-dated-tree/$SIDE/lsd2/nj99478/$VARIANT/dated -- "rate X, tMRCA" line).
-# Hardcoded here (not re-parsed at run time) so the value is fixed and reviewable;
-# override with env RATE if you re-date with a different backbone.
+# ---- clock rate: LSD2's own fitted rate for the v8_ge7 constrained dating run of
+# this side (mouse_sprint results/4-time-tree/v8_ge7/synthroot/$SIDE/lsd2/nj99478/
+# attempt1_minage_sourced_minB2h_l0.01/dated -- "rate X, tMRCA" line, iter3/final;
+# also restated verbatim in that repo's CURRENT_TREE.txt). dtt-mouse is v8-only, so
+# these ARE the target rates (not a stale default); override with env RATE to test
+# another value.
 case "$SIDE" in
-  B1) export RATE="${RATE:-0.2508}" ;;   # DTT/day, LSD2 iter3 fit
-  B2) export RATE="${RATE:-0.3019}" ;;   # DTT/day, LSD2 iter3 fit
+  B1) export RATE="${RATE:-0.251985}" ;;   # DTT/day, v8_ge7 constrained LSD2 fit
+  B2) export RATE="${RATE:-0.303488}" ;;   # DTT/day, v8_ge7 constrained LSD2 fit
   *)  echo "unknown side: $SIDE" >&2; exit 1 ;;
 esac
 
-# ---- consensus (queries): the FULL per-side callset, not the ge7-founder-ok subset
-# the backbone was built from -- placement's query universe is every cell.
-export CONSENSUS_TSV="${CONSENSUS_TSV:-$REPO/processed_data/e3v5v6.${SIDE}_tape_consensus.tsv.gz}"
+# ---- consensus (queries): founder-consistent cells of ANY n_loci (not just the
+# ge7-founder-ok subset the backbone was built from -- placement's query universe
+# is every QC-pass, founder-consistent cell). The manuscript Methods require
+# founder-consistency "at both stages" (backbone AND placement queries), so this
+# must NOT be the raw, unfiltered support_data consensus -- using that let 15,520
+# founder-divergent cells get placed anyway (verified against the shipped tree).
+# Derived by 1_build_nj_backbone/00_filter_highqual_consensus.R MIN_LOCI=4.
+export CONSENSUS_TSV="${CONSENSUS_TSV:-$TB/processed_data/e3v8.${SIDE}_tape_consensus.founderok.tsv.gz}"
+export FOUNDER_TABLE="${FOUNDER_TABLE:-$TB/processed_data/e3v8.supp_table1_founder_genotypes.wide.csv}"
 
 # ---- output ---------------------------------------------------------------------
-OUTBASE="$REPO/results/4-full-tree-placement/${SIDE}"
+OUTBASE="$TB/results/4-full-tree/${SIDE}"
 mkdir -p "$OUTBASE"
 export OUTDIR="${OUTDIR:-$OUTBASE/phase}"        # bestmatch checkpoints
 export DATED_TREE_OUT="${DATED_TREE_OUT:-$OUTBASE/dated_placed_${SIDE}.nwk}"
