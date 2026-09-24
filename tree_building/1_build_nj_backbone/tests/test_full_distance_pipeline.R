@@ -8,17 +8,13 @@
 # ingests the format and returns all tips. This is the same code path as
 # run_full_distance.R, just size-capped.
 #
-# Run from the repo root (tree_building/), against the v6 data this repo ships:
-#   DATA_VERSION=v6 QC_PASS_MODE=all \
-#     DTT_TSV=processed_data/e3v5v6.B1_tape_consensus.ge7_founderok.tsv.gz \
+# Run from the repo root (tree_building/), against the v8 data this repo ships:
+#   DATA_VERSION=v8 QC_PASS_MODE=all \
+#     DTT_TSV=processed_data/e3v8.B1_tape_consensus.ge7_founderok.tsv.gz \
 #     Rscript 1_build_nj_backbone/tests/test_full_distance_pipeline.R
-# (DATA_VERSION=v1/v2 also work if you have that delivery's data on disk, with
-#  QC_PASS_MODE=version -- see below.)
 # Optional environment variables:
-#   DATA_VERSION : v1, v2, or v6 (required, no default; see lib/paths.R)
-#   DTT_TSV     : input consensus TSV (required for v4/v5/v6, which have no
-#                 single canonical file; defaults to that DATA_VERSION's
-#                 consensus file for v1/v2/v3)
+#   DATA_VERSION : always v8 (required, no default; see lib/paths.R)
+#   DTT_TSV     : input consensus TSV (required -- v8 has no single canonical file)
 #   QC_PASS_MODE : version (default; apply DATA_VERSION's QC rule via
 #                  qc_pass_cell_ids) or all (trust every cell_id in DTT_TSV --
 #                  for already-filtered inputs like this repo's
@@ -50,8 +46,8 @@ write_and_gzip <- function(M, labels, med) {
 }
 
 # Sys.getenv(var, unset) evaluates `unset` eagerly even when `var` IS set, so
-# only call consensus_tsv_path() -- which errors for DATA_VERSION=v4/v5/v6 --
-# when DTT_TSV is actually unset.
+# only call consensus_tsv_path() -- which always errors for v8 (no single
+# canonical file) -- when DTT_TSV is actually unset.
 TSV  <- Sys.getenv("DTT_TSV")
 if (!nzchar(TSV)) TSV <- consensus_tsv_path(".")
 N    <- as.integer(Sys.getenv("DTT_TEST_N", "300"))

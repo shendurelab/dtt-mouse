@@ -10,8 +10,8 @@
 #   OUTGROUP : tip to root on and drop (SYNTHETIC_ROOT_B1 or SYNTHETIC_ROOT_B2)
 #   OUT_NWK  : where to write the rooted, outgroup-dropped newick
 # e.g.
-#   IN_NWK=results/B1/e3v5v6_nj_ge7.nwk OUTGROUP=SYNTHETIC_ROOT_B1 \
-#   OUT_NWK=results/B1/nj_rooted_ingroup.nwk Rscript 2_root_tree/root_tree.R
+#   IN_NWK=results/1-nj-backbone/nj_raw_B1.nwk OUTGROUP=SYNTHETIC_ROOT_B1 \
+#   OUT_NWK=results/2-rooted-nj/nj_rooted_ingroup_B1.nwk Rscript 2_root_tree/root_tree.R
 
 IN_NWK   <- Sys.getenv("IN_NWK")
 OUTGROUP <- Sys.getenv("OUTGROUP")

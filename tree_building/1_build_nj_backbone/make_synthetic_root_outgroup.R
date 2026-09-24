@@ -3,13 +3,13 @@
 # branching. Two unrelated constructions live here because both are "build one
 # fake cell to append before the NJ build," not because they share logic:
 #
-#   make_synthetic_root_cell()  (OUTGROUP_MODE=synthroot, the one v6 uses)
-#   make_alt_edited_cell()      (OUTGROUP_MODE=alt/both -- not used by v6)
+#   make_synthetic_root_cell()  (OUTGROUP_MODE=synthroot, the one v8 uses)
+#   make_alt_edited_cell()      (OUTGROUP_MODE=alt/both -- not used by v8)
 #
 # ============================================================================
 # make_synthetic_root_cell -- blastomere-founder outgroup (SYNTHETIC_ROOT_B1 /
-# SYNTHETIC_ROOT_B2), built from a defining-sites table (this repo's v6 data
-# ships processed_data/e3v5v6.defining_sites.tsv), in the dtt cell
+# SYNTHETIC_ROOT_B2), built from a defining-sites table (this repo's v8 data
+# ships support_data/e3v8.defining_sites.tsv), in the dtt cell
 # representation parse_tape_consensus.R uses (named list of 11 tapes, each a
 # length-6 character vector; "ETY" = unedited).
 #
@@ -51,7 +51,7 @@ make_synthetic_root_cell <- function(barcodes, defining_sites, side) {
 #   source("1_build_nj_backbone/parse_tape_consensus.R")   # parse_cells
 #   source("1_build_nj_backbone/dtt_distance.R")           # is_edit, tape_depth, tape_recovered
 #   source("1_build_nj_backbone/make_synthetic_root_outgroup.R")
-#   cells      <- parse_cells(consensus_tsv_path("."))
+#   cells      <- parse_cells("processed_data/e3v8.B1_tape_consensus.ge7_founderok.tsv.gz")
 #   depth_pool <- unlist(lapply(cells, function(cell) {
 #     recovered <- vapply(cell, tape_recovered, logical(1))
 #     vapply(cell[recovered], tape_depth, integer(1))

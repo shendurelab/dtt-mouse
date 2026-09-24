@@ -41,7 +41,7 @@ BACKBONE_NWK = os.environ.get("BACKBONE_NWK", "")
 FOUNDER_TABLE = os.environ.get(
     "FOUNDER_TABLE",
     os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                "..", "processed_data", "e3v5v6.supp_table1_founder_genotypes.csv"))
+                "..", "processed_data", "e3v8.supp_table1_founder_genotypes.wide.csv"))
 
 # ---- output location ---------------------------------------------------------
 HERE = os.path.dirname(os.path.abspath(__file__))

@@ -5,21 +5,17 @@
 # implementations reduce a pair to a mean of small integers, so they must agree
 # to the bit.
 #
-# Run from the repo root (tree_building/), against the v6 data this repo ships:
-#   DATA_VERSION=v6 DTT_TSV=processed_data/e3v5v6.B1_tape_consensus.ge7_founderok.tsv.gz \
+# Run from the repo root (tree_building/), against the v8 data this repo ships:
+#   DATA_VERSION=v8 DTT_TSV=processed_data/e3v8.B1_tape_consensus.ge7_founderok.tsv.gz \
 #     Rscript 1_build_nj_backbone/tests/test_dtt_distance_scale.R
-# (DATA_VERSION=v1/v2 also work if you have that delivery's data on disk --
-#  DTT_TSV then defaults to that version's single consensus file.)
 
 source("lib/paths.R")                              # DATA_VERSION, data_path
 source("1_build_nj_backbone/dtt_distance.R")          # reference: dtt_distance_matrix
 source("1_build_nj_backbone/dtt_distance_scale.R")    # fast:      dtt_distance_matrix_fast
 source("1_build_nj_backbone/parse_tape_consensus.R")  # parse_cells (TSV -> dtt cells)
 
-# DTT_TSV lets this test point at a per-side file directly (needed for v4/v5/v6,
-# which have no single canonical consensus file -- consensus_tsv_path() only
-# resolves a default for v1/v2/v3). Sys.getenv(var, unset) evaluates `unset`
-# eagerly even when `var` IS set, so only call consensus_tsv_path() when needed.
+# DTT_TSV lets this test point at a per-side file directly -- v8 has no single
+# canonical consensus file, so DTT_TSV is required.
 TSV <- Sys.getenv("DTT_TSV")
 if (!nzchar(TSV)) TSV <- consensus_tsv_path(".")
 N_ROWS <- nrow(read.delim(TSV, colClasses = "character", check.names = FALSE))

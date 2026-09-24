@@ -1,0 +1,16 @@
+# Supplementary Table 1 (v8, e3v8): reshaped from e3v8.supp_table1_founder_genotypes.csv
+# (long format) into v6's wide format. Genotype content is unchanged (see v8 README.md:
+# byte-identical to v6, A=23/B=19 edits).
+# total founder edits  A: 23   B: 19
+integration,A_founder_genotype,A_n_edits,B_founder_genotype,B_n_edits
+AATAGAAAACGA,ACG-GCC,2,GATG,1
+ATATCAAATTGA,GATG-ACT-ACT-AAG-ACT-AAG,6,AAG-ACT,2
+CAGCTAACGCCT,CCG-CAC,2,(unedited),0
+CATATAATCGCA,AAG,1,ACA,1
+CGGCGAAAAGGT,CAC-AAG,2,CCC,1
+CGGGGAATTGTA,AAG-AAG,2,GCC-GCC,2
+GTGTAAATCGGC,GCC,1,ACC-ACC-CCC-GCC,4
+TAACGAATGCCG,GGC,1,CAC-ACT-GCC,3
+TCCGGAAGACCC,AAG,1,CAC,1
+TGACTAAAGCGG,GCC-AAG-GCC,3,(unedited),0
+TGGGGAACATAT,GAA-GATG,2,GCC-GCC-CCC-ACT,4

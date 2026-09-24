@@ -13,9 +13,9 @@
 #   - any other site token (an edit, e.g. "AAG", "GATG")  -> kept verbatim
 #
 # Run (example):
-#   source("lib/paths.R")   # DATA_VERSION must be set, e.g. DATA_VERSION=v1
+#   source("lib/paths.R")   # DATA_VERSION must be set (always v8)
 #   source("1_build_nj_backbone/parse_tape_consensus.R")
-#   cells <- parse_cells(consensus_tsv_path("."), rows = 1:200)
+#   cells <- parse_cells("processed_data/e3v8.B1_tape_consensus.ge7_founderok.tsv.gz", rows = 1:200)
 
 MISSING_TAPE <- rep("None", 6)  # six missing sites == integration not recovered
 

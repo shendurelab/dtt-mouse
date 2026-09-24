@@ -5,21 +5,20 @@
 #
 # Two output paths, chosen by which env var is set:
 #   DTT_NJ_INMEM : hand the matrix straight to decenttree's RapidNJ in-process
-#                  (production v6 path -- see run_b1.sh/run_b2.sh). No PHYLIP
+#                  (production v8 path -- see run_b1.sh/run_b2.sh). No PHYLIP
 #                  file, no intermediate parse.
 #   DTT_OUT      : write a gzipped lower-triangular PHYLIP file instead, for
-#                  decenttree's CLI to read separately (older path, kept for
-#                  smaller/legacy DATA_VERSIONs).
+#                  decenttree's CLI to read separately (older, unused path).
 #
 # Key environment variables:
-#   DATA_VERSION       : data delivery to use (required; see lib/paths.R)
-#   DTT_TSV            : input consensus TSV (required for v6, which
-#                        have no single canonical default)
+#   DATA_VERSION       : data delivery to use (required; see lib/paths.R; always v8)
+#   DTT_TSV            : input consensus TSV (required -- v8 has no single
+#                        canonical default)
 #   DTT_NTHREADS       : kernel threads (default = all detected cores)
 #   SYNTHROOT_SIDE     : "B1" or "B2" -- which blastomere's founder genotype
 #                        the rooting outgroup is built from (required)
 #   DEFINING_SITES_TSV : defining-sites table for that outgroup (default
-#                        processed_data/e3v5v6.defining_sites.tsv)
+#                        ../support_data/e3v8.defining_sites.tsv)
 #   QC_PASS_MODE       : "version" (apply DATA_VERSION's QC rule, default) or
 #                        "all" (trust every cell_id in DTT_TSV as already
 #                        QC-pass, e.g. this repo's ge7_founderok.tsv.gz files)
@@ -32,11 +31,11 @@
 #   DTT_SCRATCH        : node-local scratch dir for that path's plain-text +
 #                        pigz intermediate (default $TMPDIR or /tmp)
 #
-# e.g. (this repo's actual v6 production invocation -- see run_b1.sh/run_b2.sh):
-#   DATA_VERSION=v6 SYNTHROOT_SIDE=B1 QC_PASS_MODE=all \
-#     DTT_TSV=processed_data/e3v5v6.B1_tape_consensus.ge7_founderok.tsv.gz \
-#     DEFINING_SITES_TSV=processed_data/e3v5v6.defining_sites.tsv \
-#     DTT_NJ_INMEM=results/B1/e3v5v6_nj_ge7.nwk DTT_NJ_NDIGITS=0 \
+# e.g. (this repo's actual v8 production invocation -- see run_b1.sh/run_b2.sh):
+#   DATA_VERSION=v8 SYNTHROOT_SIDE=B1 QC_PASS_MODE=all \
+#     DTT_TSV=processed_data/e3v8.B1_tape_consensus.ge7_founderok.tsv.gz \
+#     DEFINING_SITES_TSV=../support_data/e3v8.defining_sites.tsv \
+#     DTT_NJ_INMEM=results/1-nj-backbone/nj_raw_B1.nwk DTT_NJ_NDIGITS=0 \
 #     Rscript 1_build_nj_backbone/run_full_distance.R
 
 # Resolve this script's own directory so it sources its siblings and locates the
@@ -61,7 +60,7 @@ SYNTHROOT_SIDE <- Sys.getenv("SYNTHROOT_SIDE")
 if (!SYNTHROOT_SIDE %in% c("B1", "B2")) {
   stop(sprintf("SYNTHROOT_SIDE must be 'B1' or 'B2' (got '%s')", SYNTHROOT_SIDE))
 }
-DEFINING_SITES_TSV <- Sys.getenv("DEFINING_SITES_TSV", file.path(REPO_DIR, "processed_data/e3v5v6.defining_sites.tsv"))
+DEFINING_SITES_TSV <- Sys.getenv("DEFINING_SITES_TSV", file.path(REPO_DIR, "..", "support_data", "e3v8.defining_sites.tsv"))
 
 QC_PASS_MODE <- Sys.getenv("QC_PASS_MODE", "version")  # version | all
 if (!QC_PASS_MODE %in% c("version", "all")) {
@@ -88,7 +87,7 @@ NJ_INMEM_OUT <- Sys.getenv("DTT_NJ_INMEM")
 if (!nzchar(NJ_INMEM_OUT) && !nzchar(Sys.which("pigz"))) stop("pigz not found on PATH")
 
 # decenttree_nj_inmem()/write_phylip_lower() both take a required `na_value` to
-# impute NA distances with. For this repo's v6 data no NA can ever occur:
+# impute NA distances with. For this repo's v8 data no NA can ever occur:
 # dtt_distance() (dtt_distance.R) returns NA only when two cells share no
 # recovered integration, but the upstream QC filter requires n_loci >= 7 of 11
 # for every cell (lib/qc.R), so any two cells recovered sets overlap in at

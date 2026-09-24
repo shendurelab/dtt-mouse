@@ -22,7 +22,9 @@ prints the counts, split by the two tree-input bands (>=7 tapes, 4-6 tapes).
 
 PROVENANCE -- READ THIS. The filter that produced the published trees was applied
 upstream of the tree pipeline, which consumes files named
-`*_tape_consensus.ge7_founderok.tsv.gz`; that code is not in this package. This
+`*_tape_consensus.ge7_founderok.tsv.gz`; that code lives at
+tree_building/1_build_nj_backbone/00_filter_highqual_consensus.R (+
+00a_reshape_v8_founder_genotypes.R), NOT this script. This
 script is a RECONSTRUCTION, validated against the published tip sets: on the v8
 matrices it flags 4,195 of 4,195 (blastomere A) and 3,729 of 3,889 (B) of the
 backbone-eligible cells that are absent from the 655,701-tip backbone, and 4,776

@@ -19,7 +19,7 @@ PKG = os.path.dirname(HERE)
 REPO = os.path.dirname(PKG)
 sys.path.insert(0, PKG)
 
-CONS = os.path.join(REPO, "processed_data/e3v5v6.B2_tape_consensus.tsv.gz")
+CONS = os.path.join(REPO, "processed_data/e3v8.B2_tape_consensus.ge7_founderok.tsv.gz")
 NROWS = 120                     # first NROWS data rows -> pairs among them
 
 
