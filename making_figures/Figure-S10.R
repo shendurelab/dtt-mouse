@@ -1,7 +1,70 @@
 
 ###############################################################################
-### Figure S10. Query cells are placed at short edit distances from their 
+### Figure S10. Query cells are placed at short edit distances from their
 ### anchors and recover cell-type concordance nearly as well as backbone cells
+
+library(ggplot2)
+library(dplyr)
+
+BLASTOMERE_COL <- c(B1 = "#2a78d6", B2 = "#e07b39")
+BLASTOMERE_LAB <- c(B1 = "Blastomere A", B2 = "Blastomere B")
+
+qc <- read.csv("./figures_data/fig_s10_placement_qc_combined.csv")
+qc$lab <- BLASTOMERE_LAB[qc$side]
+
+hist_panel <- function(dat, key, xlabel, integer = TRUE) {
+    meds <- dat %>% group_by(side, lab) %>% summarise(med = median(.data[[key]]), .groups = "drop")
+    p <- ggplot(dat, aes(x = .data[[key]], y = after_stat(count / sum(count)), fill = lab)) +
+        geom_histogram(aes(y = after_stat(density * width)), position = "identity",
+                        alpha = 0.45, binwidth = if (integer) 1 else NULL, bins = if (integer) NULL else 60) +
+        geom_vline(data = meds, aes(xintercept = med, color = lab), linetype = "dashed", linewidth = 0.6) +
+        scale_fill_manual(values = setNames(BLASTOMERE_COL[names(BLASTOMERE_LAB)], BLASTOMERE_LAB)) +
+        scale_color_manual(values = setNames(BLASTOMERE_COL[names(BLASTOMERE_LAB)], BLASTOMERE_LAB)) +
+        labs(x = xlabel, y = "Fraction of query cells", fill = NULL, color = NULL) +
+        theme_classic(base_size = 12) +
+        theme(legend.position = "top")
+    p
+}
+
+##########################################
+### Fig. S10B: shared sequential edits with anchor cell
+
+p <- hist_panel(qc, "shared_edits", "Shared sequential edits with anchor cell", integer = TRUE)
+p
+
+##########################################
+### Fig. S10C: edits contradicting sequential order
+
+conf <- read.csv("./figures_data/fig_s10_panel_C_irrev_conflicts.csv")
+conf$lab <- BLASTOMERE_LAB[conf$side]
+conf$cat <- cut(conf$n_conflicts, breaks = c(-Inf, 0, 1, 2, 3, 4, Inf),
+                labels = c("0", "1", "2", "3", "4", "≥5"))
+conf_agg <- conf %>%
+    group_by(side, lab, cat) %>%
+    summarise(n = sum(n_cells), .groups = "drop") %>%
+    group_by(side) %>%
+    mutate(frac = n / sum(n)) %>%
+    ungroup()
+
+p <- ggplot(conf_agg, aes(x = cat, y = frac, fill = lab)) +
+    geom_col(position = position_dodge(0.7), width = 0.6) +
+    scale_fill_manual(values = setNames(BLASTOMERE_COL[names(BLASTOMERE_LAB)], BLASTOMERE_LAB)) +
+    labs(x = "Edits contradicting sequential order", y = "Fraction of query cells", fill = NULL) +
+    theme_classic(base_size = 12) +
+    theme(legend.position = "top")
+p
+
+##########################################
+### Fig. S10D: private edits per query
+
+p <- hist_panel(qc, "new_edits", "Private edits per query", integer = TRUE)
+p
+
+##########################################
+### Fig. S10E: implied divergence time
+
+p <- hist_panel(qc, "pendant_days", "Implied divergence time (days)", integer = FALSE)
+p
 
 ##########################################
 ### Fig. S10G: Terminal topology by origin
@@ -37,7 +100,7 @@ p <- ggplot(plot_dat, aes(x = bar, y = pct_of_origin, fill = tier)) +
           panel.grid.major.x = element_blank())
 
 
-
+p
 ############################################################################################################
 ### Fig. S10H: For each cell, the fraction of its equally related nearest neighbors that share its cell type
 
