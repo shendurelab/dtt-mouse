@@ -322,7 +322,9 @@ fwrite(placements_flat, file.path(ACC_DIR, sprintf("placements_%s.tsv", METRIC))
 fwrite(scored, file.path(ACC_DIR, sprintf("scored_%s.tsv", METRIC)), sep = "\t")
 message(sprintf("[save] wrote placements_%s.tsv and scored_%s.tsv to %s", METRIC, METRIC, ACC_DIR))
 
-# staged copy for making_figures/Figure-S12.R
-FIG_CSV <- "figures_data/fig_s12_placement_accuracy_scored_dtt.csv"
-fwrite(scored, FIG_CSV)
+# staged copy for making_figures/Figure-S12.R -- gzipped directly (fwrite's
+# compress="gzip"): at full scale this is a ~500k-row table, and gzip alone
+# gets it from ~97MB to ~22MB, comfortably under GitHub's 100MB file limit.
+FIG_CSV <- "figures_data/fig_s12_placement_accuracy_scored_dtt.csv.gz"
+fwrite(scored, FIG_CSV, compress = "gzip")
 message("wrote ", FIG_CSV)

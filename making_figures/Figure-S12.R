@@ -12,7 +12,7 @@ library(data.table)
 library(ggplot2)
 library(cowplot)
 
-scored <- fread("./figures_data/fig_s12_placement_accuracy_scored_dtt.csv")
+scored <- fread("./figures_data/fig_s12_placement_accuracy_scored_dtt.csv.gz")
 
 # every query's true anchor survives in this dataset (no query's whole side of
 # the tree got dropped), so "placement" below is never split by anchor-lost
