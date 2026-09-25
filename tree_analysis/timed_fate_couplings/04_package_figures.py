@@ -14,7 +14,7 @@ from scipy.spatial.distance import squareform
 from scipy.stats import spearmanr, pearsonr
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CK = "/Users/jay.shendure/Dropbox/claude/penultimate_clade_k_analysis"
+CK = _os.path.join(_REPO, "support_data")
 SHIP = f"{HERE}/out/ship_coupling"
 CENSOR, Z_THR, MIN_OBS = 13.5, 3.0, 5
 os.makedirs(SHIP, exist_ok=True)

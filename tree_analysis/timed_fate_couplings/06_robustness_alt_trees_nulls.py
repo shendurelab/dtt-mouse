@@ -15,8 +15,23 @@ env:  RUN_TREE  npz (default: placement tree)
 import numpy as np, csv, os, sys, json, time
 from collections import defaultdict
 
+import os as _os
+_REPO = _os.path.abspath(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", ".."))
+
+def _support(name, env=None, hint=None):
+    """Resolve an input under support_data/, overridable by env var."""
+    if env:
+        v = _os.environ.get(env)
+        if v:
+            return v
+    p = _os.path.join(_REPO, "support_data", name)
+    if not _os.path.exists(p) and hint:
+        raise FileNotFoundError(f"{p} not found. {hint}")
+    return p
+
+
 FP="/Users/jay.shendure/Dropbox/claude/current/final_push"
-TREE=os.environ.get("RUN_TREE","/Users/jay.shendure/Dropbox/claude/top_to_bottom_phylogeny/out/mergedtree_dttpq_v8.npz")
+TREE=os.environ.get("RUN_TREE",_support("mergedtree_dttpq_v8.npz", "DTT_MERGED_TREE_NPZ", 'Generate it with: python3 tools/make_merged_tree_npz.py (derived from support_data/merged_full_placed.nwk).'))
 NULL=os.environ.get("NULL_MODE","global"); NPERM=int(os.environ.get("NPERM","20"))
 DROP_BLOOD=os.environ.get("DROP_BLOOD","")=="1"; TAG=os.environ.get("TAG","run")
 MIN_CELLS,MIN_CLADE,Z_THR,MIN_OBS=100,3,3.0,5

@@ -15,14 +15,29 @@ Writes TableS7_qualifying_paths.csv and .xlsx (Legend / Summary / Paths sheets).
 import numpy as np, csv, collections, re, warnings, openpyxl, networkx as nx, os
 from openpyxl.styles import Font, Alignment, PatternFill
 from openpyxl.utils import get_column_letter
+
+import os as _os
+_REPO = _os.path.abspath(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", ".."))
+
+def _support(name, env=None, hint=None):
+    """Resolve an input under support_data/, overridable by env var."""
+    if env:
+        v = _os.environ.get(env)
+        if v:
+            return v
+    p = _os.path.join(_REPO, "support_data", name)
+    if not _os.path.exists(p) and hint:
+        raise FileNotFoundError(f"{p} not found. {hint}")
+    return p
+
 warnings.filterwarnings("ignore")
 
 BASE = "/Users/jay.shendure/Dropbox/claude/current/final_push/flowsite_v8/"
-NPZ = "/Users/jay.shendure/Dropbox/claude/top_to_bottom_phylogeny/out/mergedtree_dttpq_v8.npz"
+NPZ = _support("mergedtree_dttpq_v8.npz", "DTT_MERGED_TREE_NPZ", 'Generate it with: python3 tools/make_merged_tree_npz.py (derived from support_data/merged_full_placed.nwk).')
 TXT = BASE + "pd_nodes_infer_200.txt"
 GL = ("/Users/jay.shendure/Dropbox/claude/penultimate_tree_build/heterotypic_siblings/"
       "data/germ_layer_map_validated.csv")
-XLSX_IN = "/Users/jay.shendure/Dropbox/claude/penultimate_clade_k_analysis/41586_2024_7069_MOESM4_ESM (4).xlsx"
+XLSX_IN = _os.environ.get("QIU2024_SUPP_XLSX", _os.path.join(_REPO, "support_data", "external", "41586_2024_7069_MOESM4_ESM.xlsx"))
 OUT_CSV = BASE + "TableS7_qualifying_paths.csv"
 OUT_XLSX = BASE + "TableS7_qualifying_paths.xlsx"
 SHARE, MINCELLS, ASYM, MINTOT = 0.01, 5, 0.2, 50

@@ -16,13 +16,20 @@ from scipy.special import gammaln
 
 import os as _os
 _REPO = _os.path.abspath(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", ".."))
-def _support(name, env):
-    """Repo-relative input, overridable with an env var."""
-    return _os.environ.get(env, _os.path.join(_REPO, "support_data", name))
+def _support(name, env=None, hint=None):
+    """Resolve an input under support_data/, overridable by env var."""
+    if env:
+        v = _os.environ.get(env)
+        if v:
+            return v
+    p = _os.path.join(_REPO, "support_data", name)
+    if not _os.path.exists(p) and hint:
+        raise FileNotFoundError(f"{p} not found. {hint}")
+    return p
 
 
 HERE  = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TREE  = "/Users/jay.shendure/Dropbox/claude/top_to_bottom_phylogeny/out/mergedtree_dttpq_v8.npz"
+TREE  = _support("mergedtree_dttpq_v8.npz", "DTT_MERGED_TREE_NPZ", 'Generate it with: python3 tools/make_merged_tree_npz.py (derived from support_data/merged_full_placed.nwk).')
 META  = _support("cell_metadata.v8.txt.gz", "DTT_CELL_METADATA")
 ROUTE = _support("e3v8.routing_labels.tsv.gz", "DTT_ROUTING_LABELS")
 MIN_CELLS = 100

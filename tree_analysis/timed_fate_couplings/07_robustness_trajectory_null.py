@@ -13,6 +13,21 @@ tips, which a stratified null breaks):
 import numpy as np, csv, sys
 from collections import defaultdict
 
+import os as _os
+_REPO = _os.path.abspath(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", ".."))
+
+def _support(name, env=None, hint=None):
+    """Resolve an input under support_data/, overridable by env var."""
+    if env:
+        v = _os.environ.get(env)
+        if v:
+            return v
+    p = _os.path.join(_REPO, "support_data", name)
+    if not _os.path.exists(p) and hint:
+        raise FileNotFoundError(f"{p} not found. {hint}")
+    return p
+
+
 FP="/Users/jay.shendure/Dropbox/claude/current/final_push"
 V8="/Users/jay.shendure/Dropbox/claude/mouse_sprint/tape_pipeline/figures/v8"
 NPERM=int(sys.argv[1]) if len(sys.argv)>1 else 10
@@ -20,7 +35,7 @@ SLICES=[float(x) for x in (sys.argv[2:] or ["9.0","11.0","13.0"])]
 MIN_CLADE, Z_THR, MIN_OBS = 3, 3.0, 5
 rng=np.random.default_rng(0)
 
-z=np.load("/Users/jay.shendure/Dropbox/claude/top_to_bottom_phylogeny/out/mergedtree_dttpq_v8.npz",
+z=np.load(_support("mergedtree_dttpq_v8.npz", "DTT_MERGED_TREE_NPZ", 'Generate it with: python3 tools/make_merged_tree_npz.py (derived from support_data/merged_full_placed.nwk).'),
           allow_pickle=True)
 par=z["parent"].astype(np.int64); tm=np.asarray(z["time"],float)
 isleaf=np.asarray(z["is_leaf"],bool); names=[str(v) for v in z["names"]]

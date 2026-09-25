@@ -17,7 +17,7 @@ import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CK = "/Users/jay.shendure/Dropbox/claude/penultimate_clade_k_analysis"
+CK = _os.path.join(_REPO, "support_data")
 CELL = "ageE12.5_disc1"
 SHIP = f"{HERE}/out/ship"
 os.makedirs(SHIP, exist_ok=True)

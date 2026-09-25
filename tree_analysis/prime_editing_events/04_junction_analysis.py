@@ -3,9 +3,9 @@
 and settle the cause of the site-5/6 duplication. Reviewer comment (8)."""
 import sys, os
 from collections import Counter
-sys.path.insert(0, "/Users/jay.shendure/Dropbox/claude/mouse_sprint/tape_pipeline")
+sys.path.insert(0, _os.path.join(_REPO, "sc_tape"))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-os.environ.setdefault("TAPE_RAW_DIR", "/Users/shendure/tape_raw")
+os.environ.setdefault("TAPE_RAW_DIR", os.environ.get("TAPE_RAW_DIR", ""))  # set TAPE_RAW_DIR; raw reads are on GEO GSE341627
 import config
 from config import ANCHOR, LEADIN, N_SITES, GAP_MIN, GAP_MAX
 from tape.io import iter_reads, load_whitelist, load_vocab

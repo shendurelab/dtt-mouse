@@ -32,7 +32,7 @@ from scipy.spatial.distance import squareform
 from scipy.stats import spearmanr, pearsonr
 
 HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CK = "/Users/jay.shendure/Dropbox/claude/penultimate_clade_k_analysis"
+CK = _os.path.join(_REPO, "support_data")
 Z_THR, MIN_OBS, CENSOR = 3.0, 5, 13.5
 INK, INK2, MUTED = "#1f2328", "#4a5158", "#8b9198"
 DIV = LinearSegmentedColormap.from_list("so", [

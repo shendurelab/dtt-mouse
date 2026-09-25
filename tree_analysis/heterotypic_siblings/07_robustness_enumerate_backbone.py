@@ -26,19 +26,26 @@ from itertools import combinations
 
 import os as _os
 _REPO = _os.path.abspath(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", ".."))
-def _support(name, env):
-    """Repo-relative input, overridable with an env var."""
-    return _os.environ.get(env, _os.path.join(_REPO, "support_data", name))
+def _support(name, env=None, hint=None):
+    """Resolve an input under support_data/, overridable by env var."""
+    if env:
+        v = _os.environ.get(env)
+        if v:
+            return v
+    p = _os.path.join(_REPO, "support_data", name)
+    if not _os.path.exists(p) and hint:
+        raise FileNotFoundError(f"{p} not found. {hint}")
+    return p
 
 
 HERE  = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SUF   = os.environ.get("RUN_SUF","")
 TREE  = os.environ.get("RUN_TREE",
-        "/Users/jay.shendure/Dropbox/claude/top_to_bottom_phylogeny/out/mergedtree_dttpq_v8.npz")
+        _support("mergedtree_dttpq_v8.npz", "DTT_MERGED_TREE_NPZ", 'Generate it with: python3 tools/make_merged_tree_npz.py (derived from support_data/merged_full_placed.nwk).'))
 META  = _support("cell_metadata.v8.txt.gz", "DTT_CELL_METADATA")
-GENO  = "/Users/jay.shendure/Dropbox/claude/top_to_bottom_phylogeny/out/newcode_v8_all.npz"
+GENO  = _support("newcode_v8_all.npz", "DTT_NEWCODE_NPZ")
 ROUTE = _support("e3v8.routing_labels.tsv.gz", "DTT_ROUTING_LABELS")
-PM    = "/Users/jay.shendure/Dropbox/claude/current/final_push/fig6_v8/celltype_postmitotic_v8.csv"
+PM    = _support("celltype_postmitotic_v8.csv")
 OUT   = f"{HERE}/out/h1_pairs{SUF}.npz"
 t0 = time.time()
 log = lambda *a: print(*a, file=sys.stderr, flush=True)

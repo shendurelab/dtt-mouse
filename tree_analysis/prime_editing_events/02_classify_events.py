@@ -3,9 +3,9 @@
 insertion call in fully-resolved reads. Reviewer comment (8), bulk embryo #3."""
 import sys, os
 from collections import Counter
-sys.path.insert(0, "/Users/jay.shendure/Dropbox/claude/mouse_sprint/tape_pipeline")
+sys.path.insert(0, _os.path.join(_REPO, "sc_tape"))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-os.environ.setdefault("TAPE_RAW_DIR", "/Users/shendure/tape_raw")
+os.environ.setdefault("TAPE_RAW_DIR", os.environ.get("TAPE_RAW_DIR", ""))  # set TAPE_RAW_DIR; raw reads are on GEO GSE341627
 import config
 from tape.io import iter_reads, load_whitelist, load_vocab
 from tape.barcode import extract_bc, correct

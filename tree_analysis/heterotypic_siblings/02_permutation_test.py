@@ -1,3 +1,18 @@
+
+import os as _os
+_REPO = _os.path.abspath(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", ".."))
+
+def _support(name, env=None, hint=None):
+    """Resolve an input under support_data/, overridable by env var."""
+    if env:
+        v = _os.environ.get(env)
+        if v:
+            return v
+    p = _os.path.join(_REPO, "support_data", name)
+    if not _os.path.exists(p) and hint:
+        raise FileNotFoundError(f"{p} not found. {hint}")
+    return p
+
 #!/usr/bin/env python3
 """STEP 2 -- permutation test for recurrent progenitor -> post-mitotic sibling pairings,
 swept over the evidence-threshold grid.
@@ -190,9 +205,9 @@ def stats_table(st, key):
 
 
 gl = {}
-for fn, ok in [(f"/Users/jay.shendure/Dropbox/claude/penultimate_clade_k_analysis/germ_layer_map_validated.csv",
+for fn, ok in [(f_support("germ_layer_map_validated.csv"),
                 lambda r: r["status"] in ("data-backed", "tree-resolved")),
-               (f"/Users/jay.shendure/Dropbox/claude/penultimate_clade_k_analysis/germ_layer_map_v6.csv",
+               (f_support("germ_layer_map_v6.csv"),
                 lambda r: r["confidence"] == "clear")]:
     if not os.path.exists(fn): continue
     for r in csv.DictReader(open(fn)):

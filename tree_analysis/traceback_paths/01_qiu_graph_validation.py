@@ -11,8 +11,23 @@ same same-name merge, same norm()/MANUAL name matching) so numbers are comparabl
 Mantel rho=0.47-0.51 reported there.
 """
 import openpyxl, warnings, re, csv, sys, numpy as np, networkx as nx
+
+import os as _os
+_REPO = _os.path.abspath(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", ".."))
+
+def _support(name, env=None, hint=None):
+    """Resolve an input under support_data/, overridable by env var."""
+    if env:
+        v = _os.environ.get(env)
+        if v:
+            return v
+    p = _os.path.join(_REPO, "support_data", name)
+    if not _os.path.exists(p) and hint:
+        raise FileNotFoundError(f"{p} not found. {hint}")
+    return p
+
 warnings.filterwarnings("ignore")
-XLSX="/Users/jay.shendure/Dropbox/claude/penultimate_clade_k_analysis/41586_2024_7069_MOESM4_ESM (4).xlsx"
+XLSX=_os.environ.get("QIU2024_SUPP_XLSX", _os.path.join(_REPO, "support_data", "external", "41586_2024_7069_MOESM4_ESM.xlsx"))
 RNG=np.random.default_rng(0)
 
 # ---------------- Qiu curated graph (undirected G + directed DG) ----------------

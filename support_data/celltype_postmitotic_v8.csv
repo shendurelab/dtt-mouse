@@ -1,0 +1,28 @@
+celltype,classification,germ_layer
+Granulocytes,post_mitotic,Blood
+Megakaryocytes,post_mitotic,Blood
+Osteoclasts,post_mitotic,Blood
+Primitive erythroid cells,post_mitotic,Blood
+Myotubes,post_mitotic,Mesoderm
+Dorsal root ganglion neurons,post_mitotic,Neural crest
+Enteric neurons,post_mitotic,Neural crest
+Neural crest (PNS neurons),post_mitotic,Neural crest
+Parasympathetic neurons,post_mitotic,Neural crest
+Sympathetic neurons,post_mitotic,Neural crest
+Cajal-Retzius cells,post_mitotic,Neuroectoderm
+Cerebellar Purkinje cells,post_mitotic,Neuroectoderm
+Corticofugal neurons,post_mitotic,Neuroectoderm
+Cranial motor neurons,post_mitotic,Neuroectoderm
+Deep-layer neurons,post_mitotic,Neuroectoderm
+GABAergic cortical interneurons,post_mitotic,Neuroectoderm
+GABAergic neurons,post_mitotic,Neuroectoderm
+Glutamatergic neurons,post_mitotic,Neuroectoderm
+Neurons (Slc17a8+),post_mitotic,Neuroectoderm
+PV-containing retinal ganglion cells,post_mitotic,Neuroectoderm
+Retinal ganglion cells,post_mitotic,Neuroectoderm
+Spinal cord motor neurons,post_mitotic,Neuroectoderm
+Upper-layer neurons,post_mitotic,Neuroectoderm
+Cochlear hair cells,post_mitotic,Surface ectoderm
+Granular keratinocytes,post_mitotic,Surface ectoderm
+Olfactory sensory neurons,post_mitotic,Surface ectoderm
+Otic sensory neurons,post_mitotic,Surface ectoderm

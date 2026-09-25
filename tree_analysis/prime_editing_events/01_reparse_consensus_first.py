@@ -20,9 +20,9 @@ from __future__ import annotations
 import sys, os
 from collections import Counter, defaultdict
 
-PIPE = "/Users/jay.shendure/Dropbox/claude/mouse_sprint/tape_pipeline"
+PIPE = _os.path.join(_REPO, "sc_tape")
 sys.path.insert(0, PIPE)
-os.environ.setdefault("TAPE_RAW_DIR", "/Users/shendure/tape_raw")
+os.environ.setdefault("TAPE_RAW_DIR", os.environ.get("TAPE_RAW_DIR", ""))  # set TAPE_RAW_DIR; raw reads are on GEO GSE341627
 
 import config
 from config import ANCHOR, TERM, TERM_LONG, N_SITES, GAP_MIN, GAP_MAX
