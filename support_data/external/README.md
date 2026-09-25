@@ -1,9 +1,9 @@
 # External inputs
 
-Three inputs the analysis uses are not redistributed here — two because they belong to
-other publications or archives, one because of size. Fetch them into this directory (or
-point the listed environment variable somewhere else) before running the scripts that
-need them.
+Several inputs the analysis uses are not redistributed here — either because they
+belong to other publications or archives, or because of size. Fetch them into this
+directory (or point the listed environment variable somewhere else) before running the
+scripts that need them.
 
 ## 1. Qiu et al. 2024 mouse developmental atlas, Supplementary Table 4
 
@@ -32,7 +32,9 @@ Used by the cell-type integration and ancestral-state imputation steps
 
 as `adata.{day_id}.h5ad`. The scripts already carry this URL in a comment at the top.
 
-`Figure-S2AB_S6.ipynb` reads the embryo-3 object via `DTT_ADATA_EMBRYO3` (default:
+## 3. Embryo #3 `.h5ad` object
+
+`Figure-S2AB_S6.ipynb` reads the embryo #3 object via `DTT_ADATA_EMBRYO3` (default:
 `adata_embryo3.h5ad` in the working directory). It's hosted separately, already under
 that name:
 
@@ -45,7 +47,7 @@ wherever you put it:
 export DTT_ADATA_EMBRYO3=/path/to/adata_embryo3.h5ad
 ```
 
-## 3. Raw tape calls
+## 4. Raw tape calls
 
 `tape_calls.tsv.gz` (~250 MB) is an intermediate of the single-cell tape pipeline, produced
 from the raw reads. Raw sequencing data are on GEO under **GSE341627**; regenerate the
@@ -59,7 +61,7 @@ export DTT_TAPE_CALLS=/path/to/tape_calls.tsv.gz
 
 ---
 
-## 4. Ancestral-state node inference
+## 5. Ancestral-state node inference
 
 `pd_nodes_infer_200.txt` (~145 MB) is an output of the ancestral-state step, consumed by
 `tree_analysis/traceback_paths/02_tableS8_qualifying_paths.py`. Too large to ship;
