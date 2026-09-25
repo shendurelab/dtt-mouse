@@ -20,6 +20,7 @@ independently in blastomere A and in blastomere B and the two are compared.
 Writes out/c7_timesweep{TAG}.npz, out/c7_divergence_ages{TAG}.csv, out/c7_carpet{TAG}.png, out/c7_divmatrix{TAG}.png,
 out/c7_ab_divage{TAG}.png.  Deterministic (no RNG).
 """
+import gzip
 import numpy as np, gzip, csv, collections, json, os, sys, time
 from scipy.special import gammaln
 from scipy.stats import spearmanr, pearsonr
@@ -29,12 +30,19 @@ from matplotlib.colors import LinearSegmentedColormap, TwoSlopeNorm, Normalize
 from scipy.cluster.hierarchy import linkage, leaves_list, fcluster
 from scipy.spatial.distance import squareform
 
+import os as _os
+_REPO = _os.path.abspath(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", ".."))
+def _support(name, env):
+    """Repo-relative input, overridable with an env var."""
+    return _os.environ.get(env, _os.path.join(_REPO, "support_data", name))
+
+
 HERE  = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TAG   = os.environ.get("TAG","")
 TREE  = os.environ.get("RUN_TREE",
         "/Users/jay.shendure/Dropbox/claude/top_to_bottom_phylogeny/out/mergedtree_dttpq_v8.npz")
-META  = "/Users/jay.shendure/Dropbox/claude/current/final_push/data/cell_metadata.v8.txt"
-ROUTE = "/Users/jay.shendure/Dropbox/claude/current/final_push/fig6_v8/e3v8.routing_labels.tsv.gz"
+META  = _support("cell_metadata.v8.txt.gz", "DTT_CELL_METADATA")
+ROUTE = _support("e3v8.routing_labels.tsv.gz", "DTT_ROUTING_LABELS")
 CK    = "/Users/jay.shendure/Dropbox/claude/penultimate_clade_k_analysis"
 MIN_CELLS, MIN_CLADE, Z_THR, MIN_OBS = 100, 3, 3.0, 5
 TIMES = [round(7.0 + 0.25 * i, 2) for i in range(26)]          # E7.00 .. E13.25
@@ -63,7 +71,7 @@ db = np.flatnonzero(np.r_[True, depth[o_][1:] != depth[o_][:-1], True])
 levels = [o_[db[i]:db[i + 1]] for i in range(len(db) - 1)]
 
 ct_of = {}
-with open(META) as f:
+with gzip.open(META, "rt") as f:
     r = csv.reader(f, delimiter="\t"); h = next(r); ci, cei = h.index("cell_id"), h.index("celltype")
     for row in r:
         if len(row) > cei: ct_of[row[ci]] = row[cei]
@@ -82,7 +90,7 @@ if os.environ.get("DROP_BLOOD") == "1":
               "Mast_cells","B_cells","T_cells"}
     import csv as _csv
     _tj = {}
-    with open("/Users/jay.shendure/Dropbox/claude/current/final_push/data/cell_metadata.v8.txt") as _f:
+    with gzip.open(_support("cell_metadata.v8.txt.gz", "DTT_CELL_METADATA"), "rt") as _f:
         _r = _csv.reader(_f, delimiter="\t"); _h = next(_r)
         _a, _b = _h.index("celltype"), _h.index("major_trajectory")
         for _x in _r: _tj.setdefault(_x[_a], _x[_b])

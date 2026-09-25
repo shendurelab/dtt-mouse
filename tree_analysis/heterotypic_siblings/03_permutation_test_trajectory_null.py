@@ -1,3 +1,10 @@
+
+import os as _os
+_REPO = _os.path.abspath(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", ".."))
+def _support(name, env):
+    """Repo-relative input, overridable with an env var."""
+    return _os.environ.get(env, _os.path.join(_REPO, "support_data", name))
+
 #!/usr/bin/env python3
 """STEP 2 -- permutation test for recurrent progenitor -> post-mitotic sibling pairings,
 swept over the evidence-threshold grid.
@@ -48,6 +55,7 @@ CAPTURED DIVISION (primary) = pooled q < FDR and pooled fold >= FOLD_MIN.
 Outputs: out/h2b_traj_sweep.csv (grid summary), out/h2b_traj_pairings_<tag>.csv (per-pairing detail for
 every grid cell), out/h2b_traj_raw.npz (obs/exp/var matrices).  Deterministic given NPERM/SEED.
 """
+import gzip
 import numpy as np, os, sys, time, csv
 from scipy.stats import poisson, nbinom, spearmanr, pearsonr
 
@@ -107,7 +115,7 @@ def bh(p):
 # map each cell type to its major trajectory (types are nested within trajectories)
 import csv as _csv
 _tj = {}
-with open("/Users/jay.shendure/Dropbox/claude/current/final_push/data/cell_metadata.v8.txt") as _f:
+with gzip.open(_support("cell_metadata.v8.txt.gz", "DTT_CELL_METADATA"), "rt") as _f:
     _r = _csv.reader(_f, delimiter="\t"); _h = next(_r)
     _a, _b = _h.index("celltype"), _h.index("major_trajectory")
     for _x in _r: _tj.setdefault(_x[_a], _x[_b])

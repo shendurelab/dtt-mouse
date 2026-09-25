@@ -7,3 +7,6 @@
 
 # large uncompressed scratch copy -- tracked version is the .gz
 figures_data/fig_s12_placement_accuracy_scored_dtt.csv
+
+__pycache__/
+*.pyc

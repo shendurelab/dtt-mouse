@@ -11,7 +11,6 @@ library(ggplot2)
 library(tidyr)
 library(dplyr)
 
-dat = read.csv("./figures_data/panel_B_ltt_vs_ceiling.csv")
 dat = read.csv("figures_data/fig_s7_dating_panel_B_ltt_vs_ceiling.csv")
 ### regroup
 summary(dat$day[dat$series == "cell ceiling, unused (> E7.5)"])

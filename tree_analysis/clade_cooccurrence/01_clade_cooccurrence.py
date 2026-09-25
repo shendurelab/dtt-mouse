@@ -25,13 +25,21 @@ UNIVERSE. Cell types with >= MIN_CELLS (100) cells in EACH blastomere subtree.
 Writes out/cooccur_{B1,B2}_K{15,200}_final.csv and out/c1_clades.json.
 Read-only on inputs. Deterministic (no RNG anywhere).
 """
+import gzip
 import numpy as np, gzip, csv, collections, json, os, sys, time
 from scipy.special import gammaln
 
+import os as _os
+_REPO = _os.path.abspath(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", ".."))
+def _support(name, env):
+    """Repo-relative input, overridable with an env var."""
+    return _os.environ.get(env, _os.path.join(_REPO, "support_data", name))
+
+
 HERE  = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TREE  = "/Users/jay.shendure/Dropbox/claude/top_to_bottom_phylogeny/out/mergedtree_dttpq_v8.npz"
-META  = "/Users/jay.shendure/Dropbox/claude/current/final_push/data/cell_metadata.v8.txt"
-ROUTE = "/Users/jay.shendure/Dropbox/claude/current/final_push/fig6_v8/e3v8.routing_labels.tsv.gz"
+META  = _support("cell_metadata.v8.txt.gz", "DTT_CELL_METADATA")
+ROUTE = _support("e3v8.routing_labels.tsv.gz", "DTT_ROUTING_LABELS")
 MIN_CELLS = 100
 KS = (15, 200)
 os.makedirs(f"{HERE}/out", exist_ok=True)
@@ -85,7 +93,7 @@ def clade_of(sel):
 
 # ---- per-leaf cell type + blastomere -------------------------------------------------------
 ct_of = {}
-with open(META) as f:
+with gzip.open(META, "rt") as f:
     r = csv.reader(f, delimiter="\t"); h = next(r); ci, cei = h.index("cell_id"), h.index("celltype")
     for row in r:
         if len(row) > cei: ct_of[row[ci]] = row[cei]

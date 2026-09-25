@@ -28,7 +28,7 @@ library(ggplot2)
 library(tidyr)
 library(dplyr)
 
-dat = read.csv("./Figures_data/e3v8.saturation_sites_written.csv", skip = 2)
+dat = read.csv("./figures_data/e3v8.saturation_sites_written.csv", skip = 2)
 
 p = ggplot(dat, aes(x = sites_written, y = pct_of_cells)) +
     geom_bar(stat="identity") +
@@ -43,7 +43,7 @@ library(ggplot2)
 library(tidyr)
 library(dplyr)
 
-dat = read.csv("./Figures_data/e3v8.lineage_rarefaction_curve.csv")
+dat = read.csv("./figures_data/e3v8.lineage_rarefaction_curve.csv")
 
 p = ggplot(data = filter(dat, region == "observed"), aes(x = cells_sampled, y = expected_genotypes)) +
     geom_point() +
@@ -88,7 +88,7 @@ major_trajectory_color_plate = c(
 )
 
 dat = read.table("./support_data/e3v8.routing_labels.tsv.gz", sep='\t', header=T)
-celltype = read.table("./support_data/cell_metadata.v8.txt", sep='\t', header=T)
+celltype = read.table(gzfile("./support_data/cell_metadata.v8.txt.gz"), sep='\t', header=T)
 major_trajectory_celltype = read.table("./support_data/major_trajectory_celltype_table.txt", sep='\t', header=T)
 
 all_celltypes = unique(celltype$celltype[celltype$cell_id %in% dat$cell[dat$blastomere %in% c("B1","B2")]])

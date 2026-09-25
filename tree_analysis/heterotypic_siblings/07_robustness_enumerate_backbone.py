@@ -20,16 +20,24 @@ permuted labels alike:
 
 Output: out/h1_pairs.npz.  Read-only on inputs. Deterministic.
 """
+import gzip
 import numpy as np, csv, gzip, os, sys, time
 from itertools import combinations
+
+import os as _os
+_REPO = _os.path.abspath(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", ".."))
+def _support(name, env):
+    """Repo-relative input, overridable with an env var."""
+    return _os.environ.get(env, _os.path.join(_REPO, "support_data", name))
+
 
 HERE  = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SUF   = os.environ.get("RUN_SUF","")
 TREE  = os.environ.get("RUN_TREE",
         "/Users/jay.shendure/Dropbox/claude/top_to_bottom_phylogeny/out/mergedtree_dttpq_v8.npz")
-META  = "/Users/jay.shendure/Dropbox/claude/current/final_push/data/cell_metadata.v8.txt"
+META  = _support("cell_metadata.v8.txt.gz", "DTT_CELL_METADATA")
 GENO  = "/Users/jay.shendure/Dropbox/claude/top_to_bottom_phylogeny/out/newcode_v8_all.npz"
-ROUTE = "/Users/jay.shendure/Dropbox/claude/current/final_push/fig6_v8/e3v8.routing_labels.tsv.gz"
+ROUTE = _support("e3v8.routing_labels.tsv.gz", "DTT_ROUTING_LABELS")
 PM    = "/Users/jay.shendure/Dropbox/claude/current/final_push/fig6_v8/celltype_postmitotic_v8.csv"
 OUT   = f"{HERE}/out/h1_pairs{SUF}.npz"
 t0 = time.time()
@@ -46,7 +54,7 @@ log(f"tree {os.path.basename(TREE)}: {len(par):,} nodes, {nL:,} leaves, tips at 
 
 # ---- per-leaf labels ----------------------------------------------------------------------
 ct, mtj = {}, {}
-with open(META) as f:
+with gzip.open(META, "rt") as f:
     r = csv.reader(f, delimiter="\t"); h = next(r)
     ci, cei, mi = h.index("cell_id"), h.index("celltype"), h.index("major_trajectory")
     for row in r:
