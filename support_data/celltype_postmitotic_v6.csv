@@ -1,0 +1,136 @@
+celltype,trajectory,n,pct,classification
+Definitive early erythroblasts (CD36-),Definitive_erythroid,198023,11.29,progenitor_regional
+Fibroblasts,Mesoderm,178435,10.174,progenitor_regional
+Glutamatergic neurons,CNS_neurons,172740,9.849,post_mitotic
+Telencephalon,Neuroectoderm_and_glia,168955,9.633,progenitor_regional
+GABAergic cortical interneurons,CNS_neurons,119703,6.825,post_mitotic
+GABAergic neurons,CNS_neurons,82483,4.703,post_mitotic
+Lateral plate and intermediate mesoderm,Mesoderm,64510,3.678,progenitor_regional
+Myoblasts,Muscle_cells,53214,3.034,progenitor_regional
+Sclerotome,Mesoderm,50365,2.872,progenitor_regional
+Deep-layer neurons,Intermediate_neuronal_progenitors,49319,2.812,post_mitotic
+Midbrain,Neuroectoderm_and_glia,47100,2.685,progenitor_regional
+Limb mesenchyme progenitors,Mesoderm,46827,2.67,progenitor_regional
+Facial mesenchyme,Mesoderm,45278,2.582,progenitor_regional
+Early chondrocytes,Mesoderm,33055,1.885,progenitor_regional
+Cajal-Retzius cells,CNS_neurons,29973,1.709,post_mitotic
+Dermatome,Mesoderm,29053,1.656,progenitor_regional
+Chondrocytes (Atp1a2+),Mesoderm,25660,1.463,progenitor_regional
+Pre-epidermal keratinocytes,Epithelium,25329,1.444,progenitor_regional
+Hepatocytes,Hepatocytes,24322,1.387,progenitor_regional
+Intermediate neuronal progenitors,Intermediate_neuronal_progenitors,20176,1.15,progenitor_regional
+Thalamic neuronal precursors,CNS_neurons,18751,1.069,progenitor_regional
+Spinal cord/r7/r8,Neuroectoderm_and_glia,18486,1.054,progenitor_regional
+Hindbrain,Neuroectoderm_and_glia,16648,0.949,progenitor_regional
+Endothelium,Endothelium,15997,0.912,progenitor_regional
+Cerebellar Purkinje cells,CNS_neurons,15799,0.901,post_mitotic
+Hematopoietic stem cells (Cd34+),White_blood_cells,15550,0.887,progenitor_regional
+Myofibroblasts,Muscle_cells,14144,0.806,progenitor_regional
+Border-associated macrophages,White_blood_cells,13511,0.77,progenitor_regional
+Branchial arch epithelium,Epithelium,12102,0.69,progenitor_regional
+Myelinating Schwann cells,Neural_crest_PNS_glia,9586,0.547,progenitor_regional
+Diencephalon,CNS_neurons,8772,0.5,progenitor_regional
+Neural crest (PNS neurons),Neural_crest_PNS_neurons,8272,0.472,post_mitotic
+Spinal cord dorsal progenitors,CNS_neurons,6789,0.387,progenitor_regional
+Granular keratinocytes,Epithelium,6713,0.383,post_mitotic
+Neural crest (PNS glia),Neural_crest_PNS_glia,6218,0.355,progenitor_regional
+Astrocytes,Neuroectoderm_and_glia,5782,0.33,progenitor_regional
+Primitive erythroid cells,Primitive_erythroid,5762,0.329,post_mitotic
+Hypothalamus,Neuroectoderm_and_glia,5554,0.317,progenitor_regional
+Megakaryocytes,Megakaryocytes,5225,0.298,post_mitotic
+Olfactory epithelial cells,Mesoderm,4934,0.281,progenitor_regional
+Naive retinal progenitor cells,Eye_and_other,4827,0.275,progenitor_regional
+Olfactory sensory neurons,Olfactory_sensory_neurons,4451,0.254,post_mitotic
+Kupffer cells,White_blood_cells,4097,0.234,progenitor_regional
+Dorsal telencephalon,Neuroectoderm_and_glia,3516,0.2,progenitor_regional
+Sympathetic neurons,Neural_crest_PNS_neurons,3478,0.198,post_mitotic
+Definitive erythroblasts (CD36+),Definitive_erythroid,3031,0.173,progenitor_regional
+Otic epithelial cells,Epithelium,2779,0.158,progenitor_regional
+Lung progenitor cells,Lung_and_airway,2698,0.154,progenitor_regional
+Liver sinusoidal endothelial cells,Endothelium,2558,0.146,progenitor_regional
+Brain capillary endothelial cells,Endothelium,2395,0.137,progenitor_regional
+Metanephric mesenchyme,Epithelium,2114,0.121,progenitor_regional
+Otic sensory neurons,Neural_crest_PNS_neurons,2035,0.116,post_mitotic
+Lymphatic vessel endothelial cells,Endothelium,2016,0.115,progenitor_regional
+Midgut/Hindgut epithelial cells,Intestine,1931,0.11,progenitor_regional
+Myelinating Schwann cells (Tgfb2+),Neural_crest_PNS_glia,1790,0.102,progenitor_regional
+Choroid plexus,Ependymal_cells,1730,0.099,progenitor_regional
+Hematopoietic stem cells (Mpo+),White_blood_cells,1712,0.098,progenitor_regional
+Eye field,Eye_and_other,1670,0.095,progenitor_regional
+Neural progenitor cells (Neurod1+),CNS_neurons,1599,0.091,progenitor_regional
+Retinal ganglion cells,CNS_neurons,1538,0.088,post_mitotic
+Spinal cord motor neurons,CNS_neurons,1537,0.088,post_mitotic
+Floorplate and p3 domain,Neuroectoderm_and_glia,1486,0.085,progenitor_regional
+Anterior floor plate,Neuroectoderm_and_glia,1277,0.073,progenitor_regional
+Pre-osteoblasts (Sp7+),Mesoderm,1277,0.073,progenitor_regional
+Parasympathetic neurons,Neural_crest_PNS_neurons,989,0.056,post_mitotic
+Ureteric bud,Epithelium,973,0.055,progenitor_regional
+Dorsal root ganglion neurons,Neural_crest_PNS_neurons,912,0.052,post_mitotic
+Spinal cord ventral progenitors,CNS_neurons,853,0.049,progenitor_regional
+Mast cells,Mast_cells,846,0.048,progenitor_regional
+Endocardial cells,Endothelium,838,0.048,progenitor_regional
+Olfactory bulb cells,Epithelium,827,0.047,progenitor_regional
+Microglia,White_blood_cells,659,0.038,progenitor_regional
+Nephron progenitors,Epithelium,647,0.037,progenitor_regional
+Myotubes,Muscle_cells,604,0.034,post_mitotic
+Pericytes,Endothelium,582,0.033,progenitor_regional
+Cranial motor neurons,CNS_neurons,576,0.033,post_mitotic
+Dermomyotome,Mesoderm,518,0.03,progenitor_regional
+Melanocyte cells,Neural_crest_PNS_glia,443,0.025,progenitor_regional
+First heart field,Cardiomyocytes,442,0.025,progenitor_regional
+Retinal progenitor cells,Eye_and_other,437,0.025,progenitor_regional
+Enteric neurons,Neural_crest_PNS_neurons,435,0.025,post_mitotic
+Posterior roof plate,Neuroectoderm_and_glia,333,0.019,progenitor_regional
+Osteoclasts,White_blood_cells,331,0.019,post_mitotic
+Arterial endothelial cells,Endothelium,326,0.019,progenitor_regional
+Midbrain-hindbrain boundary,Neuroectoderm_and_glia,325,0.019,progenitor_regional
+Muscle progenitor cells,Muscle_cells,302,0.017,progenitor_regional
+Hypothalamus (Sim1+),Neuroectoderm_and_glia,300,0.017,progenitor_regional
+Foregut epithelial cells,Epithelium,277,0.016,progenitor_regional
+Gut,Epithelium,272,0.016,progenitor_regional
+Anterior roof plate,Neuroectoderm_and_glia,228,0.013,progenitor_regional
+Monocytes,White_blood_cells,222,0.013,progenitor_regional
+Pancreatic acinar cells,Epithelium,220,0.013,progenitor_regional
+Brain pericytes,Endothelium,218,0.012,progenitor_regional
+Oligodendrocyte progenitor cells,Oligodendrocytes,203,0.012,progenitor_regional
+Retinal pigment cells,Neuroectoderm_and_glia,184,0.01,progenitor_regional
+Primordial germ cells,Epithelium,175,0.01,progenitor_regional
+Pituitary/Pineal gland progenitors,Epithelium,155,0.009,progenitor_regional
+Biliary epithelial cells,Epithelium,155,0.009,progenitor_regional
+Adrenocortical cells,CNS_neurons,151,0.009,progenitor_regional
+T cells,T_cells,146,0.008,progenitor_regional
+Cone precursor cells,Eye_and_other,129,0.007,progenitor_regional
+Neurons (Slc17a8+),CNS_neurons,99,0.006,post_mitotic
+Monocytic myeloid-derived suppressor cells,White_blood_cells,93,0.005,progenitor_regional
+Pituitary gland cells,Epithelium,92,0.005,progenitor_regional
+Satellite glial cells,Neural_crest_PNS_glia,90,0.005,progenitor_regional
+Neural progenitor cells (Ror1+),CNS_neurons,82,0.005,progenitor_regional
+Placodal area,Epithelium,79,0.005,progenitor_regional
+Lens epithelial cells,Epithelium,60,0.003,progenitor_regional
+B cells,B_cells,50,0.003,progenitor_regional
+Basal keratinocytes,Epithelium,49,0.003,progenitor_regional
+Mesodermal progenitors (Tbx6+),Mesoderm,46,0.003,progenitor_regional
+Apical ectodermal ridge,Epithelium,44,0.003,progenitor_regional
+Granulocytes,White_blood_cells,37,0.002,post_mitotic
+Glomerular endothelial cells,Endothelium,24,0.001,progenitor_regional
+Amacrine/Horizontal precursor cells,CNS_neurons,19,0.001,progenitor_regional
+Thyroid gland cells,Epithelium,18,0.001,progenitor_regional
+Thymic epithelial cells,Epithelium,14,0.001,progenitor_regional
+Proximal tubule cells,Epithelium,13,0.001,progenitor_regional
+Parathyroid epithelial cells,Epithelium,13,0.001,progenitor_regional
+Amniotic ectoderm,Epithelium,13,0.001,progenitor_regional
+Cochlear hair cells,Eye_and_other,10,0.001,post_mitotic
+PV-containing retinal ganglion cells,CNS_neurons,10,0.001,post_mitotic
+NMPs and spinal cord progenitors,Mesoderm,8,0.0,progenitor_regional
+Atrial cardiomyocytes,Cardiomyocytes,8,0.0,progenitor_regional
+Suprachiasmatic nucleus,Neuroectoderm_and_glia,6,0.0,progenitor_regional
+B cell progenitors,B_cells,6,0.0,progenitor_regional
+Upper-layer neurons,CNS_neurons,4,0.0,post_mitotic
+Ciliary margin cells,Eye_and_other,4,0.0,progenitor_regional
+Corticofugal neurons,Olfactory_sensory_neurons,3,0.0,post_mitotic
+Conventional dendritic cells,White_blood_cells,3,0.0,progenitor_regional
+Olfactory ensheathing cells,Neural_crest_PNS_glia,3,0.0,progenitor_regional
+PMN myeloid-derived suppressor cells,White_blood_cells,2,0.0,progenitor_regional
+Chondrocytes (Otor+),Mesoderm,1,0.0,progenitor_regional
+Dental epithelial cells,Epithelium,1,0.0,progenitor_regional
+Pancreatic islets,Eye_and_other,1,0.0,progenitor_regional

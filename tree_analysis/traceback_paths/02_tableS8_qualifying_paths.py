@@ -19,6 +19,16 @@ from openpyxl.utils import get_column_letter
 import os as _os
 _REPO = _os.path.abspath(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", ".."))
 
+def _results(*parts):
+    """Intermediate/output dir for this analysis step, override with DTT_RESULTS."""
+    base = _os.environ.get("DTT_RESULTS", _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "out"))
+    p = _os.path.join(base, *parts) if parts else base
+    _os.makedirs(_os.path.dirname(p) if _os.path.splitext(p)[1] else p, exist_ok=True)
+    return p
+import sys as _sys
+_sys.path.insert(0, _os.path.join(_REPO, "tools"))
+from tree_io import load_tree
+
 def _support(name, env=None, hint=None):
     """Resolve an input under support_data/, overridable by env var."""
     if env:
@@ -32,11 +42,10 @@ def _support(name, env=None, hint=None):
 
 warnings.filterwarnings("ignore")
 
-BASE = "/Users/jay.shendure/Dropbox/claude/current/final_push/flowsite_v8/"
-NPZ = _support("mergedtree_dttpq_v8.npz", "DTT_MERGED_TREE_NPZ", 'Generate it with: python3 tools/make_merged_tree_npz.py (derived from support_data/merged_full_placed.nwk).')
-TXT = BASE + "pd_nodes_infer_200.txt"
-GL = ("/Users/jay.shendure/Dropbox/claude/penultimate_tree_build/heterotypic_siblings/"
-      "data/germ_layer_map_validated.csv")
+BASE = _results() + _os.sep
+NPZ = _os.environ.get("DTT_TREE", _os.path.join(_REPO, "support_data", "merged_full_placed.nwk"))
+TXT = _os.environ.get("DTT_PD_NODES", _results("pd_nodes_infer_200.txt"))
+GL = _os.path.join(_REPO, "support_data", "germ_layer_map_validated.csv")
 XLSX_IN = _os.environ.get("QIU2024_SUPP_XLSX", _os.path.join(_REPO, "support_data", "external", "41586_2024_7069_MOESM4_ESM.xlsx"))
 OUT_CSV = BASE + "TableS7_qualifying_paths.csv"
 OUT_XLSX = BASE + "TableS7_qualifying_paths.xlsx"
@@ -68,7 +77,7 @@ sp = dict(nx.all_pairs_shortest_path_length(G))
 print(f"curated graph: {G.number_of_nodes()} nodes, {G.number_of_edges()} undirected edges")
 
 # ---------------------------------------------------------------- tree + calls
-z = np.load(NPZ, allow_pickle=True)
+z = load_tree(NPZ)
 parent = z["parent"].astype(np.int64); is_leaf = z["is_leaf"]
 Nflat = parent.size; Ntip = int(is_leaf.sum()); Nint = Nflat - Ntip
 ape = np.empty(Nflat, dtype=np.int64)

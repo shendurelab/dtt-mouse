@@ -1,23 +1,32 @@
 #!/bin/bash
-PY=/Users/jay.shendure/Dropbox/claude/current/final_push/.venv/bin/python
-D=/Users/jay.shendure/Dropbox/claude/current/final_push/comment8_reparse
+# PROVENANCE ONLY -- this is the driver used for the original full-dataset run.
+# It calls a sharding/consensus staging pipeline (sc1_shard.py, sc2p_consensus.py,
+# sc4_tape.py, sc11_events.py) that is NOT part of this release; the analysis that
+# the paper reports is 01_reparse_consensus_first.py .. 04_junction_analysis.py in
+# this directory, which run from what ships in support_data/.
+# Kept so the exact stages and ordering of the original run are on record.
+#
+# To re-run it you need that staging pipeline plus the raw reads (GEO GSE341627):
+#   PY=/path/to/python  C8R_DIR=/path/to/staging  TAPE_RAW_DIR=/path/to/raw  ./run_full.sh
+PY="${PY:-python3}"
+D="${C8R_DIR:?set C8R_DIR to the staging pipeline directory}"
 until grep -q "DONE" "$D/run_full.log"; do sleep 20; done
 cd "$D"
 echo "=== FULL DATASET ==="
-$PY sc11_events.py /Users/shendure/tape_raw/c8sc_full/tape_calls.tsv.gz \
+$PY sc11_events.py ${DTT_TAPE_CALLS:?set DTT_TAPE_CALLS} \
     "$D/comment8_event_classes_FULL.csv"
 echo; echo "=== cells / support / array length ==="
 $PY - <<'PY'
 import sys, os, gzip, statistics as st
 from collections import Counter
-sys.path.insert(0,"/Users/jay.shendure/Dropbox/claude/mouse_sprint/tape_pipeline"); sys.path.insert(0,".")
-os.environ.setdefault("TAPE_RAW_DIR","/Users/shendure/tape_raw")
+sys.path.insert(0,os.environ["DTT_SC_TAPE"]); sys.path.insert(0,".")
+os.environ.setdefault("TAPE_RAW_DIR",os.environ.get("TAPE_RAW_DIR",""))
 import config
 from tape.io import load_vocab
 from sc11_events import walk
 vocab=load_vocab(config.get_embryo("DTTz_3_S3").vocab_tsv)
 cells=Counter(); nmol=[]; L=Counter(); exp=0; noterm=0; tot=0
-with gzip.open("/Users/shendure/tape_raw/c8sc_full/tape_calls.tsv.gz","rt") as f:
+with gzip.open("${DTT_TAPE_CALLS:?set DTT_TAPE_CALLS}","rt") as f:
     next(f)
     for line in f:
         p=line.rstrip("\n").split("\t"); tot+=1

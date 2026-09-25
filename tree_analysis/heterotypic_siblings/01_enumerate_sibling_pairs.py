@@ -26,6 +26,9 @@ from itertools import combinations
 
 import os as _os
 _REPO = _os.path.abspath(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", ".."))
+import sys as _sys
+_sys.path.insert(0, _os.path.join(_REPO, "tools"))
+from tree_io import load_tree
 def _support(name, env=None, hint=None):
     """Resolve an input under support_data/, overridable by env var."""
     if env:
@@ -39,7 +42,7 @@ def _support(name, env=None, hint=None):
 
 
 HERE  = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TREE  = _support("mergedtree_dttpq_v8.npz", "DTT_MERGED_TREE_NPZ", 'Generate it with: python3 tools/make_merged_tree_npz.py (derived from support_data/merged_full_placed.nwk).')
+TREE  = _os.environ.get("DTT_TREE", _os.path.join(_REPO, "support_data", "merged_full_placed.nwk"))
 META  = _support("cell_metadata.v8.txt.gz", "DTT_CELL_METADATA")
 GENO  = _support("newcode_v8_all.npz", "DTT_NEWCODE_NPZ")
 ROUTE = _support("e3v8.routing_labels.tsv.gz", "DTT_ROUTING_LABELS")
@@ -49,7 +52,7 @@ t0 = time.time()
 log = lambda *a: print(*a, file=sys.stderr, flush=True)
 
 # ---- tree ---------------------------------------------------------------------------------
-z = np.load(TREE, allow_pickle=True)
+z = load_tree(TREE)
 par, tm, isleaf, names = z["parent"], z["time"], z["is_leaf"], z["names"]
 L = np.flatnonzero(isleaf)
 lid = np.array([names[u] for u in L], object)

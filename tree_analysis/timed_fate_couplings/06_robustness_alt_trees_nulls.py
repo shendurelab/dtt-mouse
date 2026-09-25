@@ -18,6 +18,16 @@ from collections import defaultdict
 import os as _os
 _REPO = _os.path.abspath(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", ".."))
 
+def _results(*parts):
+    """Intermediate/output dir for this analysis step, override with DTT_RESULTS."""
+    base = _os.environ.get("DTT_RESULTS", _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "out"))
+    p = _os.path.join(base, *parts) if parts else base
+    _os.makedirs(_os.path.dirname(p) if _os.path.splitext(p)[1] else p, exist_ok=True)
+    return p
+import sys as _sys
+_sys.path.insert(0, _os.path.join(_REPO, "tools"))
+from tree_io import load_tree
+
 def _support(name, env=None, hint=None):
     """Resolve an input under support_data/, overridable by env var."""
     if env:
@@ -30,8 +40,8 @@ def _support(name, env=None, hint=None):
     return p
 
 
-FP="/Users/jay.shendure/Dropbox/claude/current/final_push"
-TREE=os.environ.get("RUN_TREE",_support("mergedtree_dttpq_v8.npz", "DTT_MERGED_TREE_NPZ", 'Generate it with: python3 tools/make_merged_tree_npz.py (derived from support_data/merged_full_placed.nwk).'))
+FP = _results() + _os.sep
+TREE=os.environ.get("RUN_TREE",_os.environ.get("DTT_TREE", _os.path.join(_REPO, "support_data", "merged_full_placed.nwk")))
 NULL=os.environ.get("NULL_MODE","global"); NPERM=int(os.environ.get("NPERM","20"))
 DROP_BLOOD=os.environ.get("DROP_BLOOD","")=="1"; TAG=os.environ.get("TAG","run")
 MIN_CELLS,MIN_CLADE,Z_THR,MIN_OBS=100,3,3.0,5
@@ -40,7 +50,7 @@ BLOOD={"White_blood_cells","Definitive_erythroid","Primitive_erythroid","Megakar
        "Mast_cells","B_cells","T_cells"}
 rng=np.random.default_rng(0); t0=time.time()
 
-z=np.load(TREE,allow_pickle=True)
+z=load_tree(TREE)
 par=z["parent"].astype(np.int64); tm=np.asarray(z["time"],float)
 isleaf=np.asarray(z["is_leaf"],bool); names=[str(v) for v in z["names"]]
 N=len(par); kids=[[] for _ in range(N)]
@@ -50,7 +60,7 @@ for s,c in enumerate(kids[0]):
     st=[c]
     while st: u=st.pop(); side[u]=s; st.extend(kids[u])
 ct_of,tj_of={},{}
-with open(f"{FP}/data/cell_metadata.v8.txt") as f:
+with open(_os.path.join(_REPO, "support_data", "cell_metadata.v8.txt.gz")) as f:
     r=csv.reader(f,delimiter="\t"); h=next(r)
     a,b,c=h.index("cell_id"),h.index("celltype"),h.index("major_trajectory")
     for x in r: ct_of[x[a]]=x[b]; tj_of[x[a]]=x[c]

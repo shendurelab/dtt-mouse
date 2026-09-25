@@ -46,20 +46,29 @@ export DTT_TAPE_CALLS=/path/to/tape_calls.tsv.gz
 
 ---
 
-# Generated, not shipped
+## 4. Ancestral-state node inference
 
-`support_data/mergedtree_dttpq_v8.npz` is a flat array encoding of the merged, placed,
-dated tree that several `tree_analysis` scripts read instead of re-parsing Newick. It is
-~93 MB and fully derivable from `support_data/merged_full_placed.nwk`, which already ships,
-so it is generated rather than committed:
+`pd_nodes_infer_200.txt` (~145 MB) is an output of the ancestral-state step, consumed by
+`tree_analysis/traceback_paths/02_tableS8_qualifying_paths.py`. Too large to ship;
+regenerate it with the `tree_analysis/ancestral_state/` scripts, or point `DTT_PD_NODES`
+at an existing copy.
 
-```bash
-python3 tools/make_merged_tree_npz.py
-```
+---
 
-Takes a few seconds and reproduces the original bundle exactly (verified array-by-array:
-`parent`, `blen`, `time`, `is_leaf`, `names` over all 2,391,035 nodes / 1,281,141 leaves).
-Override the location with `DTT_MERGED_TREE_NPZ`.
+# The tree is read straight from Newick
+
+Earlier versions of these scripts read the tree from a ~93 MB `mergedtree_dttpq_v8.npz`
+bundle. That file was a flat array re-encoding of `support_data/merged_full_placed.nwk`,
+which already ships, so nothing needs to be generated or committed: `tools/tree_io.py`
+parses the Newick directly into the same five arrays (`parent`, `blen`, `time`, `is_leaf`,
+`names`).
+
+Parsing 2.4M nodes takes ~8 s, so the result is cached under
+`support_data/.tree_cache/` (gitignored); repeat loads take ~0.4 s. Delete that directory
+any time and it rebuilds. Point `DTT_TREE` at a different Newick to use another tree.
+
+Verified array-by-array against the original bundle: all five arrays identical across
+2,391,035 nodes / 1,281,141 leaves.
 
 # Environment variables
 
@@ -67,7 +76,9 @@ Override the location with `DTT_MERGED_TREE_NPZ`.
 | --- | --- |
 | `DTT_CELL_METADATA` | override `support_data/cell_metadata.v8.txt.gz` |
 | `DTT_ROUTING_LABELS` | override `support_data/e3v8.routing_labels.tsv.gz` |
-| `DTT_MERGED_TREE_NPZ` | override the generated merged-tree bundle |
+| `DTT_TREE` | override the tree Newick (default `support_data/merged_full_placed.nwk`) |
+| `DTT_PD_NODES` | location of `pd_nodes_infer_200.txt` |
+| `DTT_RESULTS` | where analysis steps write intermediates (default `<step>/out/`) |
 | `DTT_NEWCODE_NPZ` | override `support_data/newcode_v8_all.npz` |
 | `QIU2024_SUPP_XLSX` | location of the Qiu et al. 2024 supplementary table |
 | `DTT_TAPE_CALLS` | location of `tape_calls.tsv.gz` |

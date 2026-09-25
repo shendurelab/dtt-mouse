@@ -1,3 +1,12 @@
+import os as _os
+_REPO = _os.path.abspath(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", ".."))
+
+def _results(*parts):
+    """Intermediate/output dir for this analysis step, override with DTT_RESULTS."""
+    base = _os.environ.get("DTT_RESULTS", _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "out"))
+    p = _os.path.join(base, *parts) if parts else base
+    _os.makedirs(_os.path.dirname(p) if _os.path.splitext(p)[1] else p, exist_ok=True)
+    return p
 #!/usr/bin/env python3
 """Table S5 (v8) -- the 27 post-mitotic cell types, now naming the progenitors asserted for
 each, and repeating the analysis columns on the backbone tree.
@@ -41,8 +50,8 @@ import os
 
 import numpy as np
 
-V8 = "/Users/jay.shendure/Dropbox/claude/mouse_sprint/tape_pipeline/figures/v8/out/"
-FP = "/Users/jay.shendure/Dropbox/claude/current/final_push/"
+V8 = _results() + _os.sep
+FP = _results() + _os.sep
 CELL = "ageE12.5_disc1"
 MINOBS = 3          # h2r.py's BH floor; below it a pairing is not tested at all
 GLNICE = {"BLOOD": "Blood", "MESODERM": "Mesoderm", "NEURAL_CREST": "Neural crest",
@@ -73,11 +82,11 @@ def fmt_prog(rows):
 
 
 # ---------------------------------------------------------------- inputs
-post = [r for r in csv.DictReader(open(FP + "fig6_v8/celltype_postmitotic_v8.csv"))
+post = [r for r in csv.DictReader(open(_os.path.join(_REPO, "support_data", "celltype_postmitotic_v8.csv")))
         if r["classification"] == "post_mitotic"]
 
 traj, ncells = {}, collections.Counter()
-with open(FP + "data/cell_metadata.v8.txt") as f:
+with open(_os.path.join(_REPO, "support_data", "cell_metadata.v8.txt.gz")) as f:
     r = csv.DictReader(f, delimiter="\t")
     for row in r:
         traj.setdefault(row["celltype"], row["major_trajectory"])

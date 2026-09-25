@@ -1,3 +1,12 @@
+import os as _os
+_REPO = _os.path.abspath(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", ".."))
+
+def _results(*parts):
+    """Intermediate/output dir for this analysis step, override with DTT_RESULTS."""
+    base = _os.environ.get("DTT_RESULTS", _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "out"))
+    p = _os.path.join(base, *parts) if parts else base
+    _os.makedirs(_os.path.dirname(p) if _os.path.splitext(p)[1] else p, exist_ok=True)
+    return p
 #!/usr/bin/env python3
 """Table S6 (v8) -- timed cell-type couplings as a LIST, on the placed tree and the backbone,
 under both the global tip-label null and the within-clone null.
@@ -47,9 +56,9 @@ import statistics as st
 
 from scipy.stats import spearmanr
 
-V8 = "/Users/jay.shendure/Dropbox/claude/mouse_sprint/tape_pipeline/figures/v8/out/"
-F6 = "/Users/jay.shendure/Dropbox/claude/current/final_push/fig6_v8/"
-FP = "/Users/jay.shendure/Dropbox/claude/current/final_push/"
+V8 = _results() + _os.sep
+F6 = _results() + _os.sep
+FP = _results() + _os.sep
 GLNICE = {"BLOOD": "Blood", "MESODERM": "Mesoderm", "NEURAL_CREST": "Neural crest",
           "NEUROECTODERM": "Neuroectoderm", "SURFACE_ECTO": "Surface ectoderm",
           "ENDODERM": "Endoderm"}

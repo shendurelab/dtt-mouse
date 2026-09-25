@@ -10,3 +10,5 @@ figures_data/fig_s12_placement_accuracy_scored_dtt.csv
 
 __pycache__/
 *.pyc
+
+support_data/.tree_cache/

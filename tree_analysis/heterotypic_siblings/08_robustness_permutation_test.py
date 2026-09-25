@@ -140,7 +140,7 @@ if NULL_MODE == "traj":
     log(f"null=traj: {len(_u)} trajectories")
 elif NULL_MODE == "clone":
     _z = np.load(os.environ.get("RUN_TREE",
-        _support("mergedtree_dttpq_v8.npz", "DTT_MERGED_TREE_NPZ", 'Generate it with: python3 tools/make_merged_tree_npz.py (derived from support_data/merged_full_placed.nwk).')),
+        _os.environ.get("DTT_TREE", _os.path.join(_REPO, "support_data", "merged_full_placed.nwk"))),
         allow_pickle=True)
     _par = _z["parent"].astype(np.int64); _tm = np.asarray(_z["time"], float)
     _il = np.asarray(_z["is_leaf"], bool); _N = len(_par)
