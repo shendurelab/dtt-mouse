@@ -8,15 +8,20 @@
 
 import os, gzip, re, sys
 
+work_path = "The sci-RNA-seq3 data processing folder"
+
 RT_barcode_correction = {}
-with open(f"{work_path}/RT_barcode_pairs.txt") as f:
+with open(f"RT_barcode_pairs.txt") as f:
     for line in f:
         a, b = line.rstrip().split('\t')
         RT_barcode_correction[a] = b
 
-batch_id = int(sys.argv[1])
 
-experiment_id = sys.argv[2]
+### replace batch_id to 1:8
+batch_id = 1
+
+### replace experiment_id to other batches
+experiment_id = "experiment2_20260713_seq2_XY"
 
 if experiment_id == "experiment2_20260713_seq2_XY":
     target_barcode = "embryo3"
