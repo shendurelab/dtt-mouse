@@ -117,7 +117,9 @@ import numpy as np
 import pandas as pd
 import sys
 
-work_path = "/net/shendure/vol2/projects/cxqiu/work/tapemouse"
+### NOTE: set work_path to a working directory of your choice, as in the other
+### step4/step5 scripts. Inputs pd.txt, pd_E13.5.tsv, internal.tsv and edge.tsv
+### are produced by step5_impute_node_all.R into the same directory.
 
 pca_coor = pd.read_csv(f"{work_path}/adata_integration_early.pca.csv", index_col = 0)
 pd_meta = pd.read_csv(f"{work_path}/pd.txt", sep = "\t", index_col = 0)
@@ -225,7 +227,9 @@ library(ggplot2)
 library(ggrepel)
 library(phangorn)
 
-work_path <- "/net/shendure/vol2/projects/cxqiu/work/tapemouse"
+### NOTE: set work_path to a working directory of your choice, as in the other
+### step4/step5 scripts. Inputs pd.txt, pd_E13.5.tsv, internal.tsv and edge.tsv
+### are produced by step5_impute_node_all.R into the same directory.
 
 internal = read.table(paste0(work_path, "/internal.tsv"), header=T, sep="\t")
 
