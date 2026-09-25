@@ -32,6 +32,8 @@ Used by the cell-type integration and ancestral-state imputation steps
 
 as `adata.{day_id}.h5ad`. The scripts already carry this URL in a comment at the top.
 
+`Figure-S2AB_S6 .ipynb` reads the embryo-3 object via `DTT_ADATA_EMBRYO3`.
+
 ## 3. Raw tape calls
 
 `tape_calls.tsv.gz` (~250 MB) is an intermediate of the single-cell tape pipeline, produced
@@ -82,4 +84,5 @@ Verified array-by-array against the original bundle: all five arrays identical a
 | `DTT_NEWCODE_NPZ` | override `support_data/newcode_v8_all.npz` |
 | `QIU2024_SUPP_XLSX` | location of the Qiu et al. 2024 supplementary table |
 | `DTT_TAPE_CALLS` | location of `tape_calls.tsv.gz` |
+| `DTT_ADATA_EMBRYO3` | location of the embryo-3 `.h5ad` |
 | `TAPE_RAW_DIR` | root of the raw reads downloaded from GEO |
