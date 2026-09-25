@@ -32,7 +32,18 @@ Used by the cell-type integration and ancestral-state imputation steps
 
 as `adata.{day_id}.h5ad`. The scripts already carry this URL in a comment at the top.
 
-`Figure-S2AB_S6 .ipynb` reads the embryo-3 object via `DTT_ADATA_EMBRYO3`.
+`Figure-S2AB_S6.ipynb` reads the embryo-3 object via `DTT_ADATA_EMBRYO3` (default:
+`adata_embryo3.h5ad` in the working directory). It's hosted separately, already under
+that name:
+
+<https://shendure-web.gs.washington.edu/content/members/cxqiu/public/backup/tapemouse/adata_embryo3.h5ad>
+
+Save it as `making_figures/adata_embryo3.h5ad`, or point the environment variable at
+wherever you put it:
+
+```bash
+export DTT_ADATA_EMBRYO3=/path/to/adata_embryo3.h5ad
+```
 
 ## 3. Raw tape calls
 
