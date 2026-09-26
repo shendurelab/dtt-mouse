@@ -122,7 +122,7 @@ Rscript making_figures/Figure-1.R
 | 5 | `making_figures/Figure-5.R` |
 | 6 | `making_figures/Figure-6.R` |
 | S1 | `making_figures/Figure-S1.R` |
-| S2, S6 | `making_figures/Figure-S2.R`, `Figure-S2AB_S6 .ipynb` |
+| S2, S6 | `making_figures/Figure-S2.R`, `Figure-S2AB_S6.ipynb` |
 | S3 | `making_figures/Figure-S3.R` |
 | S4 | `making_figures/Figure-S4.R` |
 | S5 | `making_figures/Figure-S5.R` |
